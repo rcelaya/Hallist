@@ -183,4 +183,6 @@ Shipping categories are categories based off price:
 
 you might have two shipping categories (light items) & (heavy items)
 
-Have fun!!!
+Have fun!!!!!
+
+
