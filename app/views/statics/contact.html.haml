@@ -1,0 +1,26 @@
+.header-info
+  %center
+    %h1 GET IN TOUCH!
+
+.static-content-arto
+  %center
+    .form-contact
+
+      = form_tag send_inquiry_path do
+        = text_field_tag 'name' , '' , placeholder: 'NAME', required: true
+        %br
+        = email_field_tag 'email', '', placeholder: 'EMAIL', required: true
+        %br
+        = text_area_tag 'message', nil, rows: 5, placeholder: 'INQUIRY', required: true
+        %br
+        = submit_tag "SEND", class: 'btn-contact pull-right'
+
+
+      %address
+
+        %h2 Mailing Address
+        Chihuahua #230 Col. Roma
+        %br
+        Del. Cuauhtémoc
+        %br
+        México, D.F. 06700

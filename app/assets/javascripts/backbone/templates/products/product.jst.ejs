@@ -1,0 +1,21 @@
+<% if(!_.isEmpty(like_action)) { %>
+  <div class='buttons-container'>
+    <div class="like-button" data-product-id="<%= id %>" data-like-action="<%= like_action %>"><span><%= like_action == 'like' ? 'like' : like_action %></span></div>
+    <div class="add-to-collection-button" data-product-id="<%= id %>"><span>Hall it</span></div>
+  </div>
+<% } %>
+<a href="/artworks/<%= permalink %>">
+  <img src="<%= image %>" height="<%= image_height %>" width="220" style="width:220px;height:<%= image_height%>px"/>
+  <div class='product-description'>
+    <span class='name'><%= name %></span>
+  </div>
+</a>
+<form accept-charset="UTF-8" action="/shopping/cart_items" class="new_cart_item pull-right" id="new_cart_item" method="post" >
+  <div style="margin:0;padding:0;display:inline">
+    <input name="utf8" type="hidden" value="✓">
+    <input name="authenticity_token" type="hidden" value="O8jvA/JVBblsC7hzKah3xX53+y0x5BhIf69IwXjouV8=">
+  </div>
+  <input id="cart_item_variant_id" name="cart_item[variant_id]" type="hidden" value="<%= variants.original.id %>">
+  <input id="cart_item_quantity" name="cart_item[quantity]" type="hidden" value="1">
+  <input class="btn-login-chido" id="add-cart-original" name="commit" type="submit" value="BUY">
+</form>

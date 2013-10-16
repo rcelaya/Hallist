@@ -1,0 +1,30 @@
+.row
+  .span12
+    #myCarousel.carousel.slide
+      .carousel-inner
+        - @featured_product.each_with_index do |product, index|          
+          .item.row{class: "#{'active' if index==0}"}
+            = link_to product_path(product) do
+              .span5.offset1
+                = image_tag product.featured_image(:large)
+              .span4
+                %h2= product.name
+                %p= product.description.html_safe
+
+      %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
+      %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
+    = image_tag '/assets/featured-ribbon.png', class: 'featured-ribbon'
+.row
+  .span12
+    %h2 Recent Artworks
+
+.row#recent-products-container
+  = render @recents_products
+
+- content_for :javascript do
+  $('.carousel').carousel();
+
+  $container = $('#recent-products-container');
+  $(window).load(function(){
+  $container.masonry();
+  });

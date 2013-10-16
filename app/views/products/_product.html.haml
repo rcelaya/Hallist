@@ -1,0 +1,14 @@
+.product
+  = link_to "/artwork/#{product.permalink}", class: 'product-detail' do
+    = image_tag product.featured_image(:small)
+
+    .product-description  
+      %span.name= product.name
+
+      .details
+        %span.price
+          =  product.price
+
+  .buttons-container
+    = like_button(product)
+    = collection_button(product)

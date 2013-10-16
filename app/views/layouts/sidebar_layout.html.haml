@@ -1,0 +1,51 @@
+!!!5
+%html
+  %head
+    %title
+      = "#{site_name} : #{yield :title}"
+    %link{href: 'http://fonts.googleapis.com/css?family=Dosis:300,500,600|Ubuntu+Condensed', rel: 'stylesheet', type: 'text/css'}
+    = stylesheet_link_tag 'application'
+    = csrf_meta_tag
+    = javascript_include_tag 'application'
+    = yield :head
+
+  %body
+    .container
+      %header.row
+        .span3
+          = image_tag 'logo.png'
+        .span3.offset6#links
+          = link_to 'Register / Login', login_path, class: 'login-link'
+            
+          = link_to '', class: 'cart-link' do
+            =image_tag 'cart.png'
+            Cart
+          
+      %nav
+        %ul
+          %li
+            = link_to 'Browse', products_path
+          %li
+            = link_to 'Collections', collections_path
+          %li
+            = link_to 'The artists', ''
+          %li
+            = link_to 'Sell Artwork', artwork_dashboard_path
+          %li
+            = link_to 'Favourites', ''
+          %li
+            = link_to 'Sale'
+          %li
+            = link_to 'Gift Cards'
+
+      #content.row
+        #sidebar.span3
+          = render partial: 'shared/sidebar'
+        .span9
+          = yield
+          
+      %footer
+        Copyright 2012. All right reserved.
+
+    %script{type: 'text/javascript'}
+      = yield :javascript

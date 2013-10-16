@@ -1,0 +1,264 @@
+%h1 Upload Artwork
+
+= form_for ['artwork', @product], html: {multipart: true} do |form|
+  = form.error_messages
+  .row
+    .span5
+      %fieldset{rel: 'popover', 'data-content' => 'Fill the name and the description of the artwork and upload the best photo to share with the world.', 'data-original-title' => 'Basic Information', 'data-placement' => 'right', 'data-trigger' => 'hover'}
+        %legend
+          Basic Information
+
+        .add-image
+          = image_tag '/assets/choose-image.png'
+        
+        .image-information
+          %span
+            Max size of 3Mb
+            %br
+            JPG or PNG
+          
+          .image-details
+            - @product.images.each do |image|
+              %span
+                = image.photo_file_name
+
+        .control-group
+          = form.text_field :name, class: 'span5', placeholder: 'Name'
+
+        .control-group
+          = form.text_area :description, class: 'tinymce span5', style: 'height: 200px', placeholder: 'Description'
+
+      %fieldset#original-artwork{rel: 'popover', 'data-content' => 'Tell us the information of the original artwork.', 'data-original-title' => 'Original Artwork', 'data-placement' => 'right', 'data-trigger' => 'hover'}
+        %legend
+          Original Artwork
+        = hidden_field_tag 'product[variants_attributes][][name]', 'Original'
+        = hidden_field_tag 'product[variants_attributes][][sku]', "#{@product.id}-Original"
+        = hidden_field_tag 'product[variants_attributes][][product_id]', @product.id
+        = hidden_field_tag 'product[variants_attributes][][id]', @product.original_variant.id if @product.original_variant.present?
+        .control-group
+          = text_field_tag 'product[variants_attributes][][price]', @product.original_variant.try(:price), class: 'span5', placeholder: 'Price'
+        .control-group
+          = text_field_tag 'product[variants_attributes][][cost]', @product.original_variant.try(:cost), disabled: :disabled, class: 'span5', placeholder: 'Your profit'
+        .control-group
+          = text_field_tag 'product[variants_attributes][][size][width]', (@product.original_variant.size['width'] if @product.original_variant) , class: 'size-input', placeholder: 'Width'
+          = text_field_tag 'product[variants_attributes][][size][height]', (@product.original_variant.size['height'] if @product.original_variant), class: 'size-input', placeholder: 'Height'
+          = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']], (@product.original_variant.size['measures'] if @product.original_variant)), prompt: 'Select a measure', class: 'size-input'
+          = hidden_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', 1
+
+        .control-group
+          = label_tag 'artwork auction', nil, class: 'artwork-auction'
+          = check_box_tag 'artwork_auction', '1', @product.auction.present?
+          
+        .auction-config
+          = text_field_tag 'product[auction_attributes][minimum_bid]', @product.auction.try(:minimum_bid), placeholder: 'Minimum bid amount'
+          = text_field_tag 'product[auction_attributes][deadline]', @product.auction.try(:deadline), placeholder: 'What time the auction ends?'
+        
+      .control-group
+        = link_to 'Add print', '', class: 'btn btn-gray', id: 'add-print-button'
+
+    .span5.offset2
+      %fieldset{rel: 'popover', 'data-content' => 'Help us to make easier to promote your art.', 'data-original-title' => 'Details', 'data-placement' => 'left', 'data-trigger' => 'hover'}
+        %legend
+          Details
+        .control-group
+          = form.text_field :set_keywords, placeholder: 'Separate keywords with a comma', class: 'span5'
+
+        .control-group
+          = form.select :product_type_id, nested_set_options(ProductType) {|i, level| "#{'-' * level} #{i.name}" }, class: 'span5'
+
+        .control-group
+          = form.select :property_value_ids, @colors, {}, {multiple: true, 'data-placeholder' => 'Choose the main colors of your artwork', class: 'span5'}
+        
+        = form.hidden_field :shipping_category_id
+        = form.hidden_field :tax_category_id
+
+      = form.fields_for :address, (@product.address || @product.build_address) do |address_form|
+        %fieldset{rel: 'popover', 'data-content' => 'We need to know from where you ship the artwork. This helps us to correctly calculate the shipping fee.', 'data-original-title' => 'Shipping Address', 'data-placement' => 'left', 'data-trigger' => 'hover'}
+          %legend
+            Shipping Information
+        
+          .control-group
+            = address_form.text_field :address1, placeholder: 'Address', class: 'span5'
+
+          .control-group
+            = address_form.text_field :address2, placeholder: 'will be used to calculate costs', class: 'span5'
+
+          .control-group
+            = address_form.country_select :country, priority: %w(US CA MX), prompt: 'Please select a country', class: 'span5'
+
+          .control-group
+            #order_state_code_wrapper
+              = render partial: 'shared/subregion_select', locals: {parent_region: address_form.object.country, form_address_object: 'product[address_attributes]'}
+
+          .control-group
+            = address_form.text_field :city, placeholder: 'City', class: 'span5'
+
+          .control-group
+            = address_form.text_field :zip_code, placeholder: 'Postal Code', class: 'span5'
+
+          .control-group
+            = address_form.text_field :alternative_phone, placeholder: 'Phone',class: 'span5'
+
+  .row#prints-container
+    - @product.print_variants.each do |variant_print|
+      .span5
+        %fieldset
+          %legend
+            Print
+          = link_to 'X', '', class: 'close-print'
+          = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
+          = hidden_field_tag 'product[variants_attributes][][sku]', variant_print.sku
+          .control-group
+            = text_field_tag 'product[variants_attributes][][price]', variant_print.price, class: 'required span5', placeholder: 'Price'
+          .control-group
+            = text_field_tag 'product[variants_attributes][][cost]', variant_print.cost, disabled: :disabled, class: 'span5', placeholder: 'Your profit'
+          .control-group
+            = text_field_tag 'product[variants_attributes][][size][width]', variant_print.size['width'], class: 'size-input', placeholder: 'Width'
+            = text_field_tag 'product[variants_attributes][][size][height]', variant_print.size['height'], class: 'size-input', placeholder: 'Height'
+            = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']], variant_print.size['measures']), prompt: 'Select a measure', class: 'size-input'
+          .control-group
+            = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', variant_print.inventory.count_on_hand, class: 'required span5', placeholder: 'Prints available to sell'
+          .control-group
+            .controls
+              = link_to 'delete', artwork_product_variant_path(variant_print.product_id, variant_print), confirm: 'Are you sure you want to delete this print?', method: :delete
+          = hidden_field_tag 'product[variants_attributes][][product_id]', variant_print.product_id
+
+  .form-actions
+    = form.submit 'Update', class: ['btn', 'btn-gray']
+
+#print-template.hide
+  .span5
+    %fieldset
+      %legend
+        Print
+      = link_to 'X', '', class: 'close-print'
+      = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
+      = hidden_field_tag 'product[variants_attributes][][sku]', "#{@product.id}-Print"
+      .control-group
+        = text_field_tag 'product[variants_attributes][][price]','', class: 'required span5', placeholder: 'Price'
+      .control-group
+        = text_field_tag 'product[variants_attributes][][cost]', '', disabled: :disabled, class: 'span5', placeholder: "Your profit"
+      .control-group
+        = text_field_tag 'product[variants_attributes][][size][width]', '', class: 'size-input', placeholder: 'Width'
+        = text_field_tag 'product[variants_attributes][][size][height]', '', class: 'size-input', placeholder: 'Height'
+        = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']]), prompt: 'Select a measure', class: 'size-input'
+      .control-group
+        = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', '', class: 'required size-input', placeholder: 'Prints available to sell'
+      
+        = hidden_field_tag 'product[variants_attributes][][product_id]', @product.id
+      
+
+- content_for :head do
+  = tinymce_assets
+  :css
+    .chzn-results, .chzn-container {
+      width: 250px;
+    }
+
+- content_for :javascript do
+  $('#product_product_type_id').chosen();
+  $('#product_property_value_ids').chosen();
+  
+  $('form[id*=edit_product]').validate({
+  rules: {
+  'product[name]' : {minlength: 3, required: true},
+  'product[address_attributes][address1]' : {minlength: 5, required: true},
+  'product[address_attributes][country]' : {required: true},
+  'product[address_attributes][state]' : {required: true},
+  'product[address_attributes][city]' : {minlength: 5, required: true},
+  'product[address_attributes][zip_code]' : {required: true},
+  },
+  highlight: function(label) {
+  $(label).closest('.control-group').addClass('error');
+  }
+  });
+  
+  $('#original-artwork-button').click(function(){
+  $('#original-artwork').toggle();
+  if($('#original-artwork').is(':visible')) {
+  $('#original-artwork').html($('#original-template').html());
+  } else {
+  $('#original-artwork').html('');
+  }
+  $('#original-artwork input[name="product[variants_attributes][][price]"]').rules('add', {required: true});
+  $('#original-artwork input[name="product[variants_attributes][][size][width]"]').rules('add', {required: true, messages: {required: false}});
+  $('#original-artwork input[name="product[variants_attributes][][size][height]"]').rules('add', {required: true, messages: {required: false}});
+  $('#original-artwork select[name="product[variants_attributes][][size][measures]"]').rules('add', {required: true, messages: {required: false}});
+  
+  });
+  
+  $('#add-print-button').click(function(event){
+  event.preventDefault();
+  $('#prints-container').append($('#print-template').html()).show(500);
+  validateVariant();
+  });
+  
+  $('.close-print').live('click',function(event){
+  event.preventDefault();
+  $($(this).parent().parent()).hide(500).remove();
+  });
+  
+  
+  $('select#product_address_attributes_country').change(function(event) {
+  select_wrapper = $('#order_state_code_wrapper');
+  $('select', select_wrapper).attr('disabled', true);
+  country_code = $(this).val();
+  url = "/subregion_options?parent_region=" + country_code + "&form_address_object=product[address_attributes]";
+  select_wrapper.load(url);
+  });
+  
+  function validateVariant() {
+  $('form input[name="product[variants_attributes][][price]"]').rules('add', {required: true});
+  $('form input[name="product[variants_attributes][][size][width]"]').rules('add', {required: true, messages: {required: false}});
+  $('form input[name="product[variants_attributes][][size][height]"]').rules('add', {required: true, messages: {required: false}});
+  $('form select[name="product[variants_attributes][][size][measures]"]').rules('add', {required: true, messages: {required: false}});
+  }
+  
+  $('.add-image').click(function() {
+  buttonAddImage = $(this);
+  fileInput =  $('<input/>').attr('type','file').attr('name','product[images_attributes][][photo]').addClass('hide');
+  
+  fileInput.change(function() {
+  input = this;
+  if (input.files && input.files[0]) {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+  / $('.image-details').append($('<img/>').attr('src', e.target.result));
+  $('.image-details').append(fileInput);
+  };
+  reader.readAsDataURL(input.files[0]);
+  $('.image-details').html($('<span/>').html(input.files[0].name));
+  }
+  });
+  
+  fileInput.click();
+  });
+  
+  - if @product.original_variant.present?
+    $('#original-artwork-button').trigger('click');
+
+  $('#product_variants_attributes__price').live('keyup', function(){
+  price = $(this).val();
+  cost = (price * .5)
+  costInput = $(this).closest('fieldset').find('#product_variants_attributes__cost');
+  console.log(costInput);
+  costInput.val(cost);
+  });
+  
+  $('[rel=popover]').popover();
+  
+  $('#artwork_auction').change(function() {
+  if($(this).attr('checked'))
+  $('.auction-config').show(500);
+  else
+  $('.auction-config').hide(500);
+  });
+  
+  $(function() {
+  if($('#artwork_auction').attr('checked'))
+  $('.auction-config').show(500);
+  else
+  $('.auction-config').hide(500);
+  });
+  
+= tinymce :theme => "simple"

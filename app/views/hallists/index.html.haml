@@ -1,0 +1,16 @@
+- if @hallists.empty?
+  .header-info
+    %center
+      %h1 Search not found
+- else
+  .row-fluid#hallists
+
+
+- content_for :javascript do
+  $(window).load(function() {
+  $container = $('#hallists')
+  $container.masonry({isFitWidth: true, columnWidth: 240});
+  window.router = new Arto.Routers.HallistsRouter({hallists: #{@hallists.to_json.html_safe}});
+  Backbone.history.start({pushState: true})
+  });
+  

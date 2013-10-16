@@ -1,0 +1,4 @@
+<% if @bid %>
+  $('#your-bids').append('$' + <%= @bid.amount %> +'.00')
+<% end%> new_bid
+$('#bid_amount').val("")

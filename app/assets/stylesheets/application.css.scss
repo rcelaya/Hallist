@@ -1,0 +1,20 @@
+//= require bootstrap-responsive.min
+//= require bootstrap.min
+//= require bootstrap-scroll-modal
+//= require base
+//= require products
+//= require collections
+//= require chosen
+//= require checkout
+//= require myaccount
+//= require jquery.jgrowl
+//= require artwork
+//= require artists
+//= require hallists
+//= require profile
+//= require signup
+//= require datepicker
+
+.container-fluid#header {padding: 0;}
+
+.modal-backdrop.fade.in { background: rgba(255, 255, 255, 0.2);}

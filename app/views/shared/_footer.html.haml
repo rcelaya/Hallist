@@ -1,0 +1,46 @@
+%footer.row-fluid
+  .list-icon
+    %center
+      = image_tag ('/assets/botonBarraInferior.png')
+    %span.arto-sign.pull-right ART TO THE PEOPLE
+
+  .footer-message.row.hidden-phone
+    .span2
+      %p FIND OUT MORE
+      %ul.info
+        %li
+          = link_to 'About us', about_path
+        %li
+          = link_to 'Contact us', contact_path
+    .span2
+      %P JOIN IN
+      %ul.info
+        %li
+          = link_to 'Register', signup_path
+        %li
+          = link_to 'Find Hall', hallists_path
+        %li
+          = link_to 'Find Artist', artists_path
+    .span2#fucking-icons
+      %p FOLLOW US
+      %br
+      %ul.footer-social.pull-left.hidden-phone
+        %li
+          = link_to image_tag('facebook.png'), 'http://www.facebook.com/WeAreHALLIST', target: '_blank'
+        %li
+          = link_to image_tag('twitter.png'), 'http://twitter.com/hallist_', target: '_blank'
+        %li
+          = link_to image_tag('pinterest.png'), 'http://pinterest.com/hallist/', target: '_blank'
+      
+    .footer-copyright.pull-right
+      %span A project by
+      = link_to image_tag('ARTOlogo.png'), 'http://www.arto.mx', target: '_blank'
+
+  .footer-message.row#fucking-line.hidden-phone
+  .footer-message.row#fucking-copyright.hidden-phone
+    © 2013 HALLIST All rigths reserved. |
+    = link_to 'Terms of Service', terms_path
+    |
+    = link_to 'Privacy Policy', privacy_path
+    %span.pull-right ART TO THE PEOPLE
+

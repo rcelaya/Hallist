@@ -1,0 +1,2 @@
+module Artwork::BaseHelper
+end

@@ -1,0 +1,14 @@
+%h1 Pick a Category
+
+= form_tag artwork_product_types_path, class: 'form-inline' do
+  = select_tag 'product_type_id', options_for_select(nested_set_options(ProductType) {|i, level| "#{'-' * level} #{i.name}" } ), class: :span2
+  = submit_tag 'Next >', class: [:btn, 'btn-primary']
+
+- content_for :javascript do
+  $('select').chosen();
+
+- content_for :head do
+  :css
+    .chzn-container {
+      width: 247px;
+    }

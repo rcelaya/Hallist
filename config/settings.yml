@@ -1,0 +1,64 @@
+# You can use this to store API keys, mail server settings,
+# or any other kind of configuration data that your application needs.
+# In order to keep your production settings secret, store the production
+# copy of this file on your server under shared/config/config.yml and copy
+# it on deployment with this Capistrano task:#
+
+# task :copy_config_files do
+#   filename = "config/config.yml"
+#   run "cp #{shared_path}/#{filename} #{release_path}/#{filename}"
+# end
+# after "deploy:update_code", :copy_config_files
+
+encryption_key: someRandomBINARYKEY
+braintree:
+  merchant_id: 'v4fv38hhvmrg369p'
+  public_key: '52bb84mg4sqgpcnx'
+  private_key: 'eac177db25b5c60d49345050ffc8d7bd'
+amazon_s3:
+  access_key_id: "AKIAIMYIAP4I5LHK7TWQ"
+  bucket: "arto-beta"
+  secret_key: "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"
+email:
+  server: '93.159.209.111'
+  username: 'parbros'
+  password: 'f6a04397'
+  port: 25
+paypal:
+  login:      hallist_api1.arto.mx
+  password:   W657CYUGUHR2VJJU
+  signature:  AFcWxV21C7fd0v3bYYYRCpSSRl31A53nlyIltR.jGVDjG1OFZAWmCyx5
+
+vat: false
+require_state_in_address: true
+
+# Omniauth App keys
+
+omniauth:
+  development:
+    twitter:
+      key: 'ASRI5K7oY91pQZxmvIDAxA'
+      secret: 'qkwlO8pymzzgJmNxroaz3Be5MlA9ydoU7QYbSd97qw'
+
+    facebook:
+      key: '467548533322353'
+      secret: '111eee9ea26f18221b8b6ccdc8d001f1'
+
+  staging:
+    twitter:
+      key: 'GeBkvClFPZHLZ4siUXcEMQ'
+      secret: 'Oy7NYje3ijRfE13CjoIUzEcD5RP5fZ1GnFNfi5ZI'
+
+    facebook:
+      key: '270293919778125'
+      secret: '43504bbbafa716e2f29eb288022b0461'
+
+  production:
+    twitter:
+      key: 'ai6FdT8rD1g5oHK3MrA4YQ'
+      secret: 'rU4PzsXB0GlZKgzCpsxfHqea46MzXuBb1VoQUzjrKw'
+
+    facebook:
+      key: '163095380539980'
+      secret: '0e4f283fef80e8ab8eb4c555e32ec5c7'
+

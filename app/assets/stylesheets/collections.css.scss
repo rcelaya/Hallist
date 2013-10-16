@@ -1,0 +1,68 @@
+// Place all the styles related to the collections controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.social-section.collection-actions {
+  margin: -52px 20px 0px 0;
+  float: right;
+
+  .social-button { float: right; cursor: pointer;}
+}
+
+#collections {
+  margin: 0 auto;
+}
+
+
+.collection {
+  font-family: 'Dosis', sans-serif;
+  font-size: 14px;
+  margin: 0 20px 20px 0;
+  position: relative;
+  width: 220px;
+  
+  .collection-description {
+    background-color: rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    color: #fff;
+    height: 50px;
+    padding: 5px;
+    position: absolute;
+    line-height: 1;
+    visibility: hidden;
+    width: 210px;
+    
+    
+    span {
+      &.name {
+        display: inline-block;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 15px;
+        margin: 0;
+      }
+    }
+  }
+  
+  &:hover {
+    .collection-description {visibility: visible;}    
+  }
+}
+
+#new-collection {
+  color: #666;
+  font-family: 'Dosis', sans-serif;
+  font-size: 13px;
+  padding-top: 95px;
+}
+
+#collection-actions {
+  text-align: right;
+  margin: -60px 0 30px 0;
+  
+  .facebook {
+    display: inline-block;
+    width: 87px;
+    margin-top: -5px;
+    overflow: hidden;
+  }
+}

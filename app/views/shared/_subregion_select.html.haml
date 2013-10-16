@@ -1,0 +1,10 @@
+- parent_region ||= 'México'
+- form_object =  params[:form_address_object] || form_address_object
+- country = Carmen::Country.coded(parent_region)
+
+- if country.nil?
+  %em.missing-state Please select a country above
+- elsif country.subregions?
+  = subregion_select(form_object, :state, parent_region, prompt: 'Please select a state')
+- else
+  = text_field(:state)

@@ -1,0 +1,10 @@
+<form accept-charset="UTF-8" class="new-comment" id="new-comment" method="post">
+  <div style="margin:0;padding:0;display:inline">
+    <input name="utf8" type="hidden" value="✓">
+    <input name="authenticity_token" type="hidden" value="O8jvA/JVBblsC7hzKah3xX53+y0x5BhIf69IwXjouV8=">
+  </div>
+  <textarea class="tinymce" cols="40" id="comment_note" name="note" placeholder="Add a comment..." rows="20"></textarea>
+  <input type="hidden" value="<%= commentable_id %>" name="commentable_id">
+  <input type="hidden" value="User" name="commentable_type">
+  <input type="submit" value="Comment" class="btn hide btn-gray" id="submit-comment">
+</form>

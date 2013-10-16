@@ -1,0 +1,16 @@
+%h1 Pick a Color
+
+= form_tag artwork_properties_path, class: 'form-inline' do
+  = select_tag 'property_value_ids', options_for_select(@colors), multiple: true, 'data-placeholder' => 'Pick a color to your artwork'
+  = submit_tag 'Next >', class: [:btn, 'btn-primary']
+
+- content_for :javascript do
+  $('select').chosen();
+
+- content_for :head do
+  :css
+    .chzn-results, .chzn-container {
+      width: 250px;
+    }
+    
+    input.btn { margin-top: -22px; }

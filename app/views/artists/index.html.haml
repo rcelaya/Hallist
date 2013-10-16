@@ -1,0 +1,16 @@
+- if @artists.empty?
+  .header-info
+    %center
+      %h1 Search not found
+
+- else
+  .row-fluid#artists
+
+
+- content_for :javascript do
+  $(window).load(function() {
+  $('#artists').masonry({isFitWidth: true});
+  window.router = new Arto.Routers.ArtistsRouter({artists: #{@artists.to_json.html_safe}});
+  Backbone.history.start({pushState: true})
+  });
+  

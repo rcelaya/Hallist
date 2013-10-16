@@ -1,0 +1,21 @@
+- session_cart.shopping_cart_items.each do |cart_item|
+  .row.cart-item
+    .span1
+      = image_tag cart_item.variant.product.images.first.photo(:small)
+    .span2
+      %span.cart-item-name
+        =  cart_item.variant.product.name
+      %span.cart-item-artist
+        =  cart_item.variant.product.brand_name
+      %span.cart-item-price
+        = number_to_currency cart_item.variant.price
+    .span1.delete-item-box
+      = link_to shopping_cart_item_path(cart_item, :variant_id => cart_item.variant_id), class: 'delete-item', :method => :delete, remote: true do
+        = image_tag '/assets/delete-cart-item.png'
+#cart-footer.row
+  .span2
+    %span Subtotal
+    %span.subtotal
+      = number_to_currency session_cart.sub_total
+  .span2 
+    = link_to 'Checkout', checkout_shopping_order_url('checkout'), class: 'btn btn-gray', id: 'checkout-button'

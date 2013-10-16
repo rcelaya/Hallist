@@ -1,0 +1,6 @@
+%h1 Edit Message
+
+= form_for(@notice, :url => admin_config_message_path(@notice)) do |f|
+  = render :partial => 'form', :locals => {:f => f}
+
+= link_to 'Back', admin_config_messages_path, :class => 'button'

@@ -1,0 +1,60 @@
+!!!5
+%html{class: controller_name}
+  %head
+    %title
+      Hallist
+
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    = stylesheet_link_tag 'application'
+    = csrf_meta_tag
+    = global_meta_tags(@fbgraph_object) if @fbgraph_object
+    = yield :head
+
+
+  %body{:class => detect_browser_os}
+    .container-fluid#header
+      = render partial: 'shared/header'
+
+    = yield
+
+    .container-fluid#footer
+      = render partial: 'shared/footer'
+
+
+#cart-popover-content.hide
+  = render partial: 'shared/cart'
+
+= render partial: 'shared/login_modal'
+
+= javascript_include_tag 'application'
+%script{type: 'text/javascript', src: '//assets.pinterest.com/js/pinit.js'}
+%script{type: 'text/javascript'}
+  window.resize = false;
+  
+  = yield :javascript
+
+  - if current_user.user
+    window.current_user = #{current_user.user.to_json.html_safe};
+  - else
+    window.current_user = null;
+
+  marginCalculation = (($(window).width() - $('.span12').width())/2);
+  
+  marginCarouselCalculation = (($(window).width() - $('ul.carousel-container').width())/2);
+  $('ul.carousel-container').css('margin-left', marginCarouselCalculation + 'px');
+  
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  
+  - if alert
+    $.jGrowl("#{alert}");
+  - if notice
+    $.jGrowl("#{notice}");
+  

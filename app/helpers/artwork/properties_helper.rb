@@ -1,0 +1,2 @@
+module Artwork::PropertiesHelper
+end

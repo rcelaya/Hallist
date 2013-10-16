@@ -1,0 +1,17 @@
+.span3.product
+  = link_to product_path(product) do
+    .product-content
+      .product-description
+        %a.add-to-collection-button{href: '#', 'data-product-id' => product.friendly_id}
+          Add to Collection
+
+        %a.like-button{href: '#', 'data-product-id' => product.friendly_id, 'data-like-action' => (current_user.likes?(product) ? 'unlike' : 'like' ), class: "#{'liked' if current_user.likes?(product)}"}
+          Like
+        
+      = image_tag product.featured_image(:small)
+  
+  %span.name= product.name
+  
+  .details
+    %span.price
+      = number_to_currency product.price_range.last

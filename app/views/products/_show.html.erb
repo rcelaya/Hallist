@@ -1,0 +1,115 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'product_page.css' %>
+  <%= javascript_include_tag "shopping/cart" %>
+<% end %>
+
+<div id='product'>
+
+  <div class='span-1<%=@product.variants.empty? ? '9' : '8' %> float-left last'>
+    <div class='span-9 float-left'>
+      <%= image_tag(@product.featured_image(:product)) %><br/>
+
+      <div class='product-details'><%= @product.name %>
+      ( <%= number_to_currency @product.price_range.first %>
+        <% if @product.price_range? %>
+            to <%= number_to_currency @product.price_range.last %>
+        <% end %>)
+      </div>
+    </div>
+    <% if @product.variants.empty? %>
+      <h2><%= @product.name %> </h2>
+      <div id='no-variant-available' class=' span-8  last'>
+        Sorry this product is not currently available.
+      </div>
+    <% else %>
+      <h2><%= @product.name %> </h2>
+      <div id='all-variants' class='dkBlueBox span-8'>
+        <div  class='innerBox'>
+          <% @product.variants.each_with_index do |variant, i| %>
+            <ul  id='variant_border_<%= i %>'
+                  class='variant_border last <%= 'selected_variant' if i == 0 %>  '
+                  data-variant='<%= variant.id %>' >
+                <div  id='variant_<%= i %>'
+                      class='variant_select' >
+                  <%= raw variant.primary_property.try(:property_name)  %>: <%= raw variant.sub_name %>
+                </div>
+              <%= number_to_currency variant.price %>
+              <%= variant.display_stock_status %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+      <hr/>
+      <div id='product_description' class='left-text-4'>
+        <%= raw @product.description %>
+      </div>
+    <% end %>
+  </div>
+  <div id='add-to-cart_form-wrapper' class='span-6 float-left last'>
+    <%= form_for  @cart_item, :as => :cart_item,
+                  :url  => shopping_cart_items_path(@cart_item),
+                  :html => { :id => 'new_cart_item' } do |f| %>
+        <%= f.hidden_field :variant_id, :value => @product.variants.first.try(:id) %>
+      <% unless @product.variants.empty? %>
+          <%= f.label :quantity, 'Quantity:' %>
+          <%= f.select :quantity, CartItem::QUANTITIES %>
+
+        <div id='submit_add_to_cart' class="gradientbuttons redtheme ready-to-add-to-cart">
+          <ul>
+            <li><a>Add to Cart</a></li>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <% if current_user %>
+    <a href="#" class='btn btn-blue' id="add-to-collection-button">Add to Collection</a>
+  <% end %>
+</div>
+
+<% if current_user %>
+  <div class="modal hide fade small-modal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h2>Add to collection</h2>
+    </div>
+    <div class="modal-body">
+      <%= form_tag product_collection_cart_items_path(@product), class: 'form-horizontal' do %>
+        <div class="control-group">
+          <%= label_tag :collection, 'Collection', class: 'control-label'%>
+          <div class="controls">
+            <%= select_tag 'collection_id', options_for_select(current_user.collections.collect {|collection| [collection.name, collection.id]})%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="close-button">Close</a>
+      <a href="#" class="btn btn-primary" id="create-cart-item">Add to collection</a>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :javascript do %>
+$('#add-to-collection-button').click(function(event){
+  event.preventDefault()
+  $('.modal').modal('show')
+});
+
+$('#close-button').click(function(event) {
+  event.preventDefault()
+  $('.modal').modal('hide')
+});
+
+$('#create-cart-item').click(function(event) {
+  event.preventDefault()
+  $('.modal form').submit();
+});
+
+<% end %>
+
+<% content_for :below_body do -%>
+  <script>
+    Hadean.Utility.registerOnLoadHandler(Hadean.Cart.NewForm.initialize());
+  </script>
+<% end %>

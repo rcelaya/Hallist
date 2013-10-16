@@ -1,0 +1,10 @@
+.row-fluid#collections
+
+
+- content_for :javascript do
+  $(window).load(function() {
+  $('#collections').masonry({isFitWidth: true});
+  window.router = new Arto.Routers.CollectionsRouter({collections: #{@collections.to_json.html_safe}});
+  Backbone.history.start({pushState: true})
+  });
+  

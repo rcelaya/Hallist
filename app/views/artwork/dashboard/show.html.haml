@@ -1,0 +1,36 @@
+.row
+  %ul.nav.nav-tabs
+    %li.active
+      = link_to 'Artworks','#artworks', 'data-toggle' => "tab"
+    %li
+      = link_to 'Orders','#orders', 'data-toggle' => "tab"
+  
+  .tab-content
+    #artworks.tab-pane.active
+      = link_to 'Upload ArtWork', new_artwork_product_path, class: [:btn, 'btn-gray']
+
+      %table.table-striped.table-bordered.span12
+        %thead
+          %tr
+            %th Name
+            %th Image
+            %th Active
+            %th Actions
+        %tbody
+          - @products.each do |product|
+            %tr
+              %td= product.name
+              %td= image_tag product.featured_image
+              %td= product.active?
+              %td
+                = link_to 'Edit', edit_artwork_product_path(product)
+        
+    #orders.tab-pane
+      %table.table-striped.table-bordered.span12
+        %thead
+          %tr
+            %th Buyer
+            %th Address
+            %th Status
+            %th Item
+            %th Actions

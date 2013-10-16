@@ -1,0 +1,32 @@
+#login-modal.modal.hide.fade.small-modal
+  .modal-body
+    %a.login-close-modal{href: '#', 'data-dismiss' => "modal", 'aria-hidden' => "true"}
+    .row
+      .login-header.center
+        %span LOGIN
+
+    = form_for  @user_session, :as => :user_session, 
+                               :url => user_sessions_path(@user_session),
+                               :html => {:class => 'form-horizontal'} do |form|
+      .control-group
+        .controls
+          = form.email_field :email, :autocomplete => 'off', :autocapitalize => 'off', placeholder: 'EMAIL'
+      .control-group
+        .controls
+          = form.password_field :password, :autocomplete => 'off', :autocapitalize => 'off', placeholder: 'PASSWORD'
+
+      .control-group
+        .controls
+          .login-group
+            = link_to 'Forgot password?', new_customer_password_reset_path()
+            = form.submit "LOGIN", class: 'btn-login-chido'
+    .row
+      .span5.center
+        = link_to image_tag('/assets/facebook-login.png'), '/auth/facebook'
+    .row
+      .span5.center
+        = link_to image_tag('/assets/twitter-login.png'), '/auth/twitter'
+    .row
+      .make-account.center
+        %span Not part of HALLIST yet? 
+        = link_to 'Make an account!', signup_path

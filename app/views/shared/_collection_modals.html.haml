@@ -1,0 +1,44 @@
+#create-collection-modal.modal.hide.fade.small-modal
+  .modal-header
+    %button{"type" => "button", "class" => "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+    %h2 Create collection
+
+  .modal-body
+    Create a new collection:
+    = form_for Collection.new, html: {class: 'form-horizontal'} do |form|
+      .control-group
+        = form.label :name, class: 'control-label'
+        .controls
+          = form.text_field :name
+      .control-group
+        = form.label :description, class: 'control-label'
+        .controls
+          = form.text_field :description
+
+  .modal-footer
+    %a#close-button.btn.btn-gray{:href => "#"} Close
+    %a.btn.btn-gray#create-collection{"href" => "#"} Create collection
+
+#add-to-collection-modal.modal.hide.fade.small-modal
+  .modal-body
+    .row
+      .login-header.center
+        %span ADD TO COLLECTION
+    %p.center.labels-add-collection Add to an existing collection
+    = form_tag '', class: 'form-horizontal', id: 'add-to-collection-form' do
+      .control-group
+        = label_tag :collection, 'Collection', class: 'control-label'
+        .controls
+          = select_tag 'collection_id', options_for_select(current_user.collections.collect {|collection| [collection.name, collection.id]})
+
+    %p.center.labels-add-collection Or create a new collection
+    = form_for Collection.new, html: {class: 'form-horizontal', class: 'center'} do |form|
+      .control-group
+        .controls
+          = form.text_field :name, placeholder: 'NAME'
+      .control-group
+        .controls
+          = form.text_field :description, placeholder: 'DESCRIPTION'
+          = hidden_field_tag :product_id, '', id: 'add-collection-product-id'
+
+    %a.btn-login-chido#create-to-collection{"href" => "#"} Add to collection

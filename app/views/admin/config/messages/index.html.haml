@@ -1,0 +1,16 @@
+.admin_title_header
+  %h3 Messages
+  = link_to 'New Message', new_admin_config_message_path, :class => 'button'
+
+.admin_shipping_categories
+  %table
+    %thead
+      %tr.odd
+        %th.column1_header Name
+        %th
+    
+    %tbody
+      - @notices.each do |notice|
+        %tr{class: "#{cycle("odd", "")}"}
+          %td= notice.content
+          %td= link_to('Edit', edit_admin_config_message_path(notice))

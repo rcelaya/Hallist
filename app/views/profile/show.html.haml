@@ -1,0 +1,57 @@
+.row-fluid#user-profile
+  .span10
+    .profile-header
+      %h1= @user.name.upcase
+      = @user.artist? ? image_tag('artist_icon.png') : image_tag('hallist_icon.png')
+      = link_to('Edit Profile >', edit_myaccount_overview_path, class: 'edit-link') if @user.user.id == current_user_id
+      %p= @user_profile.city
+
+    .bio
+      %p= @user_profile.about.html_safe if @user_profile.about.present?
+
+    .social
+      = link_to_if @user_profile.website.present?, @user_profile.website, url_with_protocol(@user_profile.website), target: '_blank'
+      .follow-button
+        = link_to 'Follow'
+
+  .span2
+    = image_tag @user.featured_avatar(:profile)
+
+
+.row-fluid#social-menu
+  .span12
+    .row
+      = link_to("My Work ·") if @user.artist?
+      = link_to "My Collections", profile_path(id: @user.id, artwork_type: 'collections')
+
+    .row.follow-numbers
+      = link_to "#{@user.followers.count} Followers", 'javascript:void(0)'
+      %span ∙
+      = link_to "#{@user.followings.count} following", 'javascript:void(0)'
+
+.row-fluid.user-products
+- if @products.blank? and @user.artist?
+  - if params[:artwork_type] == 'collections' and @collections
+    %p.no-products= "No collections to show yet."
+  - else
+    %p.no-products= "No products to show yet."
+- elsif params[:artwork_type] == 'collections' or !@user.artist?
+  - if @collections
+    .span12.profile-collections.my-profile
+      - @collections.each do |collection|
+        = render partial: 'collections/collection', locals: {collection: collection}
+  - else
+    %p.no-products= "No collections to show yet."
+- else
+  #products
+
+
+- content_for :javascript do
+  $(window).load(function() {
+  $container = $('#products');
+  $container.masonry({ isFitWidth: true, columnWidth: 240 });
+  $('.profile-collections').masonry({isFitWidth: true});
+  window.router = new Arto.Routers.ProductsRouter({products: #{@products}});
+  Backbone.history.start({pushState: true});
+  window.scrollInfinite.active = false;
+  });

@@ -1,0 +1,25 @@
+.row
+  .span9
+    %fieldset
+      %label Name
+      %p= @product.name
+      
+      %label Description
+      = @product.description
+      
+      %label Category
+      %p= @product.product_type.name
+      
+      %label Colors
+      %p= @product.property_values.collect {|property_value| property_value.name}.to_sentence
+      
+    %fieldset
+      %legend Sell By
+      
+      - @product.variants.each do |variant|
+        %h3= variant.name
+      
+      
+    %fieldset
+      %legend Images
+  .span3

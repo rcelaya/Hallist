@@ -1,0 +1,142 @@
+<script>
+  // Settings for social share actions
+  var Share = {};
+  Share.link = "<%= window.location.href %>";
+  Share.name = "<%= name %>";
+  Share.brand_name = "<%= brand_name %>";
+  Share.description = "<%= description %>";
+  Share.picture = "<%= small_image %>";
+  window.Share = Share;
+</script>
+
+<div class="modal-body">
+  <div class="modal-product-header">
+    <h2><%= name %></h2>
+    <a href="<%= brand_path %>">
+      <%= brand_name %>
+    </a>
+    <div class="close-artwork-button"><img src="/assets/modal-close.png"></div>
+  </div>
+
+  <div class='img-product-container'>
+    <div class='img-product'>
+    <img src="<%= image %>" class="artwork-image">
+    </div>
+
+    <div class="preview">
+      <a href="#" class="preview-close">Close preview</a>
+      <img src="/assets/preview/preview-004.jpg">
+      <img src="<%= small_image %>" class="small-image" data-artwork-height="<%= height %>" data-artwork-width="<%= width %>" data-artwork-measures="<%= measures %>">
+    </div>
+  </div>
+
+  <div class="social-buttons-container">
+    <div class="like-button" data-product-id="<%= id %>" data-like-action="<%= like_action %>"><span><%= like_action %></span></div>
+    <div class="add-to-collection-button" data-product-id="<%= id %>"><span>Hall it</span></div>
+
+    <!-- Share via Facebook only -->
+    <div class="share-button" data-url="<%= window.location.href %>">
+      <a onclick='postToFeed(); return false;'><span>Share</span></a>
+    </div>
+
+
+    <div class="follow-button">
+    <% if(following == true){ %>
+      <a href="/artists/<%= artist_id %>/follows" data-remote="true" data-method="delete" rel="nofollow" id="follow-link"><span>Unfollow</span></a>
+    <%} else {%>
+      <a href="/artists/<%= artist_id %>/follows" data-remote="true" data-method="post" rel="nofollow" id="follow-link"><span>Follow</span></a>
+    <% } %>
+    </div>
+  </div>
+
+  <div class="row" id="artwork-varaints">
+
+    <div class="span3 original-details">
+     <span class="description-title">ABOUT THIS PIECE</span>
+      <%= description %> 
+    </div>
+    
+    <div class="span4">
+
+  <div class='row'>
+    <div class='span7'>
+        <span class="variant-name">ORIGINAL</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class='span2 size-column'>
+      <span class='variant-detail'>
+        <label>
+          Size: <%= variants.original.size + " cm" %>
+        </label>
+      </span>
+    </div>
+    <div class='span1'>
+      <span class='variant-detail last'><%= variants.original.price %></span>
+    </div>
+    <div class='span2 hidden-phone preview-column'>
+      <a href="#" class="preview-link">View in a room</a>
+    </div>
+  </div>
+
+      <% if(!_.isEmpty(variants.prints)) { %>
+        <div class="row">
+          <div class="span7">
+            <span class='variant-name'>PRINTS AVAILABLE</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class='span2 size-column'>
+            <span class='title-variant'>
+              Select Size
+            </span>
+          </div>
+          <div class='span1'>
+            <span class='title-variant last'>
+              Price
+            </span>
+          </div>
+        </div>
+  
+        <form accept-charset="UTF-8" action="/shopping/cart_items" class="new_cart_item" id="new_cart_item" method="post" data-remote="true">
+          <div style="margin:0;padding:0;display:inline">
+            <input name="utf8" type="hidden" value="✓">
+            <input name="authenticity_token" type="hidden" value="O8jvA/JVBblsC7hzKah3xX53+y0x5BhIf69IwXjouV8=">
+          </div>
+    
+          <% _.each(variants.prints, function(print) { %>
+              <div class="row">
+                <div class='span2 size-column'>
+                  <span class='variant-detail'>
+                    <label>
+                      <input id="cart_item_variant_id_3" name="cart_item[variant_id]" type="radio" value="<%= print.id %>" />
+                      <%= print.size + " cm" %>
+                    </label>
+                  </span>
+                </div>
+                <div class='span1'>
+                  <span class='variant-detail last'>
+                    <%= print.price %>
+                  </span>
+                </div>
+                <div class='span2 hidden-phone preview-column'>
+                  <a href="#" class="preview-link">View in a room</a>
+                </div>
+            </div>
+          <% }) %>
+          <div class="row">
+            <div class='span2'>
+              <input class="btn-login-chido" name="commit" type="submit" value="BUY">
+            </div>
+          </div>
+        </form>
+      <% } %>
+    </div>
+  </div>
+
+<div class="fb-comments" data-href="<%= product_url %>" data-num-posts="5"></div>
+
+
+</div>

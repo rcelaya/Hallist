@@ -1,0 +1,40 @@
+- if @notice.errors.any?
+  .error_explanation
+    %h2= pluralize(@notice.errors.count, "error")
+    prohibited this message from being saved:
+
+    %ul
+      - @shipping_category.errors.full_messages.each do |msg|
+        %li= msg
+
+%fieldset
+  %label Content
+  = f.text_area :content, class: :tinymce
+  
+  %label Text Color
+  = f.text_field :color
+  
+  %label Background Color
+  = f.text_field :background_color
+
+  %label Image
+  = f.file_field :image
+
+  %label Active
+  = f.check_box :active
+
+= f.submit "Create", :class => "button"
+
+= tinymce
+
+%script
+  $('#notice_color').ColorPicker({
+  onChange: function (hsb, hex, rgb) {
+  $('#notice_color').val('#' + hex);
+  }});
+  
+  $('#notice_background_color').ColorPicker({
+  onChange: function (hsb, hex, rgb) {
+  $('#notice_background_color').val('#' + hex);
+  }});
+  

@@ -1,0 +1,137 @@
+%header.row-fluid
+  #main-header-row
+    = link_to image_tag('logo.png', id: :logo), root_path, id: 'logo-link'
+
+    %nav.hidden-phone
+      %ul.nav
+        %li.search-contaniner
+          = link_to artists_path, class: 'search-link artists', 'data-search-link' => 'artists' do
+            Artists
+        %li
+          .search.search-artist
+            = form_tag artists_search_path do
+              = text_field_tag 'filters[search]', '', placeholder: 'Search for an artist'
+            = link_to 'All', artists_path
+        %li.search-contaniner
+          = link_to hallists_path, class: 'search-link halls', 'data-search-link' => 'halls' do
+            Halls
+        %li
+          .search.search-hallist
+            = form_tag hallists_search_path do
+              = text_field_tag 'filters[search]', '', placeholder: 'Search for a hall'
+            = link_to 'All', hallists_path
+
+    %ul#links.visible-phone
+      %li.dropdown
+        %a.link-menu-iphone{"href" => "#"}
+          %i.icon-white.icon-align-justify
+
+    %ul#links.hidden-phone
+      - if current_user.user
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", "data-hover"=>"dropdown","href" => "#", class: 'profile-link'}
+            - if current_user.first_name.nil?
+              = current_user.email
+            - else 
+              = "Hi " + current_user.first_name + "!"
+          %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
+            %li
+              = link_to 'MY PROFILE', myprofile_path
+            %li
+              = link_to 'PROFILE SETTINGS', edit_myaccount_overview_path
+            - if current_user.user.artist? || current_user.user.admin?
+              %li
+                = link_to 'SELL ARTWORK', artwork_dashboard_path
+            - if current_user.user.admin?
+              %li
+                = link_to 'ADMIN', admin_overviews_path
+            %li
+              = link_to 'HELP', contact_path
+            %li
+              = link_to 'LOGOUT', user_session_path(current_user), method: :delete
+      - else
+        %li
+          = link_to login_path, class: 'login-link' do
+            LOGIN / REGISTER
+      %li
+        = link_to '#', class: 'cart-link', 'data-original-title' => 'Shopping Cart' do
+          = image_tag 'shoppingCart.png'
+          %span.circle-green
+            = "#{session_cart.shopping_cart_items.count || 0}"
+
+  #menu-iphone
+    %ul.menu-iphone.unstyled
+      %li
+        %i.icon-white.icon-chevron-right
+        = link_to 'Artitst', '/artists'
+      %li
+        %i.icon-white.icon-chevron-right
+        = link_to 'Hallist', '/hallists'
+      - if current_user.user
+        %li
+          %i.icon-white.icon-chevron-right
+          = link_to 'My Profile', myprofile_path
+        %li
+          %i.icon-white.icon-chevron-right
+          = link_to 'Edit Profile', myaccount_overview_path
+      - else
+        %li
+          %i.icon-white.icon-chevron-right
+          = link_to 'Login', '/login'
+      %li
+        %i.icon-white.icon-chevron-right
+        = link_to 'About', '/about'
+      %li
+        %i.icon-white.icon-chevron-right
+        = link_to 'Terms of Service', '/terms'
+      %li
+        %i.icon-white.icon-chevron-right
+        = link_to 'Privacy Policy', '/privacy'
+      %li
+        %i.icon-white.icon-chevron-right
+        = link_to 'Copyright', '#'
+
+      - if current_user.user
+        %li
+          %i.icon-white.icon-chevron-right
+          = link_to 'Logout', user_session_path(current_user), method: :delete
+    
+  #filter-header-row
+  
+    #filter-header-row-container
+      %nav
+        %ul.nav
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", "href" => "#"}
+              Categories
+            %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
+              - ProductType.find_by_name('Art').children.each do |product_type_children|
+                %li
+                  = link_to product_type_children.name, "/category/#{product_type_children.id}"
+
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", "href" => "#"}
+              Colors
+            %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
+              - property = Property.first.property_values.each do |property_value|
+                %li
+                  = link_to "/color/#{property_value.id}" do
+                    = property_value.name
+                    .item{class: property_value.name.downcase}
+
+          %li.dropdown.price
+            %a.dropdown-toggle{"data-toggle" => "dropdown", "href" => "#"}
+              Prices
+            %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
+              %li= link_to '$0.00 - $500.00 USD', '/price/0/500'
+              %li= link_to '$501.00 - $1000.00 USD', '/price/501/1000'
+              %li= link_to '$1001.00 - $1500.00 USD', '/price/1001/1500'
+              %li= link_to '$1501.00 - $2000.00 USD', '/price/1501/2000'
+              %li= link_to '$2001.00 USD >', '/price/2001'
+
+      %ul#links.hidden-phone
+        %li
+          .input-append
+            = form_tag search_path do
+              = text_field_tag 'filters[search]', '', placeholder: 'Search website'
+

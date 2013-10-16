@@ -1,0 +1,10 @@
+<div class="admin-login">
+  <span><%= current_user.name %></span><br/>
+  <%= link_to 'Logout', logout_path, :id => 'admin-logout-button' %>
+</div>
+
+
+
+<ul class="nav-bar">
+	<%= render :partial => "/shared/admin/header_buttons" %>
+</ul>

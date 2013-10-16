@@ -1,0 +1,84 @@
+.row
+  .span7
+    #product-image
+      = image_tag @product.featured_image(:large)
+    #social-section
+      - share_message = "#{@product.name} : #{site_name}"
+      
+      .social-button
+        %a.twitter-share-button{"href" => "https://twitter.com/share", "data-url" => "#{request.url}", "data-text" => "#{share_message}", "data-lang" => "es", "data-count" => "none"}
+          Twittear
+      .social-button
+        %a.pin-it-button{href: "http://pinterest.com/pin/create/button/?url=#{request.url}&media=#{request.protocol}#{request.host_with_port}#{@product.featured_image(:large, false)}&description=#{share_message}", 'count-layout' => "none"}
+          %img{border: "0", src: "//assets.pinterest.com/images/PinExt.png", title: "Pin It"}
+
+      .social-button
+        .fb-like{"data-href" => "#{request.url}", "data-send" => "false", "data-layout" => "button_count", "data-show-faces" => "false", "data-action" => "recommend", "data-font" => "tahoma"}
+
+      = collection_button(@product)
+      
+      = like_button(@product)
+
+    #comments
+      = form_for [@product, @product.comments.new] do |form|
+        = form.text_area :note, class: 'tinymce', placeholder: 'Add a comment...'
+
+  .span5
+    #details-header
+      %h2= @product.name
+      = @product.brand_name
+      = follow_link(@product.brand.artist)
+    
+    %label
+      Decription
+    = @product.description.html_safe
+    
+    - if @product.original_variant
+      .row
+        .span3
+          %span.variant-name Original
+        .span2
+          .row
+            .span2
+              %span.original-price
+                = number_to_currency @product.original_variant.price
+
+          .row
+            .span2
+              = form_for ['shopping', CartItem.new] do |form|
+                = form.hidden_field :variant_id, {value: @product.original_variant.id}
+                = form.hidden_field :quantity, {value: 1}
+                = form.submit 'Buy Original', class: 'btn btn-large btn-orange', id: 'add-cart-original'
+    
+    .row
+      .span5
+        %hr
+
+    .row
+      .span2
+        %span.variant-name Prints Available
+
+      #variant-details.span3
+        = form_for ['shopping', CartItem.new] do |form|
+          .row
+            .span2
+              %span.title-variant
+                Select Size
+            .span1
+              %span.title-variant.last
+                Price
+          - @product.print_variants.each do |variant|
+            .row
+              .span2
+                %span.variant-detail
+                  = form.radio_button :variant_id, variant.id, disabled: variant.sold_out?
+                  = variant.primary_property.description
+                  in.
+              .span1
+                %span.variant-detail.last
+                  = number_to_currency variant.price
+          .row
+            .span3
+              = form.hidden_field :quantity, {value: 1}
+              = form.submit 'Buy Print', class: 'btn btn-orange'
+

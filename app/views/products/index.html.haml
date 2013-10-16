@@ -1,0 +1,34 @@
+- if @products.empty?
+  .header-info
+    %center
+      %h1 Search not found
+  
+-else
+  .row-fluid#products
+
+- content_for :javascript do
+  $(window).load(function() {
+  $container = $('#products')
+  $container.masonry({isFitWidth: true, columnWidth: 240});
+  window.router = new Arto.Routers.ProductsRouter({products: #{@products.to_json.html_safe}});
+  Backbone.history.start({pushState: true});
+  $('.carousel').carousel();
+  });
+
+  $(function () {
+  $(window).scroll(function () {
+  if ($(this).scrollTop() > 100) {
+  $('#back-top').fadeIn();
+  } else {
+  $('#back-top').fadeOut();
+  }
+  });
+
+  $('#back-top a').click(function () {
+  $('body,html').animate({
+  scrollTop: 0
+  }, 800);
+  return false;
+  });
+  });
+

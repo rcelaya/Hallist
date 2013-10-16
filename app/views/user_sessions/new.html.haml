@@ -1,0 +1,23 @@
+#create-account
+  .controls
+    %h1 Sign in using
+  .controls
+    = link_to '/auth/facebook', class: 'social-account' do
+      = image_tag '/assets/signin-facebook.png'
+  .controls
+    = link_to '/auth/twitter', class: 'social-account' do
+      = image_tag '/assets/signin-twitter.png'
+
+  .hr-line.center
+    %span Or use your email address
+  
+  = form_tag user_sessions_path, method: :post do
+  
+    .controls
+      = text_field_tag 'user_session[email]', '', placeholder: 'Email'
+
+    .controls
+      = password_field_tag 'user_session[password]', '', placeholder: 'Password'
+
+    .controls
+      = submit_tag 'Sign In', class: 'button-380 btn-gray'

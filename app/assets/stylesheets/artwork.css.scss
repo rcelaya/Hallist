@@ -1,0 +1,32 @@
+form#new_product, form.edit_product {
+  input {
+    height: 36px;
+    background-color: #F4F4F4; 
+  }
+}
+
+
+fieldset {
+  background-color: #fff;
+  border: none;
+
+  legend {
+    color: #6DA0B8;
+    border-bottom: 1px solid #75A7C3;
+    width: 100%
+  }
+}
+
+.close-print {
+  margin-top: -35px;
+  float: right;
+  font-size: 20px;
+}
+
+
+.artwork-auction {
+  display: inline-block;
+  width: 150px;
+}
+
+.auction-config { display: none;}

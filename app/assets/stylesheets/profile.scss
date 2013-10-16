@@ -1,0 +1,485 @@
+@import "app_mixins";
+
+#row-profile {
+  width: 220px;
+  height: 240px;
+}
+
+h3.collection-name {
+  background: url('/assets/collection-name-header.png') repeat-x 0px 19px;
+  font-size: 12px;
+  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
+  
+  a {
+    color: black;
+    background-color: white;
+    padding-right: 10px;
+  }
+}
+
+#social-menu {
+  padding: 15px 0;
+  margin-top: 15px;
+  border-top: 1px dotted gray;
+  border-bottom: 1px dotted gray;
+  font-weight: 500;
+  line-height: 13px;
+  height: 15px;
+  text-transform: uppercase;
+
+  .row {
+    margin-left: 0px;
+    display: inline-block;
+    &.follow-numbers {
+      float: right;
+    }
+  }
+
+  a {
+    color: gray;
+
+    &:hover {
+      color:#77c144;
+      text-decoration: none;
+      cursor:pointer;
+    }
+  }
+}
+
+#user-profile {
+  color: gray;
+
+  .profile-header {
+    h1 {
+      font-family: 'Gotham-Medium';
+      font-size: 24px;
+      display: inline;
+    }
+    img {
+      padding: 0 0 10px 10px;
+    }
+    p {
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+  }
+
+  .bio {
+    height: 60px;
+    width: 70%;
+    margin-bottom: 10px;
+    p { font-size: 11px; }
+  }
+
+  .social {
+    height: 30px;
+    text-transform: uppercase;
+    font-size: 10px;
+
+    .follow-button {
+      position: relative;
+      top: -20px;
+      a {
+        color: white;
+      }
+    }
+  }
+
+  a {
+    color: #999999;
+    &:hover {
+        text-decoration: none;
+        color:#77c144;
+        cursor: pointer;
+    }
+    &.edit-link {
+      font-size: 10px;
+      padding: 10px;
+    }
+  }
+
+  .span2 {
+    min-height: 200px;
+    img {
+
+    }
+  }
+}
+
+#row-about {
+  background-color: #D1D3D4;
+  width: 220px;
+  display: none;
+}
+
+.user-products {
+  margin: 30px auto !important;
+}
+.no-products {
+  margin: 30px 0;
+  color: gray;
+  font-size: 11px;
+  font-style: italic;
+}
+
+#profile-links {
+  background-color: #4D4D4D;
+  color: white;
+  margin: 0px;
+  padding: 10px;
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+  
+  &:after {
+    content: url('/assets/header.png');
+    float: right;
+    margin: -9px -22px 0 0;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 10px;
+    a {
+      color: white;
+      
+      &.selected {
+        color: #45fd2f;
+      }
+    }
+  }
+}
+
+.profile-information {
+  margin: 0 5px 5px 25px;
+  width: 210px;
+
+  span {
+    &.profile {
+      color: #596D80;
+    }
+  }
+}
+
+span {
+  &.profile {
+    display: inline-block;
+    margin: 52px auto;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.profile-collections {
+  .product {
+    float: left;
+    
+    &:last-child { margin-right: 0;}
+  }
+}
+
+.profile-title {
+  background-color: #4d4d4d;
+  text-align: center;
+  margin-left: 0;
+  padding-left: 20px;
+  
+  h2 {
+    color: #fff;
+    line-height: 1;
+    font-weight: normal;
+  }
+  
+  .user-name {
+    display: inline-block;
+    margin-top: 2px;
+  }
+  
+  a {
+    margin-left: 10px;
+    margin-top: -5px;
+  }
+}
+
+.profile-about {
+  background-color: #F1F2F2;
+  height: 120px;
+  margin-left: 0 !important;
+  padding-left: 20px;
+  width: 33.314894% !important;
+  
+  p {
+    display: none;
+  }
+  
+  &:hover {
+    p {display: block;}
+    
+    span {display: none;}
+  }
+}
+
+.profile-followers {
+  background-color: #D1D3D4;
+  height: 120px;
+  margin-left: 0 !important;
+  padding-left: 20px;
+  width: 33.314894% !important;
+  
+  p {
+    padding: 10px 10px 0 0px;
+    display: none;
+  }
+  
+  &:hover {
+    p {display: block;}
+    
+    span {display: none;}
+  }
+}
+
+.profile-following {
+  background-color: #A7A9AC;
+  height: 120px;
+  margin-left: 0 !important;
+  padding-left: 20px;
+  width: 33.314894% !important;
+  
+  p {
+    padding: 10px 10px 0 0px;
+    display: none;
+  }
+  
+  &:hover {
+    p {display: block;}
+    
+    span {display: none;}
+  }
+}
+
+.my-profile .product {
+  width: 220px;
+  height: 220px;
+  overflow: hidden;
+  
+  img {
+    min-height: 220px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile-followers, .profile-following, .profile-about, .profile-title {
+    width: 435px !important;
+    margin: 0 auto;
+  }
+}
+
+.image-container {
+  height: 35px;
+  width: 35px;
+  overflow: hidden;
+  float: left;
+  margin-right: 8px;
+  
+  &:last-child {
+    margin: 0;
+  }
+}
+
+#about, #followers, #followings {
+  background-color: #000;
+  padding: 10px;
+  height: 220px;
+  width: 200px;
+  color: white;
+  opacity: .5;
+  margin-top: -240px;
+  display: none;
+  overflow: hidden;
+  
+  img {opacity: 1;}
+  
+  h4 {
+    margin: 0 0 10px 0;
+  }
+}
+
+#about {
+  height: 140px;
+  margin-top: -200px;
+  padding: 30px 20px;
+  width: 180px;
+}
+
+#avatar-profile {
+  height: 240px;
+  width: 220px;
+  overflow: hidden;
+}
+
+h2.large.profile {
+  font-size: 12px;
+}
+
+h2.large.collections {
+  padding: 4px 0px 4px 10px;
+  text-align: left;
+  margin-top: -58px;
+  
+  &:after {
+    content: none;
+  }
+}
+
+.profile a#follow-link {
+  padding-left: 20px;
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+  margin-left: 10px;
+}
+
+.collection-carrussel {
+  height: 300px;
+  overflow: hidden;
+
+  .collection-carrussel-container {
+    
+  }
+  
+  
+}
+
+@media screen and (max-width: 320px) {
+  .profile-info-container {
+    width: 240px !important;
+  }
+  
+  .collection-carrussel {
+    height: 100%;
+    width: 240px;
+  }
+  
+  .collection-container {
+    width: 240px !important;
+  }
+  
+  .image-container {
+    margin-right: 6px;
+  }
+}
+
+/******************************************************************
+*******************************************************************
+** EDIT PROFILE
+*******************************************************************
+******************************************************************/
+
+.gray-main-container {
+  @include gray-container-section;
+
+
+  form {
+    display: inline-block;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    background-color: $gray-bg-color;
+  }
+
+  input, textarea {
+    border: 0px;
+    border-radius: 0;
+  }
+
+  input[type=file] {
+    width: 230px;
+  }
+
+  fieldset {
+    background-color: $gray-bg-color;
+
+    legend {
+      text-transform: uppercase;
+      color: #666;
+      font-size: 18px;
+      border: 0;
+    }
+
+    &.basic-info {
+      border-bottom: dotted 2px #999;
+      input {
+        margin: 10px 0 30px 25px;
+        width: 450px;
+      }
+    }
+
+    &.social-web-info {
+      width: 100%;
+      margin-right: 30px;
+      padding: 40px 0;
+      border-bottom: dotted 2px #999;
+
+      input, textarea {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .social-info {
+        display: inline-block;
+        width: 330px;
+        height: 220px;
+        margin-right: 30px;
+        padding-right: 50px;
+        border-right: dotted 2px #999;
+      }
+      .web-info {
+        display: inline-block;
+        width: 330px;
+        position: absolute;
+      }
+    }
+
+    &.social-apps {
+      img.connected {
+        -moz-opacity: 0.50;
+        opacity: 0.50;
+      }
+
+      .app {
+        display: inline-block;
+        width: 330px;
+        padding: 10px;
+      }
+    }
+
+  }
+
+
+  textarea { resize: none; }
+
+  input[type=submit] {
+    width: 70px;
+    background-color: #333;
+    border: 1px solid #000;
+    display: inline-block;
+    color: #ffffff;
+    font-size:11px;
+    padding:3px 15px;
+    text-decoration:none;
+
+    &:hover {
+      background-color: #393939;
+    }
+
+    &:active {
+      background-color: #666;
+    }
+
+  }
+
+  #edit_user_section {
+    float: none;
+    margin: 0 auto;
+  }
+}
