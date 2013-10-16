@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #ROR Ecommerce
 
 ##Project Overview
@@ -185,7 +184,3 @@ Shipping categories are categories based off price:
 you might have two shipping categories (light items) & (heavy items)
 
 Have fun!!!
-=======
-hallist
-=======
->>>>>>> c1a43ca73ed0a0a3fdea3aa4360a1cc03f8db91f
