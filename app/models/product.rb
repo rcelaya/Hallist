@@ -305,6 +305,8 @@ class Product < ActiveRecord::Base
   end
 
   def create_original_variant(variant_attributes)
+    puts 'variants' + variant_attributes.to_yaml
+    puts 'idd' + id.to_yaml
     property_size = Property.find_by_identifing_name('Size')
     variant = variants.create(name: 'Original', sku: "#{id}-Original", brand_id: brand.id, price: variant_attributes['price'], cost: variant_attributes['cost'])
     variant.variant_properties.create(property_id: property_size.id, description: "#{variant_attributes['size']['width']} x #{variant_attributes['size']['height']} #{variant_attributes['size']['measures']}")
@@ -334,9 +336,13 @@ class Product < ActiveRecord::Base
   private
     def create_content
       if self.description_markup.present?
-        self.description = BlueCloth.new(self.description_markup).to_html
+        #Checarlo correctamente que funcione el BlueCloth
+        #self.description = BlueCloth.new(self.description_markup).to_html
+        self.description = self.description_markup
       elsif self.description.present?
-        self.description_markup = BlueCloth.new(self.description).to_html
+        #Checarlo correctamente que funcione el BlueCloth
+        #self.description_markup = BlueCloth.new(self.description).to_html
+        self.description_markup = self.description
       end
     end
 

@@ -1,0 +1,56 @@
+.header-info
+  %center
+    %h1 GET STARTED
+
+.gray-main-container
+  %center
+    = image_tag '/assets/signup-step1.png', class: 'signup-steps'
+  .row-fluid
+    #edit_user_section.span8
+      = form_for @user, :url => customer_registrations_path(@user)  do |f|
+        %fieldset.basic-info
+          = f.fields_for :profile do |profile_form|
+
+            .span4
+              = profile_form.label :avatar
+              = image_tag '/assets/signup-no-avatar.png'
+              = profile_form.file_field :avatar
+
+            .span5
+              = profile_form.text_field :username, placeholder: 'USERNAME'
+
+              = f.text_field :email, placeholder: 'EMAIL'
+              %br
+              = f.text_field :first_name, placeholder: 'FIRST NAME'
+              %br
+              = f.text_field :last_name, placeholder: 'LAST NAME'
+              %br
+              = profile_form.text_field :city, placeholder: 'CITY'
+              %br
+
+        %fieldset.social-web-info
+          .social-info
+            = f.fields_for :profile do |profile_form|
+              = profile_form.text_field :facebook, placeholder: 'FACEBOOK URL'
+              %br
+              = profile_form.text_field :twitter, placeholder: 'TWITTER URL'
+              %br
+              = profile_form.text_field :pinterest, placeholder: 'PINTEREST URL'
+              %br
+              = profile_form.text_field :instagram, placeholder: 'INSTAGRAM URL'
+              %br
+
+          .web-info
+            = f.fields_for :profile do |profile_form|
+              = profile_form.text_field :website, placeholder: 'WEBSITE'
+              %br
+              = profile_form.text_area :about, placeholder: 'ABOUT YOU', rows: '7'
+              %br
+
+        %div
+          = submit_tag 'NEXT', class: 'pull-right'
+          %label
+            I agree with the Terms of Use and Privacy Policy
+            = check_box_tag :accept
+        - content_for :javascript do
+          $('#user_profile_attributes_birth_date').datepicker();

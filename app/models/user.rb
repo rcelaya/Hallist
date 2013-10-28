@@ -487,6 +487,7 @@ class User < ActiveRecord::Base
   protected
 
   def apply_facebook(omniauth)
+    puts 'modelooo_face' + omniauth.to_yaml
     if omniauth['extra']['raw_info'].present?
       self.email = omniauth['extra']['raw_info']['email'] if omniauth['extra']['raw_info']['email'].present? && email.blank?
       self.first_name = omniauth['extra']['raw_info']['first_name'] if omniauth['extra']['raw_info']['first_name'].present? && first_name.blank?
@@ -497,12 +498,13 @@ class User < ActiveRecord::Base
   end
 
   def apply_twitter(omniauth)
+    puts 'modelooo_twitter' + omniauth.to_yaml
     if omniauth['extra']['raw_info'].present?
       self.email = omniauth['extra']['raw_info']['email'] if omniauth['extra']['raw_info']['email'].present? && email.blank?
       if omniauth['extra']['raw_info']['name'].present?
         name = extract_name(omniauth['extra']['raw_info']['name'])
         self.first_name = name[0] if first_name.blank?
-        self.last_name = name[1] if last_name.blank?
+        self.last_name = name[1] ? name[1] : ''
         get_avatar(omniauth['extra']['raw_info']['profile_image_url'])
       end
       self.profile.username = omniauth['extra']['raw_info']['screen_name'] if omniauth['extra']['raw_info']['screen_name'].present? && profile.username.blank?
@@ -607,6 +609,8 @@ class User < ActiveRecord::Base
   def extract_name(name)
     name_splited = name.split(' ')
     case name_splited.size
+    when 1
+      return [name_splited[0]]
     when 2
       return [name_splited[0], name_splited[1]]
     when 3

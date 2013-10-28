@@ -16,7 +16,6 @@ class Arto.Views.Products.ProductView extends Backbone.View
   
   clicked: (event) ->
     href = $(event.currentTarget).attr('href')
-    
     if !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
       event.preventDefault()
       url = href.replace(/^\//,'').replace('\#\!\/','')

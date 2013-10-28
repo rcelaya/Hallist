@@ -11,7 +11,7 @@
 # after "deploy:update_code", :copy_config_files
 
 development: &non_production_settings
-  encryption_key: someRandomBINARYKEY
+  encryption_key: e0151c8eb72bde809499a2805a17c33e44fc99a1b71bc0f20fdf306b2e33f4b5384fcb8e323f91f7fa360b0d06b000e1cdd13935a8d930eb6afc6efe6f6a3316
   mailer:
     server: mail.example.com
     username: someLOGIN
@@ -34,7 +34,7 @@ test:
   <<: *non_production_settings
 
 production:
-  encryption_key: someRandomBINARYKEY
+  encryption_key: e0151c8eb72bde809499a2805a17c33e44fc99a1b71bc0f20fdf306b2e33f4b5384fcb8e323f91f7fa360b0d06b000e1cdd13935a8d930eb6afc6efe6f6a3316
   mailer:
     server: mail.example.com
     username: someLOGIN
