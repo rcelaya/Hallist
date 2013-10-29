@@ -47,7 +47,6 @@ gem "jquery-rails", '2.1.3'
 gem "rails_config", '0.3.1'
 gem 'airbrake', '3.1.4'
 gem 'newrelic_rpm'
-gem 'rails_12factor'
 
 #gem 'memcache-client', '~> 1.8.5'
 group :production do
