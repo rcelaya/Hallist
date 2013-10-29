@@ -29,6 +29,7 @@ gem 'sidekiq', '2.5.3'
 gem 'open-meta-tags', :require => 'open_meta_tags'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'progress_bar'
+gem 'rails_12factor'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
