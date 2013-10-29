@@ -4,7 +4,6 @@
 
 .gray-main-container
   %center
-    = image_tag '/assets/signup-step1.png', class: 'signup-steps'
   .row-fluid
     #edit_user_section.span6
       = form_for @user, :url => customer_registrations_path(@user)  do |f|
