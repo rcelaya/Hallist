@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/conekta/conekta-ruby.git
+  revision: d912ba47a8baf26323b91754f7f743015a2deb2e
+  specs:
+    conekta (0.2.0)
+      multi_json (>= 1.0.4, < 2)
+      rest-client (~> 1.4)
+
+GIT
   remote: https://github.com/neocoin/rails3-generators.git
   revision: 6bdea11693e69917849dabc6bd38cf752e8ff194
   specs:
@@ -299,6 +307,8 @@ GEM
     redis (3.0.4)
     redis-namespace (1.3.0)
       redis (~> 3.0.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rmagick (2.13.2)
     rsolr (1.0.9)
       builder (>= 2.1.2)
@@ -403,6 +413,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass-rails (= 1.0.3)
   compass_twitter_bootstrap (= 2.0.3)
+  conekta!
   database_cleaner (= 0.9.1)
   debugger
   detect_browser_os (= 0.2.0)

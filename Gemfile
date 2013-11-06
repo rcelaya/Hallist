@@ -68,6 +68,8 @@ gem 'dynamic_form', '1.1.4'
 
 gem 'ffaker', '1.15.0'
 
+gem 'conekta', :git => 'git://github.com/conekta/conekta-ruby.git'
+
 group :development do
   gem 'sqlite3'
   gem "autotest-rails-pure" , '4.1.2'
