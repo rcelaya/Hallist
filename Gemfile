@@ -48,7 +48,6 @@ gem "jquery-rails", '2.1.3'
 gem "rails_config", '0.3.1'
 gem 'airbrake', '3.1.4'
 gem 'newrelic_rpm'
-gem 'pg'
 
 #gem 'memcache-client', '~> 1.8.5'
 group :production do
@@ -82,6 +81,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'thin'
+  gem 'pg'
 end
 
 group :test, :development do
