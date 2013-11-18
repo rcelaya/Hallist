@@ -18,9 +18,10 @@
             %th Actions
         %tbody
           - @products.each do |product|
+            = product.featured_image.to_yaml
             %tr
               %td= product.name
-              %td= image_tag product.featured_image
+              %td= image_tag product.decorator().featured_image
               %td= product.active?
               %td
                 = link_to 'Edit', edit_artwork_product_path(product)

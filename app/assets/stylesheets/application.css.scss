@@ -18,3 +18,13 @@
 .container-fluid#header {padding: 0;}
 
 .modal-backdrop.fade.in { background: rgba(255, 255, 255, 0.2);}
+
+.container{
+  &.dotted-line{
+    width: 95.1%;
+    margin-top: 3%;
+    margin-left: 3.5%;
+    border-top: dotted;
+    border-color: #58595a;
+  }
+}

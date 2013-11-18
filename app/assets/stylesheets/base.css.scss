@@ -752,7 +752,7 @@ span.subtotal {
     float: right;
 
     &:hover {
-      background-color:#68a54b;
+      background-color: #58595a;
     }
     &:active {
       position: relative;
@@ -1158,7 +1158,7 @@ table {
       color: #DCD9D6;
       margin-bottom: 20px;
 
-      &:hover { color: #45fd2f; }
+      &:hover { color: #59FF00; }
     }
 
     div {
@@ -1184,6 +1184,10 @@ table {
     position: relative;
     left: 340px;
     margin-bottom: -15px;
+  }
+
+  .checkout_pay{
+    color: white;
   }
 }
 
@@ -1620,6 +1624,6 @@ ul.menu-iphone {
 
   a {
     text-decoration: none;
-    color: #7eaa5d;
+    color: #59FF00;
   }
 }

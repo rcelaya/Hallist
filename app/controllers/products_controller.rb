@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
 
   def index
     set_filters
+    puts 'filtros' + params[:filters].to_yaml
     search = Product.filters(params[:filters] || {}, params[:page])
     @products = ProductDecorator.decorate(search.results).map(&:json_to_browse)
     @featured_product = ProductDecorator.decorate(Product.featured) unless request.xhr?

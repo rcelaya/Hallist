@@ -37,6 +37,7 @@ class Admin::Shopping::Checkout::BaseController < Admin::Shopping::BaseControlle
   def find_or_create_order
     return @session_admin_order if @session_admin_order
     if session[:order_admin_id]
+      puts 'if entra de find or create'
       @session_admin_order = checkout_user.orders.includes([ {:ship_address => :state},
                                                       {:bill_address => :state},
                                                       {:order_items =>
@@ -44,6 +45,7 @@ class Admin::Shopping::Checkout::BaseController < Admin::Shopping::BaseControlle
                                                           {:product => :images }}}]).find(session[:order_admin_id])
       create_order if !@session_admin_order.in_progress?
     else
+      puts 'else find or create'
       create_order
     end
     @session_admin_order

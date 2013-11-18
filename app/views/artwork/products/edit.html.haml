@@ -7,9 +7,8 @@
       %fieldset{rel: 'popover', 'data-content' => 'Fill the name and the description of the artwork and upload the best photo to share with the world.', 'data-original-title' => 'Basic Information', 'data-placement' => 'right', 'data-trigger' => 'hover'}
         %legend
           Basic Information
-
         .add-image
-          = image_tag '/assets/choose-image.png'
+          = image_tag @product.decorator().featured_image(:small), :id => 'product_image'
         
         .image-information
           %span
@@ -18,9 +17,10 @@
             JPG or PNG
           
           .image-details
-            - @product.images.each do |image|
+            - @product.images.each_with_index do |image, index|
               %span
-                = image.photo_file_name
+                - if index == @product.images.length - 1
+                  = image.photo_file_name
 
         .control-group
           = form.text_field :name, class: 'span5', placeholder: 'Name'
@@ -214,20 +214,12 @@
   $('.add-image').click(function() {
   buttonAddImage = $(this);
   fileInput =  $('<input/>').attr('type','file').attr('name','product[images_attributes][][photo]').addClass('hide');
-  
+
   fileInput.change(function() {
-  input = this;
-  if (input.files && input.files[0]) {
-  var reader = new FileReader();
-  reader.onload = function (e) {
-  / $('.image-details').append($('<img/>').attr('src', e.target.result));
+  updateImage(this,'product_image');
+  $('.image-details').html($('<span/>').html(this.files[0].name));
   $('.image-details').append(fileInput);
-  };
-  reader.readAsDataURL(input.files[0]);
-  $('.image-details').html($('<span/>').html(input.files[0].name));
-  }
   });
-  
   fileInput.click();
   });
   

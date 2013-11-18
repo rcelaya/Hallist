@@ -1,0 +1,31 @@
+#checkout-modal.modal.hide.fade.small-modal
+  .modal-body
+    %a.login-close-modal{href: '#', 'data-dismiss' => "modal", 'aria-hidden' => "true"}
+    .row
+      .login-header.center
+        %span Credit Card Info
+
+      = form_tag(pay_shopping_creditcard_checkout_path,:method => :post, :class => 'checkout_pay span12') do
+        = label_tag :first_name, 'First Name', :class => 'span5'
+        = text_field_tag(:first_name, @credit_card.first_name , :placeholder => 'First Name', :class => 'span6')
+
+        = label_tag :last_name, 'Last Name', :class => 'span5'
+        = text_field_tag(:last_name, @credit_card.last_name , :placeholder => 'Last Name', :class => 'span6')
+
+        = label_tag :number, 'Credit Card Number', :class => 'span5'
+        = text_field_tag(:number, @credit_card.number , :placeholder => 'Credit Card Number', :class => 'span6')
+
+        = label_tag :verification_value, 'VCC', :class => 'span5'
+        = text_field_tag(:verification_value, @credit_card.verification_value , :placeholder => 'VCC', :class => 'span6')
+
+        = label_tag :type, 'Type Card', :class => 'span5'
+        = select_tag(:type, options_for_select(['visa', 'mastercard']), :class => 'span6')
+
+        = label_tag :month, 'Mes', :class => 'span5'
+        = select_tag(:month, options_for_select(['01', '02',  '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']), :class => 'span6')
+
+        = label_tag :year, 'Year', :class => 'span5'
+        = select_tag(:year, options_for_select((Time.zone.now.year..(Time.zone.now.year + 10))), :class => 'span6')
+
+        = submit_tag 'Complete Order' , class: 'button light pull-right'
+

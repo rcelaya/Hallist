@@ -16,11 +16,18 @@
     .container-fluid#header
       = render partial: 'shared/header'
 
+    .container-fluid
+      = render partial: 'welcome/index'
+
+    .container-fluid
+      .container.dotted-line
+        %h2 Recent Artworks
 
     .container-fluid
       #content.row-fluid
         %div{id: 'fb-root'}
         .span12
+          %div
           = yield
 
     .container-fluid#footer

@@ -28,6 +28,9 @@ class Shopping::CheckoutController < Shopping::BaseController
     @order.default_shipping_rate
     @order.find_total
     @credit_card ||= ActiveMerchant::Billing::CreditCard.new
+
+    puts 'checkout controller' + @order.to_yaml
+    puts 'checkout controller + credit card' + @credit_card.to_yaml
   end
   
   def user_exists?

@@ -32,6 +32,7 @@ class Artwork::ProductsController < ApplicationController
   
   def edit
     @product = Product.find params[:id]
+    puts 'editarrrrrrrr producttt' + @product.to_yaml
     @colors = Property.find_by_identifing_name('Color').property_values.collect {|color| [color.name, color.id]}
   end
   

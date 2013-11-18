@@ -36,7 +36,7 @@
               = "Hi " + current_user.first_name + "!"
           %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
             %li
-              = link_to 'MY PROFILE', myprofile_path
+              = link_to 'MY HALL', myprofile_path
             %li
               = link_to 'PROFILE SETTINGS', edit_myaccount_overview_path
             - if current_user.user.artist? || current_user.user.admin?
@@ -70,7 +70,7 @@
       - if current_user.user
         %li
           %i.icon-white.icon-chevron-right
-          = link_to 'My Profile', myprofile_path
+          = link_to 'My Hall', myprofile_path
         %li
           %i.icon-white.icon-chevron-right
           = link_to 'Edit Profile', myaccount_overview_path
@@ -134,4 +134,3 @@
           .input-append
             = form_tag search_path do
               = text_field_tag 'filters[search]', '', placeholder: 'Search website'
-

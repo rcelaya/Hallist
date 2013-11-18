@@ -4,8 +4,8 @@
 
     .span4
       = profile_form.label :avatar
-      = image_tag @user.featured_avatar(:profile)
-      = profile_form.file_field :avatar
+      = image_tag @user.featured_avatar(:profile), :id => 'product_image'
+      = profile_form.file_field :avatar, :id => 'add-image'
 
     .span5
       = profile_form.text_field :username, placeholder: 'USERNAME'

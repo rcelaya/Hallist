@@ -1,37 +1,8 @@
 %h2.large Checkout
 
 .row-fluid
-  = form_for [:shopping, @order], html: {class: 'span4'} do |form|
-    %h3.bottom-line 1. Shipping Address
-    .row-fluid
-      %span.help-block
-        Please fill your shipping address before checkout.
-      = form.label :first_name
-      = text_field_tag 'order[ship_address_attributes][first_name]', @order.ship_address.try(:first_name) ,class: 'span12'
-
-      = form.label :last_name
-      = text_field_tag 'order[ship_address_attributes][last_name]', @order.ship_address.try(:last_name) ,class: 'span12'
-      
-      = form.label :address1, 'Address'
-      = text_field_tag 'order[ship_address_attributes][address1]', @order.ship_address.try(:address1) ,class: 'span12'
-      
-      = form.label :address2, 'Address Line 2'
-      = text_field_tag 'order[ship_address_attributes][address2]', @order.ship_address.try(:address2) ,class: 'span12'
-      
-      = form.label :country, "Country"
-      = country_select_tag 'order[ship_address_attributes][country]', {priority: %w(US CA MX), prompt: 'Please select a country'}, {class: 'span12'}
-      
-      = form.label :state_id, "State"
-      #ship_state_code_wrapper
-      
-      = form.label :city
-      = text_field_tag 'order[ship_address_attributes][city]', @order.ship_address.try(:city) ,:class => 'span12'
-      
-      = form.label :zip_code
-      = text_field_tag 'order[ship_address_attributes][zip_code]', @order.ship_address.try(:zip_code) ,:class => 'span12'
-
-  #order-items.span8
-    %h3.bottom-line Your Order
+  #order-items.span12
+    %h3.bottom-line 1. Your Order
     .row-fluid
       #items-header.span12
         .row-fluid
@@ -71,8 +42,36 @@
             = number_to_currency @order.total || 0
 
     .row-fluid
+      = form_for [:shopping, @order], html: {class: 'span4'} do |form|
+        %h3.bottom-line 2. Shipping Address
+        .row-fluid
+          %span.help-block
+            Please fill your shipping address before checkout.
+          = form.label :first_name
+          = text_field_tag 'order[ship_address_attributes][first_name]', @order.ship_address.try(:first_name) ,class: 'span12'
+
+          = form.label :last_name
+          = text_field_tag 'order[ship_address_attributes][last_name]', @order.ship_address.try(:last_name) ,class: 'span12'
+
+          = form.label :address1, 'Address'
+          = text_field_tag 'order[ship_address_attributes][address1]', @order.ship_address.try(:address1) ,class: 'span12'
+
+          = form.label :address2, 'Address Line 2'
+          = text_field_tag 'order[ship_address_attributes][address2]', @order.ship_address.try(:address2) ,class: 'span12'
+
+          = form.label :country, "Country"
+          = country_select_tag 'order[ship_address_attributes][country]', {priority: %w(US CA MX), prompt: 'Please select a country'}, {class: 'span12'}
+
+          = form.label :city
+          = text_field_tag 'order[ship_address_attributes][city]', @order.ship_address.try(:city) ,:class => 'span12'
+
+          = form.label :zip_code
+          = text_field_tag 'order[ship_address_attributes][zip_code]', @order.ship_address.try(:zip_code) ,:class => 'span12'
+
+
+    .row-fluid
       .span12
-        %h3.bottom-line 2. Select your payment method
+        %h3.bottom-line 3. Select your payment method
 
     .row-fluid
       .span12
@@ -87,13 +86,12 @@
               :price => item.price,
               :name => item.variant.product.name
 
-          = image_submit_tag 'https://www.2checkout.com/images/paymentlogoshorizontal.png', id: 'place-order-button', class: 'checkout-button checkout-disabled'
 
     .row-fluid
       .span12
-        = link_to shopping_paypal_checkout_path, method: :post, class: 'pull-right checkout-button checkout-disabled' do
-          = image_tag '/assets/btn_paypal.gif', align: 'left', style: 'margin-right: 7px'
-          
+        = link_to  image_tag('credit_card2.png', :width => 80, :height => 80), '', :class => 'checkout-button checkout-disabled pago'
+        = render partial: 'shopping/checkout/checkout_modal', :locals => {:order => @order}
+
 
 %script{:src => "https://www.2checkout.com/static/checkout/javascript/direct.min.js"}
 - content_for :javascript do
@@ -123,7 +121,7 @@
   $('ul.cards li').removeClass('not-selected')
   }
   });
-  
+
   $('#order_ship_address_attributes_country').change(function(){
   select_wrapper = $('#ship_state_code_wrapper');
   $('select', select_wrapper).attr('disabled', true);
@@ -132,7 +130,7 @@
   select_wrapper.load(url);
   $('em.missing-state').hide();
   });
-  
+
   $('#order_bill_address_attributes_country').change(function(){
   select_wrapper = $('#bill_state_code_wrapper');
   $('select', select_wrapper).attr('disabled', true);

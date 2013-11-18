@@ -80,6 +80,12 @@ Hadean::Application.routes.draw do
       end
     end
 
+    resource :creditcard_checkout, controller: :creditcard_checkout do
+      member do
+        post :pay
+      end
+    end
+
     resources  :cart_items do
       member do
         put :move_to

@@ -56,6 +56,7 @@ class Shopping::CartItemsController < Shopping::BaseController
 
   def get_new_cart_item
     if current_user.present?
+      puts 'session cart' + session_cart.cart_items.to_yaml
       session_cart.cart_items.new(params[:cart_item].merge({:user_id => current_user.try(:id)}))
     else
       ###  ADD to session cart

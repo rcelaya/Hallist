@@ -7,7 +7,9 @@ describe Admin::Shopping::Checkout::OrdersController do
     activate_authlogic
 
     @admin_user = create(:admin_user)
+    puts 'admin user' + @admin_user.to_yaml
     login_as(@user)
+    puts 'login as' + login_as(@user).to_yaml
     #Admin::BaseController.stubs(:verify_admin).returns(@admin_user)
     controller.stubs(:verify_admin).returns(@admin_user)
     controller.stubs(:current_user).returns(@admin_user)

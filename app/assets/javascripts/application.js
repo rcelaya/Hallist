@@ -22,6 +22,8 @@
 //= require jquery.resize.min
 //= require bootstrap-datepicker
 //= require fb/facebook
+//= require conekta
+//= require updateImage
 
 var $window = $(window);
 var Arto = Arto || {}
@@ -169,6 +171,13 @@ $(function(){
     event.preventDefault();
     openLoginModal();
   });
+});
+
+$(function(){
+    $('.pago').click(function(event) {
+        event.preventDefault();
+        openCheckoutModal();
+    });
 })
 
 $(function() {
@@ -325,7 +334,8 @@ $(function(){
   });
   
   $('.checkout-button').click(function(event) {
-    $('.edit_order input').removeClass('fail');
+      event.preventDefault();
+      $('.edit_order input').removeClass('fail');
     
     shippingAddressComplete = true;
     if(_.isEmpty($('#order_ship_address_attributes_first_name').val())) {
@@ -347,11 +357,10 @@ $(function(){
       shippingAddressComplete = false;
       $('#order_ship_address_attributes_country').addClass('fail');
     }
-
-    if(_.isEmpty($('#order_ship_address_attributes_state').val())) {
+/*if(_.isEmpty($('#order_ship_address_attributes_state').val())) {
       shippingAddressComplete = false;
       $('#order_ship_address_attributes_state').addClass('fail');
-    }
+    }  */
 
     if(_.isEmpty($('#order_ship_address_attributes_city').val())) {
       shippingAddressComplete = false;
@@ -372,8 +381,9 @@ $(function(){
 
 
 $(document).ready(function() {  
-  $('input[id*=order_ship_address_attributes], select[id*=order_ship_address_attributes]').live('change', function() {
-    var shippingAddressComplete = true;
+  $('input[id*=order_ship_address_attributes], select[id*=order_ship_address_attributes]').live('change', function(event) {
+      event.preventDefault();
+      var shippingAddressComplete = true;
 
     if(_.isEmpty($('#order_ship_address_attributes_first_name').val())) {
       shippingAddressComplete = false;
@@ -391,9 +401,9 @@ $(document).ready(function() {
       shippingAddressComplete = false;
     }
 
-    if(_.isEmpty($('#order_ship_address_attributes_state').val())) {
+    /*if(_.isEmpty($('#order_ship_address_attributes_state').val())) {
       shippingAddressComplete = false;
-    }
+    } */
 
     if(_.isEmpty($('#order_ship_address_attributes_city').val())) {
       shippingAddressComplete = false;
@@ -416,6 +426,12 @@ function openLoginModal() {
   $('#artwork-details-modal').modal('hide');
   Arto.popovers.closeCart();
   $('#login-modal').modal(); 
+}
+
+function openCheckoutModal() {
+    $('#artwork-details-modal').modal('hide');
+    //Arto.popovers.closeCart();
+    $('#checkout-modal').modal();
 }
 
 $('#about-profile').live('click', function(event) {

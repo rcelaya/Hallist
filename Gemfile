@@ -41,17 +41,17 @@ gem 'activemerchant', :require => 'active_merchant'
 gem 'bluecloth',     '~> 2.1.0'
 gem 'cancan', '~> 1.6.7'
 gem 'haml-rails', '0.3.5'
-#  gem 'dalli', '~> 1.0.2'
+#gem 'dalli', '~> 1.0.2'
 
 gem "friendly_id", "~> 3.3"
 gem "jquery-rails", '2.1.3'
 gem "rails_config", '0.3.1'
 gem 'airbrake', '3.1.4'
 gem 'newrelic_rpm'
+gem 'pg'
 
 #gem 'memcache-client', '~> 1.8.5'
 group :production do
-  gem 'pg'
   gem 'unicorn'
 end
 

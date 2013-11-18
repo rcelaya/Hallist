@@ -7,3 +7,19 @@
     max-width: 1024px;
   }
 }
+
+.checkbox-user {
+  span {
+    position: relative;
+    top: 26px;
+  }
+}
+
+.terms_service{
+  display: none;
+}
+
+
+.terms_service_show{
+  display: block !important;
+}

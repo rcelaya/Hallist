@@ -37,42 +37,57 @@ class Admin::Shopping::Checkout::OrdersController < Admin::Shopping::Checkout::B
   end
 
   def update
+    puts 'update'
     @order = session_admin_order
     @order.ip_address = request.remote_ip
-
+    puts 'order' + @order.to_yaml
     @credit_card ||= ActiveMerchant::Billing::CreditCard.new(cc_params)
 
     address = @order.bill_address.cc_params
 
+    puts 'orfderr' + @order.to_yaml
+    puts 'credit' + @credit_card.to_yaml
+
     if @order.complete?
+      puts 'order complete'
       #CartItem.mark_items_purchased(session_cart, @order)
       session_admin_cart.mark_items_purchased(@order)
       flash[:error] = I18n.t('the_order_purchased')
+      puts 'order' + @order.to_yaml
+
       redirect_to admin_history_order_url(@order)
     elsif @credit_card.valid?
+      puts 'credit valid'
       if response = @order.create_invoice(@credit_card,
                                           @order.credited_total,
                                           {:email => @order.email, :billing_address=> address, :ip=> @order.ip_address },
                                           @order.amount_to_credit)
+
+        puts 'response' + response.to_yaml
         if response.succeeded?
+          puts 'response succed'
           ##  MARK items as purchased
           #CartItem.mark_items_purchased(session_cart, @order)
           @order.remove_user_store_credits
           session_admin_cart.mark_items_purchased(@order)
+          puts 'order succed' + @order.to_yaml
           order_completed!
           Notifier.order_confirmation(@order, invoice).deliver rescue puts( 'do nothing...  dont blow up over an email')
           redirect_to admin_history_order_url(@order)
         else
+          puts 'else the order'
           form_info
           flash[:error] =  [I18n.t('could_not_process'), I18n.t('the_order')].join(' ')
           render :action => "show"
         end
       else
+        puts 'else the credit card'
         form_info
         flash[:error] = [I18n.t('could_not_process'), I18n.t('the_credit_card')].join(' ')
         render :action => 'show'
       end
     else
+      puts 'else is not valid'
       form_info
       flash[:error] = [I18n.t('credit_card'), I18n.t('is_not_valid')].join(' ')
       render :action => 'show'
