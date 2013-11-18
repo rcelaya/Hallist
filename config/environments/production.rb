@@ -97,12 +97,12 @@
 
   config.after_initialize do
     ActionMailer::Base.smtp_settings = {
-      :address        => Settings.email.server,
-      :port           => Settings.email.port,
+      :address        => 'smtp.sendgrid.net',
+      :port           => '587',
       :authentication => :plain,
-      :user_name      => Settings.email.username,
-      :password       => Settings.email.password,
-      :domain         => 'magnolias.parbros.com'  
+      :user_name      => ENV['app19585508@heroku.com'],
+      :password       => ENV['vfye7ffc'],
+      :domain         => 'heroku.com'
     }
     #Formtastic::SemanticFormBuilder.send(:include, Formtastic::DatePicker)
     #Formtastic::SemanticFormBuilder.send(:include, Formtastic::FuturePicker)
