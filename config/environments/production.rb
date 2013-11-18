@@ -80,7 +80,7 @@
   # config.action_controller.asset_host = "http://assets.example.com"
   
   ActionMailer::Base.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'hallist.parbros.com' }
+  config.action_mailer.default_url_options = { :host => 'arto-dev.heroku.com' }
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
