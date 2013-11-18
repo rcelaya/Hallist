@@ -53,6 +53,7 @@ gem 'pg'
 #gem 'memcache-client', '~> 1.8.5'
 group :production do
   gem 'unicorn'
+  gem 'pg'
 end
 
 gem 'nested_set', '~> 1.7.0'
