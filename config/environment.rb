@@ -13,8 +13,8 @@ Hadean::Application.configure do
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
     :authentication => :plain,
-    :user_name      => ENV['app16290187@heroku.com'],
-    :password       => ENV['Passw0rd'],
+    :user_name      => ENV['app19585508@heroku.com'],
+    :password       => ENV['vfye7ffc'],
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
