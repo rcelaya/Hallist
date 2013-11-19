@@ -20,10 +20,11 @@ amazon_s3:
   bucket: "arto-beta"
   secret_key: "N0SVd2HD2XzBHvfUSmDu5i8SS9fb3EdGYKKk/B/g"
 email:
-  server: '93.159.209.111'
-  username: 'parbros'
-  password: 'f6a04397'
-  port: 25
+  server: 'smtp.gmail.com'
+  username: 'support@hallist.com'
+  password: 'donartohallcanvas'
+  domain: 'gmail.com'
+  port: 587
 paypal:
   login:      hallist_api1.arto.mx
   password:   W657CYUGUHR2VJJU
