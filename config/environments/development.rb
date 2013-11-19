@@ -28,7 +28,7 @@ Hadean::Application.configure do
   config.action_controller.perform_caching = true
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -41,9 +41,26 @@ Hadean::Application.configure do
   #config.cache_store = :dalli_store
   #config.cache_store = :redis_store
   # Don't care if the mailer can't send
-  config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: Settings.email.server,
+      port: Settings.email.port,
+      domain: Settings.email.domain,
+      authentication: "plain",
+      enable_starttls_auto: true,
+      user_name: Settings.email.username,
+      password: Settings.email.password
+  }
+
+  config.action_mailer.default :charset => "utf-8"
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation can not be found)
+  config.i18n.fallbacks = true
+
+  # Send deprecation notices to registered listeners
+  config.active_support.deprecation = :notify
 
 
   config.after_initialize do

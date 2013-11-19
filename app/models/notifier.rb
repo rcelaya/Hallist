@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default :from => "app19585508@heroku.com"
+  default :from => "support@hallist.com"
 
   # Simple Welcome mailer
   # => CUSTOMIZE FOR YOUR OWN APP
