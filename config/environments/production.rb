@@ -81,15 +81,15 @@
   
   ActionMailer::Base.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => 'arto-dev.heroku.com' }
-  config.action_mailer.smtp_settings = {
-      address: Settings.email.server,
-      port: Settings.email.port,
-      domain: Settings.email.domain,
-      authentication: "plain",
-      enable_starttls_auto: true,
-      user_name: Settings.email.username,
-      password: Settings.email.password
-  }
+  #config.action_mailer.smtp_settings = {
+      #address: Settings.email.server,
+      #port: Settings.email.port,
+      #domain: Settings.email.domain,
+      #authentication: "plain",
+      #enable_starttls_auto: true,
+      #user_name: Settings.email.username,
+      #password: Settings.email.password
+  #}
   config.action_mailer.default :charset => "utf-8"
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -106,14 +106,14 @@
 
 
   config.after_initialize do
-    #ActionMailer::Base.smtp_settings = {
-      #:address        => Settings.email.server,
-      #:port           => Settings.email.port,
-      #:authentication => :plain,
-      #:user_name      => Settings.email.username,
-      #:password       => Settings.email.password,
-      #:domain         => Settings.email.domain
-    #}
+    ActionMailer::Base.smtp_settings = {
+      :address        => Settings.email.server,
+      :port           => Settings.email.port,
+      :authentication => 'plain',
+      :user_name      => Settings.email.username,
+      :password       => Settings.email.password,
+      :domain         => Settings.email.domain
+    }
     #Formtastic::SemanticFormBuilder.send(:include, Formtastic::DatePicker)
     #Formtastic::SemanticFormBuilder.send(:include, Formtastic::FuturePicker)
     #Formtastic::SemanticFormBuilder.send(:include, Formtastic::YearPicker)
