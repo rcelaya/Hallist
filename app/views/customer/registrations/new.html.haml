@@ -28,13 +28,12 @@
         %div
           = submit_tag 'Sign Up', class: 'pull-right'
           %label
-            = link_to('I agree with the Terms of Use and Privacy Policy', 'javascript:;', :id => 'terms')
+            %a#terms I agree with the Terms of Use and Privacy Policy
             = check_box_tag :accept
 
-        %div#terms_service.terms_service
-          = render partial: 'statics/terms'
+            = render partial: 'shared/terms_modal'
 
         - content_for :javascript do
           $('#user_profile_attributes_birth_date').datepicker();
-          $('#terms').click(function(){$('#terms_service').toggle();});
+          /$('#terms').click(function(){$('#terms_service').toggle();});
 

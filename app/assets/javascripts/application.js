@@ -178,7 +178,14 @@ $(function(){
         event.preventDefault();
         openCheckoutModal();
     });
-})
+});
+
+$(function(){
+    $('#terms').click(function(event) {
+        event.preventDefault();
+        openTermsModal();
+    });
+});
 
 $(function() {
   window.onresize = function(event) {
@@ -432,6 +439,11 @@ function openCheckoutModal() {
     $('#artwork-details-modal').modal('hide');
     //Arto.popovers.closeCart();
     $('#checkout-modal').modal();
+}
+
+function openTermsModal() {
+    $('#artwork-details-modal').modal('hide');
+    $('#terms-modal').modal();
 }
 
 $('#about-profile').live('click', function(event) {

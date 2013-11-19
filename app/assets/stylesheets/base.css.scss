@@ -944,6 +944,7 @@ ul.carousel-container {
     img {
       margin: 0;
       width: 100%;
+      height: 250px;
     }
     
     .message-content {
@@ -1183,6 +1184,16 @@ table {
     width: 29px;
     position: relative;
     left: 340px;
+    margin-bottom: -15px;
+  }
+
+  a.terms-close-modal {
+    background: url(/assets/close-icon.png) no-repeat;
+    display: inline-block;
+    height: 28px;
+    width: 29px;
+    position: relative;
+    left: 480px;
     margin-bottom: -15px;
   }
 
@@ -1550,6 +1561,14 @@ ul.menu-iphone {
     }
 }
 
+.header-info-terms{
+  h1 {
+    margin-top: 10%;
+    color: #59FF00;
+    font-family: 'Gotham-Medium', Helvetica, sans-serif;
+  }
+}
+
 .static-content-arto {
 
   width: 100%;
@@ -1566,6 +1585,71 @@ ul.menu-iphone {
 
     form {
       margin-bottom: 60px;
+    }
+    input, textarea{
+      border: 0px;
+      margin: 10px 0 30px 0;
+      width: 550px;
+      border-radius: 0;
+    }
+
+    textarea{
+      resize: none;
+    }
+
+    .btn-contact {
+      width: 70px;
+      background-color: #333;
+      border: 1px solid #000;
+      display: inline-block;
+      color: #ffffff;
+      font-size:11px;
+      padding:3px 15px;
+      text-decoration:none;
+
+      &:hover {
+        background-color: #393939;
+      }
+
+      &:active {
+        background-color: #666;
+      }
+
+    }
+
+    address {
+      text-align: left;
+      margin-bottom: 150px;
+
+      h2 {
+        text-transform: uppercase;
+        color: #333;
+        font-weight: normal;
+      }
+    }
+
+    .text-about{
+
+      width: 500px;
+      text-align: justify;
+
+    }
+  }
+
+}
+
+.static-content-arto-terms {
+
+  width: 100%;
+  height: 100%;
+  padding-bottom: 10px;
+  color: white;
+  font-family: 'Gotham';
+
+  .form-terms{
+    display: inline-block;
+
+    form {
     }
     input, textarea{
       border: 0px;
