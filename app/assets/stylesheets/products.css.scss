@@ -202,9 +202,12 @@
 
     .img-product-container {
       margin-top: 10px;
-      padding-bottom: 20px;
+      padding-bottom: 15px;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
+      img{
+        margin-top: 0px;
+      }
     }
 
     #artwork-varaints {
@@ -330,11 +333,17 @@
 }
 
 .social-buttons-container {
-  position: absolute;
+  /*position: absolute;
   top: 105px;
   left: 40px;
   width: 544px;
-  background: url('/assets/social-button-bg.png') no-repeat;
+  background: url('/assets/social-button-bg.png') no-repeat;*/
+  position: relative;
+  width: 544px;
+  left: 48%;
+  bottom: 20px;
+  float: left;
+  background: url("/assets/social-button-bg.png") no-repeat;
 }
 
 p {

@@ -21,8 +21,10 @@ class Artwork::ProductsController < ApplicationController
       @variant_original.sku = @product.id.to_s+"-Original"
       @variant_original.save
       @variant_print = Variant.find_by_product_id_and_name(@product.id, "Print")
-      @variant_print.sku = @product.id.to_s+"-Print"
-      @variant_print.save
+      if !@variant_print.nil?
+        @variant_print.sku = @product.id.to_s+"-Print"
+        @variant_print.save
+      end
       redirect_to artwork_dashboard_url
     else
       @colors = Property.find_by_identifing_name('Color').property_values.collect {|color| [color.name, color.id]}

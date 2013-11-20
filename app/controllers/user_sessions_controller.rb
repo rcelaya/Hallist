@@ -19,7 +19,7 @@ class UserSessionsController < ApplicationController
       redirect_back_or_default root_url
     else
       @user = User.new
-      redirect_to login_url, :alert => I18n.t('login_failure')
+      redirect_to root_url, :alert => I18n.t('login_failure')
     end
   end
 
@@ -27,7 +27,7 @@ class UserSessionsController < ApplicationController
     current_user_session.destroy
     reset_session
     cookies.delete(:hadean_uid)
-    redirect_to login_url, :notice => I18n.t('logout_successful')
+    redirect_to root_url, :notice => I18n.t('logout_successful')
   end
 
   private

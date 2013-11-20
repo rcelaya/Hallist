@@ -11,25 +11,12 @@
 
 <div class="modal-body">
   <div class="modal-product-header">
+    <div class="close-artwork-button"><img src="/assets/modal-close.png"></div>
     <h2><%= name %></h2>
     <a href="<%= brand_path %>">
       <%= brand_name %>
     </a>
-    <div class="close-artwork-button"><img src="/assets/modal-close.png"></div>
   </div>
-
-  <div class='img-product-container'>
-    <div class='img-product'>
-    <img src="<%= image %>" class="artwork-image">
-    </div>
-
-    <div class="preview">
-      <a href="#" class="preview-close">Close preview</a>
-      <img src="/assets/preview/preview-004.jpg">
-      <img src="<%= small_image %>" class="small-image" data-artwork-height="<%= height %>" data-artwork-width="<%= width %>" data-artwork-measures="<%= measures %>">
-    </div>
-  </div>
-
   <div class="social-buttons-container">
     <div class="like-button" data-product-id="<%= id %>" data-like-action="<%= like_action %>"><span><%= like_action %></span></div>
     <div class="add-to-collection-button" data-product-id="<%= id %>"><span>Hall it</span></div>
@@ -46,6 +33,18 @@
     <%} else {%>
       <a href="/artists/<%= artist_id %>/follows" data-remote="true" data-method="post" rel="nofollow" id="follow-link"><span>Follow</span></a>
     <% } %>
+    </div>
+  </div>
+
+  <div class='img-product-container'>
+    <div class='img-product'>
+    <img src="<%= image %>" class="artwork-image">
+    </div>
+
+    <div class="preview">
+      <a href="#" class="preview-close">Close preview</a>
+      <img src="/assets/preview/preview-004.jpg">
+      <img src="<%= small_image %>" class="small-image" data-artwork-height="<%= height %>" data-artwork-width="<%= width %>" data-artwork-measures="<%= measures %>">
     </div>
   </div>
 
@@ -127,13 +126,13 @@
                 </div>
             </div>
           <% }) %>
-          <div class="row">
-            <div class='span2'>
-              <input class="btn-login-chido" name="commit" type="submit" value="BUY">
-            </div>
-          </div>
         </form>
       <% } %>
+      <div class="row">
+        <div class='span2'>
+          <input class="btn-login-chido" name="commit" type="submit" value="BUY">
+        </div>
+      </div>
     </div>
   </div>
 
