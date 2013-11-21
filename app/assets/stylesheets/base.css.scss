@@ -741,25 +741,20 @@ span.subtotal {
 {
   @include social-button;
   a {
-    /*background-color: $green-button-color;
+    background-color: $green-button-color;
     cursor: pointer;
-    margin: 4px 5px 5px 5px;
-    display:inline-block;
     color:#ffffff;
     font-size:11px;
-    padding:3px 20px;
+    padding:6px 20px;
     text-decoration:none;
-    text-transform: uppercase;
-    float: right;*/
-    background-color: #00f900;
-    cursor: pointer;
-    font-size: 11px;
-    padding: 5px 8px;
-    text-decoration: none;
     text-transform: uppercase;
 
     &:hover {
       background-color: #58595a;
+      span{
+        padding: 0px;
+        color: white;
+      }
     }
     &:active {
       position: relative;
@@ -767,7 +762,8 @@ span.subtotal {
     }
   }
   span{
-    color: #58595a;
+    padding: 0px;
+    color: white;
   }
  }
 
@@ -1719,4 +1715,23 @@ ul.menu-iphone {
     text-decoration: none;
     color: #59FF00;
   }
+}
+
+.button-checkout{
+  background-color: $green-button-color;
+  display:inline-block;
+  color:#ffffff;
+  font-family:Trebuchet MS;
+  font-size:10px;
+  font-weight:bold;
+  padding:3px 15px;
+  text-decoration:none;
+
+
+  &:hover {
+    background-color:#58595a;
+    text-decoration:none;
+    color:#ffffff;
+  }
+
 }

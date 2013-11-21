@@ -22,7 +22,8 @@
   .span12
     .row
       = link_to("My Work ·") if @user.artist?
-      = link_to "My Collections", profile_path(id: @user.id, artwork_type: 'collections')
+      = link_to "My Collections ·", profile_path(id: @user.id, artwork_type: 'collections')
+      = link_to "My Likes", profile_path(id: @user.id, artwork_type: 'likes')
 
     .row.follow-numbers
       = link_to "#{@user.followers.count} Followers", 'javascript:void(0)'

@@ -41,7 +41,7 @@ Arto.popovers = {
       html: true,
       template: '<div class="popover cart"><div class="arrow arrow-gray"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
     }).click(function(e) {
-      e.preventDefault()
+      e.preventDefault();
       $(this).popover('toggle');
     }); 
   },
@@ -437,12 +437,13 @@ function openLoginModal() {
 
 function openCheckoutModal() {
     $('#artwork-details-modal').modal('hide');
-    //Arto.popovers.closeCart();
+    Arto.popovers.closeCart();
     $('#checkout-modal').modal();
 }
 
 function openTermsModal() {
     $('#artwork-details-modal').modal('hide');
+    Arto.popovers.closeCart();
     $('#terms-modal').modal();
 }
 

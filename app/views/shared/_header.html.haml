@@ -102,7 +102,7 @@
       %nav
         %ul.nav
           %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", "href" => "#"}
+            %a.dropdown-toggle{"data-hover" => "dropdown", "href" => "#"}
               Categories
             %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
               - ProductType.find_by_name('Art').children.each do |product_type_children|
@@ -110,7 +110,7 @@
                   = link_to product_type_children.name, "/category/#{product_type_children.id}"
 
           %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", "href" => "#"}
+            %a.dropdown-toggle{"data-hover" => "dropdown", "href" => "#"}
               Colors
             %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
               - property = Property.first.property_values.each do |property_value|
@@ -120,7 +120,7 @@
                     .item{class: property_value.name.downcase}
 
           %li.dropdown.price
-            %a.dropdown-toggle{"data-toggle" => "dropdown", "href" => "#"}
+            %a.dropdown-toggle{"data-hover" => "dropdown", "href" => "#"}
               Prices
             %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
               %li= link_to '$0.00 - $500.00 USD', '/price/0/500'

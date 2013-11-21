@@ -40,7 +40,7 @@ h3.collection-name {
     color: gray;
 
     &:hover {
-      color:#77c144;
+      color:#59FF00;
       text-decoration: none;
       cursor:pointer;
     }
@@ -81,6 +81,7 @@ h3.collection-name {
     .follow-button {
       position: relative;
       top: -20px;
+      float: right;
       a {
         color: white;
       }
