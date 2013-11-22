@@ -1,5 +1,6 @@
 class Shopping::CheckoutController < Shopping::BaseController
-  layout 'profile'
+  #layout 'profile'
+  layout 'no-responsive'
   
   require 'active_merchant/billing/integrations/action_view_helper'
 

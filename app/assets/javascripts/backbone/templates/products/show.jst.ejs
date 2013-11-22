@@ -28,9 +28,9 @@
 
     <div class="follow-button">
     <% if(following == true){ %>
-      <a href="/artists/<%= artist_id %>/follows" data-remote="true" data-method="delete" rel="nofollow" id="follow-link"><span>Unfollow</span></a>
+      <a href="/artists/<%= artist_id %>/follows" data-remote="true" data-method="delete" rel="nofollow" id="follow-link">Unfollow</a>
     <%} else {%>
-      <a href="/artists/<%= artist_id %>/follows" data-remote="true" data-method="post" rel="nofollow" id="follow-link"><span>Follow</span></a>
+      <a href="/artists/<%= artist_id %>/follows" data-remote="true" data-method="post" rel="nofollow" id="follow-link">Follow</a>
     <% } %>
     </div>
   </div>
@@ -61,24 +61,29 @@
         <span class="variant-name">ORIGINAL</span>
     </div>
   </div>
+  <form accept-charset="UTF-8" action="/shopping/cart_items" class="new_cart_item" id="new_cart_item" method="post">
+      <div style="margin:0;padding:0;display:inline">
+        <input name="utf8" type="hidden" value="✓">
+        <input name="authenticity_token" type="hidden" value="O8jvA/JVBblsC7hzKah3xX53+y0x5BhIf69IwXjouV8=">
+      </div>
 
-  <div class="row">
-    <div class='span2 size-column'>
-      <span class='variant-detail'>
-        <label>
-          <input id="cart_item_variant_id_2" name="cart_item[variant_id]" type="radio" value="<%= variants.original.id %>" />
-          Size: <%= variants.original.size + " cm" %>
-        </label>
-      </span>
-    </div>
-    <div class='span1'>
-      <span class='variant-detail last'><%= variants.original.price %></span>
-    </div>
-    <div class='span2 hidden-phone preview-column'>
-      <a href="#" class="preview-link">View in a room</a>
-    </div>
-  </div>
-
+      <div class="row">
+        <div class='span2 size-column'>
+          <span class='variant-detail'>
+            <label>
+              <input id="cart_item_variant_id_2" name="cart_item[variant_id]" checked="true" type="radio" value="<%= variants.original.id %>" />
+              Size: <%= variants.original.size + " cm" %>
+              <input id="cart_item_quantity" name="cart_item[quantity]" type="hidden" value="1">
+            </label>
+          </span>
+        </div>
+        <div class='span1'>
+          <span class='variant-detail last'><%= variants.original.price %></span>
+        </div>
+        <div class='span2 hidden-phone preview-column'>
+          <a href="#" class="preview-link">View in a room</a>
+        </div>
+      </div>
       <% if(!_.isEmpty(variants.prints)) { %>
         <div class="row">
           <div class="span7">
@@ -98,42 +103,36 @@
             </span>
           </div>
         </div>
-  
-        <form accept-charset="UTF-8" action="/shopping/cart_items" class="new_cart_item" id="new_cart_item" method="post" data-remote="true">
-          <div style="margin:0;padding:0;display:inline">
-            <input name="utf8" type="hidden" value="✓">
-            <input name="authenticity_token" type="hidden" value="O8jvA/JVBblsC7hzKah3xX53+y0x5BhIf69IwXjouV8=">
-          </div>
-    
-          <% _.each(variants.prints, function(print) { %>
-              <div class="row">
-                <div class='span2 size-column'>
-                  <span class='variant-detail'>
-                    <label>
-                      <input id="cart_item_variant_id_3" name="cart_item[variant_id]" type="radio" value="<%= print.id %>" />
-                      <%= print.size + " cm" %>
-                    </label>
-                  </span>
-                </div>
-                <div class='span1'>
-                  <span class='variant-detail last'>
-                    <%= print.price %>
-                  </span>
-                </div>
-                <div class='span2 hidden-phone preview-column'>
-                  <a href="#" class="preview-link">View in a room</a>
-                </div>
+
+        <% _.each(variants.prints, function(print) { %>
+          <div class="row">
+            <div class='span2 size-column'>
+              <span class='variant-detail'>
+                <label>
+                  <input id="cart_item_variant_id_3" name="cart_item[variant_id]" type="radio" value="<%= print.id %>" />
+                  <%= print.size + " cm" %>
+                </label>
+              </span>
             </div>
-          <% }) %>
-        </form>
+            <div class='span1'>
+              <span class='variant-detail last'>
+                <%= print.price %>
+              </span>
+            </div>
+            <div class='span2 hidden-phone preview-column'>
+              <a href="#" class="preview-link">View in a room</a>
+            </div>
+          </div>
+        <% }) %>
       <% } %>
-      <div class="row">
-        <div class='span2'>
-          <input class="btn-login-chido" name="commit" type="submit" value="BUY">
-        </div>
+    <div class="row">
+      <div class='span2'>
+        <input class="btn-login-chido" name="commit" type="submit" value="BUY">
       </div>
     </div>
-  </div>
+  </form>
+ </div>
+</div>
 
 <div class="fb-comments" data-href="<%= product_url %>" data-num-posts="5"></div>
 

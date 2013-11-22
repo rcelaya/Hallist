@@ -95,9 +95,9 @@ EXAMPLE USAGE!!
   
   def follow_link(artist)
     if current_user.user
-      link_to (current_user.follows?(artist) ? 'Unfollow' : 'Follow'), artist_follows_path(artist), method: (current_user.follows?(artist) ? :delete : :post), id: 'follow-artist'
+      link_to (current_user.follows?(artist) ? 'Unfollow' : 'Follow'), artist_follows_path(artist), method: (current_user.follows?(artist) ? :delete : :post), remote: true, id: 'follow-link'
     else
-      link_to  'Follow', '', 'data-user-login' => false, id: 'follow-artist', class: 'login-link'
+      link_to  'Follow', '', 'data-user-login' => false, id: 'follow-link', class: 'login-link'
     end
   end
   

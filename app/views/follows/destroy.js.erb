@@ -1,1 +1,4 @@
-$('#follow-link').data('method','post').find('span').html('Follow')
+$('#follow-link').data('method','post').html('Follow');
+<% user = User.find(params[:artist_id]).decorator().followers.count  %>
+var follower = <%= user %>;
+$('#followers-num').html(follower + 'Followers');

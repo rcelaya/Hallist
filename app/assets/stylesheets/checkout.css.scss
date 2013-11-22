@@ -1,3 +1,5 @@
+@import "app_mixins";
+
 .white-box {
   background-color: #fff;
   -webkit-box-shadow: 1px 1px 2px rgba(180, 180, 180, 0.75);
@@ -68,8 +70,7 @@ h3 {
   font-size: 14px;
 
   #items-header {
-    border-bottom: 1px solid #DEDEDE;
-    padding-bottom: 5px;
+    //padding-bottom: 5px;
   }
   
   .line-item {
@@ -81,9 +82,6 @@ h3 {
   }
 }
 
-.charge-title {
-  text-align: right;
-}
 
 #subtotal {
   border-top: 1px solid #DEDEDE;
@@ -93,9 +91,9 @@ h3 {
 #total {
   color: #525252;
   font-size: 18px;
-  border-bottom: 1px solid #DEDEDE;
   margin-bottom: 20px;
   padding-bottom: 5px;
+  border-top: dotted 2px #999;
 }
 
 #shipping-charges {
@@ -114,5 +112,157 @@ h3 {
   }
 }
 
+.order_item{
+  border-bottom: 1px solid #DEDEDE;
+}
+
 
 input.fail { border: 1px solid red;}
+
+.top-line{
+  border-top: 1px solid #DEDEDE;
+  width: 30px;
+}
+
+/******************************************************************
+*******************************************************************
+** Checkout
+*******************************************************************
+******************************************************************/
+
+.gray-main-container-checkout {
+  @include gray-container-section;
+
+
+  form {
+    display: inline-block;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    margin-left: 60px;
+    background-color: $gray-bg-color;
+  }
+
+  input, textarea {
+    border: 0px;
+    border-radius: 0;
+  }
+
+  input[type=file] {
+    width: 230px;
+  }
+
+  fieldset {
+    background-color: $gray-bg-color;
+
+    legend {
+      text-transform: uppercase;
+      color: #666;
+      font-size: 18px;
+      border: 0;
+    }
+
+    &.basic-info {
+      input {
+        margin: 10px 0 30px 25px;
+        width: 450px;
+      }
+      #name-product{
+        text-transform: uppercase;
+        color: #666;
+        font-size: 16px;
+      }
+      description-product{
+        font-size: 14px;
+      }
+    }
+
+    &.social-web-info {
+      width: 100%;
+      margin-right: 30px;
+      padding: 40px 0;
+
+      input, textarea {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .social-info {
+        display: inline-block;
+        width: 45%;
+        height: 400px;
+        margin-right: 30px;
+        padding-right: 50px;
+        border-right: dotted 2px #999;
+      }
+      .web-info {
+        display: inline-block;
+        width: 45%;
+        bottom: 125px;
+        position: relative;
+        form {
+          display: inline-block;
+          margin-left: 0px;
+          background-color: $gray-bg-color;
+        }
+        .complete-order{
+          margin-top: 77px;
+          width: 50%;
+          margin-right: -12px;
+        }
+      }
+    }
+
+    #shipping-address{
+      border-top: dotted 2px #999;
+    }
+
+    &.social-apps {
+      img.connected {
+        -moz-opacity: 0.50;
+        opacity: 0.50;
+      }
+
+      .app {
+        display: inline-block;
+        width: 330px;
+        padding: 10px;
+      }
+    }
+
+  }
+
+
+  textarea { resize: none; }
+
+  input[type=submit] {
+    width: 70px;
+    background-color: #333;
+    border: 1px solid #000;
+    display: inline-block;
+    color: #ffffff;
+    font-size:11px;
+    padding:3px 15px;
+    text-decoration:none;
+
+    &:hover {
+      background-color: #393939;
+    }
+
+    &:active {
+      background-color: #666;
+    }
+
+  }
+
+  #checkout_section {
+    top: 60px;
+    float: none;
+    margin: 0 auto;
+    position: relative;
+    legend {
+      text-transform: uppercase;
+      color: #666;
+      font-size: 18px;
+    }
+  }
+}

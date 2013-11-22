@@ -1,15 +1,17 @@
 class Shopping::CreditcardCheckoutController < Shopping::BaseController
 
-  include Shopping::CreditcardCheckoutHelper
+  include Shopping::PaypalCheckoutHelper
   def pay
-    @name = params[:first_name] +' '+ params[:last_name]
+    @name = params[:name]
+    total = params[:total].to_f
     @order = find_or_create_order
-    puts 'order total' + to_cents(@order.total).to_yaml
+    products = @order.id.to_s + ' - ' + @order.number.to_s + '  [' + params[:products] + ']'
+    puts 'ordeennnn completaa' + @order.to_yaml + params[:products]
     Conekta.api_key= "key_FfrkmqPQodQdPFEQ"
     charge = Conekta::Charge.create({
-                                         "amount" => to_cents(@order.total),
+                                         "amount" => to_cents(total),
                                          "currency" => 'USD',
-                                         "description" => 'Waldos',
+                                         "description" => products,
                                          "card" => {
                                              "name" => @name,
                                              "cvc" => params[:verification_value],
@@ -33,7 +35,7 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
       puts 'entro a el cargo'
       @order.remove_user_store_credits
       session_cart.mark_items_purchased(@order)
-      redirect_to root_url
+      redirect_to root_url, notice: "Purchase was Successful."
     else
       notice = "Woops. Something went wrong while we were trying to complete the purchase with Paypal. Btw, here's what Paypal said: #{purchase.message}"
       redirect_to checkout_shopping_order_path, :notice => notice
