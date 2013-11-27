@@ -1,37 +1,72 @@
-.row
-  %ul.nav.nav-tabs
-    %li.active
-      = link_to 'Artworks','#artworks', 'data-toggle' => "tab"
-    %li
-      = link_to 'Orders','#orders', 'data-toggle' => "tab"
-  
-  .tab-content
-    #artworks.tab-pane.active
-      = link_to 'Upload ArtWork', new_artwork_product_path, class: [:btn, 'btn-gray']
+.header-info
+  %center
+    %h1 UPLOAD ARTWORK
 
-      %table.table-striped.table-bordered.span12
-        %thead
-          %tr
-            %th Name
-            %th Image
-            %th Active
-            %th Actions
-        %tbody
+.gray-main-container-upload
+  .row-fluid
+    %ul.nav.nav-tabs
+      %li#upload-tab.active
+        = link_to 'Artworks','#artworks', 'data-toggle' => "tab"
+      %li#order-tab
+        = link_to 'Orders','#orders', 'data-toggle' => "tab"
+
+    .tab-content
+      #artworks.tab-pane.active
+        = link_to 'UPLOAD NEW', new_artwork_product_path, id: 'link-new'
+
+        #upload-section.span10
+          .span12#header_artwork
+            %legend
+              %center
+                .span3
+                  IMAGE
+                .span3
+                  NAME
+                .span3
+                  ACTIVE
+                .span3
+                  ACTIONS
+
+          .row.span12#space_artwork
+
           - @products.each do |product|
-            = product.featured_image.to_yaml
-            %tr
-              %td= product.name
-              %td= image_tag product.decorator().featured_image
-              %td= product.active?
-              %td
-                = link_to 'Edit', edit_artwork_product_path(product)
-        
-    #orders.tab-pane
-      %table.table-striped.table-bordered.span12
-        %thead
-          %tr
-            %th Buyer
-            %th Address
-            %th Status
-            %th Item
-            %th Actions
+            .span12
+              %legend
+                %center
+                  .span3
+                    = image_tag product.decorator().featured_image
+                  .span3#align_artwork
+                    = product.name
+                  .span3#align_artwork
+                    = product.active?
+                  .span3#align_artwork
+                    = link_to 'Edit', edit_artwork_product_path(product), id: 'link-button'
+            .row.span12#space_artwork
+
+      #orders.tab-pane
+        #upload-section.span10
+          %legend
+            %center
+              .span3
+                BUYER
+              .span3
+                ADDRESS
+              .span2
+                STATUS
+              .span2
+                ITEM
+              .span2
+                ACTIONS
+
+          .row.span12#space_artwork
+
+- content_for :javascript do
+  $('#order-tab').click(function(event){
+  event.preventDefault();
+  $('.header-info').html('<div class="header-info"><center><h1> ORDERS </h1></center></div>');
+  });
+
+  $('#upload-tab').click(function(event){
+  event.preventDefault();
+  $('.header-info').html('<div class="header-info"><center><h1> UPLOAD ARTWORK </h1></center></div>');
+  });

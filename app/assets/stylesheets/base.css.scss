@@ -825,8 +825,8 @@ label.error {color: #b94a48;}
 .add-image {
   cursor: pointer;
   float: left;
-  width: 160px;
-  height: 160px;
+  width: 95%;
+  height: 258px;
   background-color: #f4f4f4;
   border: 2px solid #eee;
   margin: 0 20px 10px 0;
@@ -835,8 +835,9 @@ label.error {color: #b94a48;}
   &:hover {background-color: #eee;}
   
   img {
-    margin: 45px auto 0 auto;
+    //margin: 45px auto 0 auto;
     display: block;
+    height: 100%;
   }
 }
 

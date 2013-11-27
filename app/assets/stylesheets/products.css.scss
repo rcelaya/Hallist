@@ -205,9 +205,9 @@
       padding-bottom: 15px;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
-      /*img{
+      img{
         margin-top: 0px;
-      } */
+      }
     }
 
     #artwork-varaints {
@@ -333,11 +333,21 @@
 }
 
 .social-buttons-container {
+  /*position: absolute;
+  top: 105px;
+  left: 40px;
+  width: 544px;
+  background: url('/assets/social-button-bg.png') no-repeat;*/
   position: relative;
   bottom: 20px;
   float: right;
   left: 10px;
   background: url("/assets/social-button-bg.png") no-repeat;
+  /*position: relative;
+  right: 13%;
+  bottom: 20px;
+  float: right;
+  background: url("/assets/social-button-bg.png") no-repeat; */
 }
 
 p {
@@ -477,6 +487,3 @@ span{
     }
   }
 }
-
-
-
