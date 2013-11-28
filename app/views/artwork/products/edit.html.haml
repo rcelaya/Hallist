@@ -14,6 +14,15 @@
               .span5
                 .add-image
                   = image_tag @product.decorator().featured_image(:small), :id => 'product_image'
+                .image-information
+                  %span
+                    Max size of 3Mb, JPG or PNG
+
+                  .image-details
+                    - @product.images.each_with_index do |image, index|
+                      - if index == @product.images.length - 1
+                        %span
+                          = image.photo_file_name
 
               .span7
                 = form.text_field :name, class: 'span12', placeholder: 'NAME OF ARTWORK'
@@ -30,7 +39,32 @@
             = form.label 'CHOOSE THE MAIN COLORS OF YOUR ARTWORK', class: 'main-colors'
 
             - @colors.each do |color|
-              = form.check_box(:property_value_ids, { :multiple => true, class: 'span4' }, color, nil)
+              .span3
+                - case color[1]
+                  - when 1
+                    = image_tag('bgris.png', :class => 'span3' )
+                  - when 2
+                    = image_tag('bamarillo.png', :class => 'span3' )
+                  - when 3
+                    = image_tag('bcafe.png', :class => 'span3' )
+                  - when 4
+                    = image_tag('bblanco.png', :class => 'span3' )
+                  - when 5
+                    = image_tag('bnaranja.png', :class => 'span3' )
+                  - when 6
+                    = image_tag('bnegro.png', :class => 'span3' )
+                  - when 7
+                    = image_tag('brgis.png', :class => 'span3' )
+                  - when 8
+                    = image_tag('brojo.png', :class => 'span3' )
+                  - when 9
+                    = image_tag('brosa.png', :class => 'span3' )
+                  - when 10
+                    = image_tag('bverde.png', :class => 'span3' )
+                  - when 11
+                    = image_tag('bkg_dark.png', :class => 'span3' )
+
+                = form.check_box(:property_value_ids, { :multiple => true, class: 'span4' }, color[1], nil)
 
             = form.hidden_field :shipping_category_id
             = form.hidden_field :tax_category_id
@@ -62,74 +96,53 @@
               = text_field_tag 'product[auction_attributes][deadline]', @product.auction.try(:deadline), placeholder: 'WHAT TIME THE AUCTION ENDS?', class: 'span10'
 
             %br
-            = link_to 'ADD PRINT', '', id: 'add-print-button'
+            = link_to image_tag('boton1.jpg'), '', id: 'add-print-button'
 
-        .span5
-          = form.fields_for :address, (@product.address || @product.build_address) do |address_form|
-            %fieldset{rel: 'popover', 'data-content' => 'We need to know from where you ship the artwork. This helps us to correctly calculate the shipping fee.', 'data-original-title' => 'Shipping Address', 'data-placement' => 'bottom', 'data-trigger' => 'hover'}
-              %legend Shipping Information
-              = address_form.text_field :address1, placeholder: 'ADDRESS'
-
-              = address_form.text_field :address2, placeholder: 'WILL BE USED TO CALCULATE COSTS'
-
-              = address_form.country_select :country, priority: %w(US CA MX), prompt: 'PLEASE SELECT A COUNTRY'
-
-              #order_state_code_wrapper
-                = render partial: 'shared/subregion_select', locals: {parent_region: address_form.object.country, form_address_object: 'product[address_attributes]'}
-
-              = address_form.text_field :city, placeholder: 'CITY'
-
-              = address_form.text_field :zip_code, placeholder: 'POSTAL CODE'
-
-              = address_form.text_field :alternative_phone, placeholder: 'PHONE'
-
-        .span12#prints-container.hide
+        .span6#prints-container
           - @product.print_variants.each do |variant_print|
-            .span5
-              %fieldset
-                %legend PRINT
-                = link_to 'X', '', class: 'close-print'
-                = hidden_field_tag 'product[variants_attributes][][name]', 'PRINT'
-                = hidden_field_tag 'product[variants_attributes][][sku]', variant_print.sku
+            %fieldset
+              %legend PRINT
+              = link_to 'X', artwork_product_variant_path(variant_print.product_id, variant_print), confirm: 'Are you sure you want to delete this print?', method: :delete, class: 'close-print'
+              = hidden_field_tag 'product[variants_attributes][][name]', 'PRINT'
+              = hidden_field_tag 'product[variants_attributes][][sku]', variant_print.sku
 
-                = text_field_tag 'product[variants_attributes][][price]', variant_print.price, class: 'required', placeholder: 'PRICE TO THE PUBLIC'
+              = text_field_tag 'product[variants_attributes][][price]', variant_print.price, class: 'required span10', placeholder: 'PRICE TO THE PUBLIC'
 
-                = text_field_tag 'product[variants_attributes][][cost]', variant_print.cost, disabled: :disabled, placeholder: 'YOUR PROFIT'
+              = text_field_tag 'product[variants_attributes][][cost]', variant_print.cost, disabled: :disabled, class: 'span10', placeholder: 'YOUR PROFIT'
 
-                = text_field_tag 'product[variants_attributes][][size][width]', variant_print.size['width'], class: 'size-input', placeholder: 'WIDTH'
-                = text_field_tag 'product[variants_attributes][][size][height]', variant_print.size['height'], class: 'size-input', placeholder: 'HEIGHT'
-                = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']], variant_print.size['measures']), prompt: 'SELECT A MEASURE', class: 'size-input'
+              = text_field_tag 'product[variants_attributes][][size][width]', variant_print.size['width'], class: 'span5', placeholder: 'WIDTH'
+              = text_field_tag 'product[variants_attributes][][size][height]', variant_print.size['height'], class: 'span5', placeholder: 'HEIGHT'
+              = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']], variant_print.size['measures']), prompt: 'SELECT A MEASURE', class: 'size-input', class: 'span9'
 
-                = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', variant_print.inventory.count_on_hand, class: 'required', placeholder: 'PRINTS AVAILABLE TO SELL'
-                .control-group
-                  .controls
-                    = link_to 'delete', artwork_product_variant_path(variant_print.product_id, variant_print), confirm: 'Are you sure you want to delete this print?', method: :delete
-                = hidden_field_tag 'product[variants_attributes][][product_id]', variant_print.product_id
+              = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', variant_print.inventory.count_on_hand, class: 'required span9', placeholder: 'PRINTS AVAILABLE TO SELL'
+
+              = hidden_field_tag 'product[variants_attributes][][product_id]', variant_print.product_id
 
         .span12.border-artwork
 
         .span5
           = form.submit 'UPDATE'
 
-      .span12#print-template.hide
-        .span5
-          %fieldset
+      .span#print-template.hide
+        %fieldset
+          .span12
             %legend PRINT
             = link_to 'X', '', class: 'close-print'
             = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
             = hidden_field_tag 'product[variants_attributes][][sku]', "#{@product.id}-Print"
 
-            = text_field_tag 'product[variants_attributes][][price]','', class: 'required', placeholder: 'Price'
+            = text_field_tag 'product[variants_attributes][][price]','', class: 'required span10', placeholder: 'Price'
 
-            = text_field_tag 'product[variants_attributes][][cost]', '', disabled: :disabled, placeholder: "Your profit"
+            = text_field_tag 'product[variants_attributes][][cost]', '', disabled: :disabled, class: 'span10', placeholder: "Your profit"
 
-            = text_field_tag 'product[variants_attributes][][size][width]', '', class: 'size-input', placeholder: 'Width'
-            = text_field_tag 'product[variants_attributes][][size][height]', '', class: 'size-input', placeholder: 'Height'
-            = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']]), prompt: 'Select a measure', class: 'size-input'
+            = text_field_tag 'product[variants_attributes][][size][width]', '', class: 'span5', placeholder: 'Width'
+            = text_field_tag 'product[variants_attributes][][size][height]', '', class: 'span5', placeholder: 'Height'
+            = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']]), prompt: 'Select a measure', class: 'span9'
 
-            = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', '', class: 'required size-input', placeholder: 'Prints available to sell'
+            = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', '', class: 'required span9', placeholder: 'Prints available to sell'
 
             = hidden_field_tag 'product[variants_attributes][][product_id]', @product.id
+          %br
 
 - content_for :head do
   = tinymce_assets

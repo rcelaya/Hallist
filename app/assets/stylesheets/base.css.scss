@@ -826,7 +826,7 @@ label.error {color: #b94a48;}
   cursor: pointer;
   float: left;
   width: 95%;
-  height: 258px;
+  height: 250px;
   background-color: #f4f4f4;
   border: 2px solid #eee;
   margin: 0 20px 10px 0;
@@ -843,14 +843,11 @@ label.error {color: #b94a48;}
 
 .image-information {
   display: inline-block;
-  float: left;
-  width: 190px;
 
   span {
     color: #999;
     display: inline-block;
-    font-size: 16px;
-    margin: 20px 0 0;
+    font-size: 12px;
     text-align: center;
     width: 190px;
   }
@@ -861,7 +858,7 @@ label.error {color: #b94a48;}
     
     span {
       color: #72A7C0;
-      font-size: 14px;
+      font-size: 12px;
     }
   }
 }

@@ -1,5 +1,9 @@
 @import "app_mixins";
 
+.artwork-steps{
+
+}
+
 form#new_product, form.edit_product {
   input {
     height: 36px;
@@ -212,22 +216,10 @@ fieldset {
   }
 
   #add-print-button{
-    width: 70px;
-    background-color: #333 !important;
-    border: 1px solid #000;
-    display: inline-block;
     color: #ffffff;
     font-size:11px;
     padding:3px 15px;
     text-decoration:none;
-
-    &:hover {
-      background-color: #393939;
-    }
-
-    &:active {
-      background-color: #666;
-    }
   }
 
   #artwork_auction{

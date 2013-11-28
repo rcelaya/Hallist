@@ -35,7 +35,7 @@ class ProductDecorator < Draper::Base
   end
   
   def featured_image(image_size = :small, cache = true)
-    images.first ? images.first.photo.url(image_size, cache) : "no_image_product.jpg" rescue "no_image_product.jpg"
+    images.order('created_at DESC').first ? images.order('created_at DESC').first.photo.url(image_size, cache) : "no_image_product.jpg" rescue "no_image_product.jpg"
   end
   
   def small_image

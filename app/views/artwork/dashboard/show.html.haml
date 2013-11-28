@@ -6,9 +6,10 @@
   .row-fluid
     %ul.nav.nav-tabs
       %li#upload-tab.active
-        = link_to 'Artworks','#artworks', 'data-toggle' => "tab"
+        = link_to image_tag('artworks.png', :id => 'artworks-image' ), '#artworks', 'data-toggle' => "tab"
       %li#order-tab
-        = link_to 'Orders','#orders', 'data-toggle' => "tab"
+        = link_to image_tag('orders.png', :id => 'orders-image'), '#orders', 'data-toggle' => "tab"
+
 
     .tab-content
       #artworks.tab-pane.active
@@ -38,7 +39,10 @@
                   .span3#align_artwork
                     = product.name
                   .span3#align_artwork
-                    = product.active?
+                    - if product.active?
+                      = image_tag 'paloma.png'
+                    - else
+                      = image_tag 'tache.png'
                   .span3#align_artwork
                     = link_to 'Edit', edit_artwork_product_path(product), id: 'link-button'
             .row.span12#space_artwork
@@ -63,10 +67,14 @@
 - content_for :javascript do
   $('#order-tab').click(function(event){
   event.preventDefault();
+  $('#artworks-image').attr('src', '/assets/orders.png');
+  $('#orders-image').attr('src', '/assets/artworks.png');
   $('.header-info').html('<div class="header-info"><center><h1> ORDERS </h1></center></div>');
   });
 
   $('#upload-tab').click(function(event){
   event.preventDefault();
+  $('#orders-image').attr('src', '/assets/artworks.png');
+  $('#artworks-image').attr('src', '/assets/orders.png');
   $('.header-info').html('<div class="header-info"><center><h1> UPLOAD ARTWORK </h1></center></div>');
   });

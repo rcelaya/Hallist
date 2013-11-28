@@ -12,6 +12,30 @@
 .gray-main-container-upload {
   @include gray-container-section;
 
+  .nav-tabs>.active>a, .nav-tabs>.active>a:hover{
+    color: transparent;
+    cursor: default;
+    background-color: transparent;
+    border: none;
+    border-bottom-color: transparent;
+  }
+
+  .nav-tabs>li>a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 00px;
+    border: 0px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+  }
+
+  .nav-tabs>li>a, .nav-pills>li>a{
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    line-height: 0px;
+  }
 
   #content-info-artwork{
     position: relative;
@@ -218,6 +242,10 @@
   #header_artwork{
     margin-left: 1.9%;
     margin-top: 30px;
+  }
+
+  #nav_artwork{
+    margin-left: 1.9%;
   }
 
   #space_artwork{
