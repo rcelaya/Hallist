@@ -102,7 +102,7 @@
             %fieldset
               %legend PRINT
               = link_to 'X', '', class: 'close-print'
-              = hidden_field_tag 'product[variants_attributes][][name]', 'PRINT'
+              = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
               = hidden_field_tag 'product[variants_attributes][][sku]', variant_print.sku
 
               = text_field_tag 'product[variants_attributes][][price]', variant_print.price, class: 'required span10',  placeholder: 'PRICE TO THE PUBLIC'
@@ -129,7 +129,7 @@
           .span12
             %legend PRINT
             = link_to 'X', '', class: 'close-print'
-            = hidden_field_tag 'product[variants_attributes][][name]', 'PRINT'
+            = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
             = hidden_field_tag 'product[variants_attributes][][sku]', "#{@product.id}-Print"
 
             = text_field_tag 'product[variants_attributes][][price]','', class: 'required span10', placeholder: 'PRICE TO THE PUBLIC'
