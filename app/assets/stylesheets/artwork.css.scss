@@ -50,6 +50,11 @@ fieldset {
   #content_info_upload{
     position: relative;
     top: 60px;
+    .select-color{
+      width: 17px;
+      height: 17px;
+      margin-right: 6px;
+    }
   }
 
   #content-info-artwork{

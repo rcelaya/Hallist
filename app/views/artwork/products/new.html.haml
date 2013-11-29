@@ -38,29 +38,31 @@
             = form.label 'CHOOSE THE MAIN COLORS OF YOUR ARTWORK', class: 'main-colors'
             - @colors.each do |color|
               .span3
-                - case color[1]
-                  - when 1
-                    = image_tag('bgris.png', :class => 'span3' )
-                  - when 2
-                    = image_tag('bamarillo.png', :class => 'span3' )
-                  - when 3
-                    = image_tag('bcafe.png', :class => 'span3' )
-                  - when 4
-                    = image_tag('bblanco.png', :class => 'span3' )
-                  - when 5
-                    = image_tag('bnaranja.png', :class => 'span3' )
-                  - when 6
-                    = image_tag('bnegro.png', :class => 'span3' )
-                  - when 7
-                    = image_tag('brgis.png', :class => 'span3' )
-                  - when 8
-                    = image_tag('brojo.png', :class => 'span3' )
-                  - when 9
-                    = image_tag('brosa.png', :class => 'span3' )
-                  - when 10
-                    = image_tag('bverde.png', :class => 'span3' )
-                  - when 11
-                    = image_tag('bkg_dark.png', :class => 'span3' )
+                - case color[0]
+                  - when 'White'
+                    = image_tag('bblanco.png', :class => 'select-color' )
+                  - when 'Black'
+                    = image_tag('bnegro.png', :class => 'select-color' )
+                  - when 'Blue'
+                    = image_tag('bgris.png', :class => 'select-color' )
+                  - when 'Red'
+                    = image_tag('brojo.png', :class => 'select-color' )
+                  - when 'Yellow'
+                    = image_tag('bamarillo.png', :class => 'select-color' )
+                  - when 'Orange'
+                    = image_tag('bnaranja.png', :class => 'select-color' )
+                  - when 'Green'
+                    = image_tag('bverde.png', :class => 'select-color' )
+                  - when 'Pink'
+                    = image_tag('brosa.png', :class => 'select-color' )
+                  - when 'Brown'
+                    = image_tag('bcafe.png', :class => 'select-color' )
+                  - when 'Gray'
+                    = image_tag('brgis.png', :class => 'select-color' )
+                  - when 'Violet'
+                    = image_tag('bkg_dark.png', :class => 'select-color' )
+
+                .span1
 
                 = form.check_box(:property_value_ids, { :multiple => true, class: 'span3' }, color[1], nil)
 
