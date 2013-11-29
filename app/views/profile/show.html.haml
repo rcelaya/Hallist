@@ -22,14 +22,14 @@
 .row-fluid#social-menu
   .span12
     .row
-      = link_to("My Work ·") if @user.artist?
+      = link_to("My Work ·", profile_path(id: @user.id, artwork_type: 'works')) if @user.artist?
       = link_to "My Collections ·", profile_path(id: @user.id, artwork_type: 'collections')
       = link_to "My Likes", profile_path(id: @user.id, artwork_type: 'likes')
 
     .row.follow-numbers
-      = link_to "#{@user.followers.count} Followers", 'javascript:void(0)', id: 'followers-num'
+      = link_to "#{@user.followers.count} Followers", profile_path(id: @user.id, artwork_type: 'followers'), id: 'followers-num'
       %span ∙
-      = link_to "#{@user.followings.count} following", 'javascript:void(0)'
+      = link_to "#{@user.followings.count} following", ''
 
 .row-fluid.user-products
 - if @products.blank? and @user.artist?
@@ -37,8 +37,24 @@
     %p.no-products= "No collections to show yet."
   - else
     %p.no-products= "No products to show yet."
-- elsif params[:artwork_type] == 'collections' or !@user.artist?
-  - if @collections
+- elsif params[:artwork_type] == 'collections'
+  - if !@collections.blank?
+    .span12.profile-collections.my-profile
+      - @collections.each do |collection|
+        = render partial: 'collections/collection', locals: {collection: collection}
+  - else
+    %p.no-products= "No collections to show yet."
+- elsif params[:artwork_type] == 'likes'
+  - if !@likes.blank?
+    .span12.profile-collections.my-profile
+      - @likes.each do |like|
+        = render partial: 'likes/like', locals: {like: like}
+  - else
+    %p.no-products= "No likes to show yet."
+- elsif params[:artwork_type] == 'works'
+  #products
+- elsif @user.artist?
+  - if !@collections.blank?
     .span12.profile-collections.my-profile
       - @collections.each do |collection|
         = render partial: 'collections/collection', locals: {collection: collection}

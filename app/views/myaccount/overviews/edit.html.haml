@@ -3,6 +3,8 @@
     %h1 ACCOUNT SETTINGS
 
 .gray-main-container
+  %center
+    = image_tag '/assets/signup-step1.png', class: 'signup-steps'
   .row-fluid
     #edit_user_section.span8
       = form_for current_user, :url => myaccount_overview_path, :method => 'PUT', :html => {:multipart => true } do |f|

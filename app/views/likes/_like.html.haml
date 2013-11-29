@@ -1,0 +1,9 @@
+.product
+  = image_tag like.decorator().featured_image
+  .product-description
+    %span.name
+      = like.name
+    %br
+    %br
+    %span
+      = like.description.html_safe
