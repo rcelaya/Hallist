@@ -2,11 +2,11 @@
   .span12
     #myCarousel.carousel.slide
       .carousel-inner
-        - Product.last(10).each_with_index do |product, index|
+        - Product.last(4).each_with_index do |product, index|
           .item.row{class: "#{'active' if index==0}"}
             = link_to product_path(product) do
               .span12
-                = image_tag 'banner.png'
+                = image_tag 'banner'+index.to_s+'.png'
               .span4
                 %h2= product.name
                 %p= product.description.html_safe
