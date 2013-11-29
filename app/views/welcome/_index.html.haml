@@ -11,9 +11,27 @@
                 %h2= product.name
                 %p= product.description.html_safe
 
-      %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
-      %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
-    //= image_tag '/assets/featured-ribbon.png', class: 'featured-ribbon'
+      %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :id => "carousel-control-left"} ‹
+      %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel", :id => "carousel-control-right"} ›
+      %a
+        = image_tag 'rectangulo_header.png', :id => 'publicidad-header'
+        %div#nombre-publicidad
+          %span
+            NEW!
+            #contenido-publicidad
+              Know Hope Original Work
+          %br
+          %span
+            20% OFF
+            #contenido-publicidad
+              on all Stephen Power Prints!
+          %br
+          %span
+            BUY 2
+            #contenido-publicidad
+              ROA Prints and get the 3rd
+              %br
+                Print FREE
 
 - content_for :javascript do
   $('.carousel').carousel();
