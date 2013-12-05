@@ -39,7 +39,7 @@ class Profile < ActiveRecord::Base
   after_create :initialize_settings
   
   def featured_avatar(size = :mini)
-    avatar.present? ? avatar.url(size) : "/assets/#{size}-no-avatar.png"
+    avatar.present? ? avatar.url(size) : "/assets/avatarphoto.png"
   end
   
   def initialize_settings

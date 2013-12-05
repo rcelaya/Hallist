@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
     @notices = Notice.active unless request.xhr?
     respond_to do |format|
       format.html do
-        redirect_to artwork_url(search.results.first.permalink) if @products.size == 1
+        #redirect_to artwork_url(search.results.first.permalink) if @products.size == 1
       end
       format.json { render json: @products }
     end
