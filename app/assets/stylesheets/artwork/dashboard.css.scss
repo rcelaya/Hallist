@@ -201,23 +201,9 @@
   }
 
   #link-new{
-    width: 100px;
-    background-color: #333 !important;
-    border: 1px solid #000;
     display: inline-block;
-    color: #ffffff;
-    font-size:11px;
     padding:3px 15px;
-    text-decoration:none;
     margin-left: 10%;
-
-    &:hover {
-      background-color: #393939;
-    }
-
-    &:active {
-      background-color: #666;
-    }
   }
 
   #link-button{

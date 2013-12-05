@@ -13,7 +13,7 @@
             .row-fluid
               .span5
                 .add-image
-                  = image_tag '/assets/choose-image.png', :id => 'product_image'
+                  = image_tag '/assets/Artworkphoto.png', :id => 'product_image'
                 .image-information
                   %span
                     Max size of 3Mb, JPG or PNG
@@ -81,23 +81,24 @@
 
             = text_field_tag 'product[variants_attributes][][price]', @product.original_variant.try(:price), class: 'required span10', placeholder: 'PRICE TO THE PUBLIC'
 
-            = text_field_tag 'product[variants_attributes][][cost]', @product.original_variant.try(:cost), disabled: :disabled, class: 'span10', placeholder: 'YOUR PROFIT'
+            = text_field_tag 'product[variants_attributes][][cost]', @product.original_variant.try(:cost), disabled: :disabled, class: 'span10', placeholder: '* YOUR PROFIT'
 
             = text_field_tag 'product[variants_attributes][][size][width]', (@product.original_variant.size['width'] if @product.original_variant) , class: 'span5', placeholder: 'WIDTH'
             = text_field_tag 'product[variants_attributes][][size][height]', (@product.original_variant.size['height'] if @product.original_variant), class: 'span5', placeholder: 'HEIGHT'
             = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']], (@product.original_variant.size['measures'] if @product.original_variant)), prompt: 'SELECT A MEASURE', class: 'span9'
             = hidden_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', 1
 
-            = label_tag 'ARTWORK AUCTION', nil, class: 'artwork-auction span5'
-            = check_box_tag 'artwork_auction', '1', @product.auction.present?, class: 'span4'
+            = label_tag '* This is your estimated profit', nil, class: 'profit'
+            //= label_tag 'ARTWORK AUCTION', nil, class: 'artwork-auction span5'
+            //= check_box_tag 'artwork_auction', '1', @product.auction.present?, class: 'span4'
             %br
 
-            .auction-config
-              = text_field_tag 'product[auction_attributes][minimum_bid]', @product.auction.try(:minimum_bid), placeholder: 'MINIMUM BID AMOUNT', class: 'span10'
-              = text_field_tag 'product[auction_attributes][deadline]', @product.auction.try(:deadline), placeholder: 'WHAT TIME THE AUCTION ENDS?', class: 'span10'
+            //.auction-config
+            //= text_field_tag 'product[auction_attributes][minimum_bid]', @product.auction.try(:minimum_bid), placeholder: 'MINIMUM BID AMOUNT', class: 'span10'
+            //= text_field_tag 'product[auction_attributes][deadline]', @product.auction.try(:deadline), placeholder: 'WHAT TIME THE AUCTION ENDS?', class: 'span10'
 
             %br
-            = link_to image_tag('boton1.jpg'), '', id: 'add-print-button'
+            = link_to image_tag('AddPRINT.png'), '', id: 'add-print-button'
 
         .span6#prints-container.hide
           - @product.print_variants.each do |variant_print|
@@ -124,7 +125,7 @@
         .span12.border-artwork
 
         .span5
-          = form.submit 'UPDATE'
+          = form.submit ''
 
       .span#print-template.hide
         %fieldset

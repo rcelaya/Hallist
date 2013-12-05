@@ -461,22 +461,13 @@ h2.large.collections {
   textarea { resize: none; }
 
   input[type=submit] {
-    width: 70px;
-    background-color: #333;
-    border: 1px solid #000;
+    width: 100px;
+    height: 35px;
     display: inline-block;
-    color: #ffffff;
     font-size:11px;
     padding:3px 15px;
-    text-decoration:none;
-
-    &:hover {
-      background-color: #393939;
-    }
-
-    &:active {
-      background-color: #666;
-    }
+    background-image: url('/assets/update.png');
+    background-repeat: no-repeat;
 
   }
 

@@ -3,9 +3,13 @@
   = f.fields_for :profile do |profile_form|
 
     .span4
-      = profile_form.label :avatar
-      = image_tag @user.featured_avatar(:profile), :id => 'product_image'
-      = profile_form.file_field :avatar, :id => 'add-image'
+      .add-image
+        = image_tag @user.featured_avatar(:profile).present? ?  @user.featured_avatar(:profile) : '/assets/avatarphoto.png', :id => 'product_image'
+
+      .image-information
+        .image-details
+          %span
+            = profile_form.label :avatar
 
     .span5
       = profile_form.text_field :username, placeholder: 'USERNAME'
@@ -57,3 +61,15 @@
 
 - content_for :javascript do
   $('#user_profile_attributes_birth_date').datepicker();
+
+  $('.add-image').click(function() {
+  buttonAddImage = $(this);
+  fileInput =  $('<input/>').attr('type','file').attr('name','product[images_attributes][][photo]').addClass('hide');
+
+  fileInput.change(function() {
+  updateImage(this,'product_image');
+  $('.image-details').html($('<span/>').html(this.files[0].name));
+  $('.image-details').append(fileInput);
+  });
+  fileInput.click();
+  });

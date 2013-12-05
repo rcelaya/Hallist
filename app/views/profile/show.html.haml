@@ -46,9 +46,10 @@
     %p.no-products= "No collections to show yet."
 - elsif params[:artwork_type] == 'likes'
   - if !@likes.blank?
-    .span12.profile-collections.my-profile
-      - @likes.each do |like|
-        = render partial: 'likes/like', locals: {like: like}
+    //.span12.profile-collections.my-profile
+    //- @likes.each do |like|
+    //= render partial: 'likes/like', locals: {likes: @likes}
+    #products
   - else
     %p.no-products= "No likes to show yet."
 - elsif params[:artwork_type] == 'works'
@@ -69,7 +70,10 @@
   $container = $('#products');
   $container.masonry({ isFitWidth: true, columnWidth: 240 });
   $('.profile-collections').masonry({isFitWidth: true});
-  window.router = new Arto.Routers.ProductsRouter({products: #{@products}});
+  - if @likes.present?
+    window.router = new Arto.Routers.ProductsRouter({products: #{@likes}});
+  - else
+    window.router = new Arto.Routers.ProductsRouter({products: #{@products}});
   Backbone.history.start({pushState: true});
   window.scrollInfinite.active = false;
   });

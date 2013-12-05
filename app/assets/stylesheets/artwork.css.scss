@@ -164,15 +164,16 @@ fieldset {
   textarea { resize: none; }
 
   input[type=submit] {
-    width: 70px;
-    background-color: #333 !important;
+    width: 90px !important;
+    /*background-color: #333 !important;
     border: 1px solid #000;
     display: inline-block;
     color: #ffffff;
     font-size:11px;
     padding:3px 15px;
     text-decoration:none;
-    margin-bottom: 30px;
+    margin-bottom: 30px;*/
+    background-image: url('/assets/update.png') !important;
 
     &:hover {
       background-color: #393939;
@@ -234,6 +235,10 @@ fieldset {
 
   .main-colors{
     text-transform: uppercase;
+  }
+
+  .profit{
+      text-transform: uppercase;
   }
 }
 

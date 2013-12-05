@@ -89,13 +89,15 @@
             = text_field_tag 'product[variants_attributes][][size][height]', (@product.original_variant.size['height'] if @product.original_variant), class: 'span5', placeholder: 'Height'
             = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']], (@product.original_variant.size['measures'] if @product.original_variant)), prompt: 'SELECT A MEASURE', class: 'span9'
 
-            = label_tag 'artwork auction', nil, class: 'artwork-auction span5'
-            = check_box_tag 'artwork_auction', '1', @product.auction.present?, class: 'span4'
+            = label_tag '* This is your estimated profit', nil, class: 'profit'
+
+            //= label_tag 'artwork auction', nil, class: 'artwork-auction span5'
+            //= check_box_tag 'artwork_auction', '1', @product.auction.present?, class: 'span4'
             %br
 
-            .auction-config
-              = text_field_tag 'product[auction_attributes][minimum_bid]', @product.auction.try(:minimum_bid), placeholder: 'MINIMUM BID AMOUNT', class: 'span10'
-              = text_field_tag 'product[auction_attributes][deadline]', @product.auction.try(:deadline), placeholder: 'WHAT TIME THE AUCTION ENDS?', class: 'span10'
+            //.auction-config
+            //= text_field_tag 'product[auction_attributes][minimum_bid]', @product.auction.try(:minimum_bid), placeholder: 'MINIMUM BID AMOUNT', class: 'span10'
+            //= text_field_tag 'product[auction_attributes][deadline]', @product.auction.try(:deadline), placeholder: 'WHAT TIME THE AUCTION ENDS?', class: 'span10'
 
             %br
             = link_to image_tag('boton1.jpg'), '', id: 'add-print-button'

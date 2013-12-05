@@ -43,7 +43,7 @@ Arto.popovers = {
     }).click(function(e) {
       e.preventDefault();
       $(this).popover('toggle');
-    }); 
+    });
   },
   
   closeCart: function() {

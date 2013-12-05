@@ -12,6 +12,7 @@ class ProfileController < ApplicationController
       @likeables.each do |like|
         @likes.push(Product.find(like.likeable_id))
       end
+      @likes = ProductDecorator.decorate(@likes).map(&:json_to_browse).to_json.html_safe
     end
 
     @user_profile = if params[:username].present?

@@ -9,5 +9,5 @@
     #edit_user_section.span8
       = form_for current_user, :url => myaccount_overview_path, :method => 'PUT', :html => {:multipart => true } do |f|
         = render :partial => 'form', :locals => {:f => f}
-        = f.submit 'UPDATE' , class: 'btn-submit pull-right'
+        = f.submit '' , class: 'btn-submit pull-right'
 

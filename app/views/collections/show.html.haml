@@ -1,24 +1,25 @@
-.row-fluid
+.container-fluid
   .span12
-    %h2.large #{@collection.name} collection
-    .social-section.collection-actions
-      - share_message = "#{@collection.name} : #{site_name}"
-      .share-facebook.social-button{"data-url" => "http://www.facebook.com/sharer.php?u=#{request.url}"}
-        = image_tag '/assets/share-button-facebook.png'
+    %h2 #{@collection.name}
+    //.social-section.collection-actions
+    //  - share_message = "#{@collection.name} : #{site_name}"
+    //  .share-facebook.social-button{"data-url" => "http://www.facebook.com/sharer.php?u=#{request.url}"}
+    //    = image_tag '/assets/share-button-facebook.png'
 
-      .share-pinterest.social-button{"data-url" => "http://pinterest.com/pin/create/button/?url=#{request.url}&media=#{@collection.featured_image(:large, false)}&description=#{share_message}"}
-        = image_tag '/assets/share-button-pinterest.png'
-        
-      .share-twitter.social-button{"data-url" => "https://twitter.com/intent/tweet?text=#{share_message}&url=#{request.url}"}
-        = image_tag '/assets/share-button-twitter.png'
+    //  .share-pinterest.social-button{"data-url" => "http://pinterest.com/pin/create/button/?url=#{request.url}&media=#{@collection.featured_image(:large, false)}&description=#{share_message}"}
+    //    = image_tag '/assets/share-button-pinterest.png'
+
+    //  .share-twitter.social-button{"data-url" => "https://twitter.com/intent/tweet?text=#{share_message}&url=#{request.url}"}
+    //    = image_tag '/assets/share-button-twitter.png'
 
 .row-fluid#products
   / = render partial: 'cart_item', collection: @collection.cart_items
 
 - content_for :javascript do
   $(window).load(function() {
+  $('#recent').remove();
   $container = $('#products');
-  $container.masonry();
+  $container.masonry({isFitWidth: true, columnWidth: 240});
   window.router = new Arto.Routers.ProductsRouter({products: #{@collection.cart_items.collect{|cart_item| ProductDecorator.decorate(cart_item.variant_product).json_to_browse}.to_json.html_safe}});
   window.scrollInfinite.active = false;
   Backbone.history.start();

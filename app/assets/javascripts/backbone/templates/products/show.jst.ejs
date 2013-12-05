@@ -68,17 +68,17 @@
       </div>
 
       <div class="row">
-        <div class='span2 size-column'>
+        <div class='span2 size-column medidas'>
           <span class='variant-detail'>
             <label>
               <input id="cart_item_variant_id_2" name="cart_item[variant_id]" checked="true" type="radio" value="<%= variants.original.id %>" />
-              Size: <%= variants.original.size + " cm" %>
+              Size: <%= variants.original.size %>
               <input id="cart_item_quantity" name="cart_item[quantity]" type="hidden" value="1">
             </label>
           </span>
         </div>
-        <div class='span1'>
-          <span class='variant-detail last'><%= variants.original.price %></span>
+        <div class='span1 precio'>
+          <span class='variant-detail last'>US <%= variants.original.price %></span>
         </div>
         <div class='span2 hidden-phone preview-column'>
           <a href="#" class="preview-link">View in a room</a>
@@ -106,17 +106,17 @@
 
         <% _.each(variants.prints, function(print) { %>
           <div class="row">
-            <div class='span2 size-column'>
+            <div class='span2 size-column medidas'>
               <span class='variant-detail'>
                 <label>
                   <input id="cart_item_variant_id_3" name="cart_item[variant_id]" type="radio" value="<%= print.id %>" />
-                  <%= print.size + " cm" %>
+                  <%= print.size %>
                 </label>
               </span>
             </div>
-            <div class='span1'>
+            <div class='span1 precio'>
               <span class='variant-detail last'>
-                <%= print.price %>
+                US <%= print.price %>
               </span>
             </div>
             <div class='span2 hidden-phone preview-column'>

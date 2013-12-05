@@ -1,4 +1,5 @@
-var popoverContent = "<%= escape_javascript(render(partial: 'shared/cart'))%>";
+/*var popoverContent = "<= escape_javascript(render(partial: 'shared/cart'))%>";
 $('.popover.cart .popover-content p').html(popoverContent);
-Arto.popovers.cartPopover.data('popover').options.content = popoverContent;
-$('.cart-link').html('<img alt="Cart" src="/assets/cart.png"> Cart (<%= session_cart.shopping_cart_items.count %>)');
+Arto.popovers.cartPopover.data('popover').options.content = popoverContent;*/
+//$('.cart-link').html('<img alt="Cart" src="/assets/cart.png"> Cart (<= session_cart.shopping_cart_items.count %>)');
+$('.cart-link').html('<img alt="Cart" src="/assets/shoppingCart.png"><span class="circle-green"><%= session_cart.shopping_cart_items.count || 0 %></span>');

@@ -61,7 +61,7 @@ header {
       -webkit-border-radius: 0px;
       -moz-border-radius: 0px;
       border-radius: 0px;
-      height: 12px;
+      height: 13px;
 
       &::-webkit-input-placeholder {
          color: rgba(255, 255, 255, .6);
@@ -414,7 +414,7 @@ footer {
 
   .arto-sign
   {
-    margin: -15px auto 0 auto;
+    margin: -15px 32px 0 auto;
     color: gray;
     font-size: 10px;
   }
@@ -658,7 +658,7 @@ hr {
 
 .cart-item {
   padding: 10px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #000;
   margin-left: -14px;
   margin-right: -14px;
   
@@ -667,18 +667,19 @@ hr {
   span {
     
     &.cart-item-name {
-      color: #fff;
+      color: #DCD9D6;
       font-size: 14px;
       display: block;
+      text-transform: uppercase;
     }
 
     &.cart-item-artist {
-      color: #fff;
-      font-size: 14px;
+      font-size: 13px;
+      color: #DCD9D6;
       display: block;
     }
     &.cart-item-price {
-      color: #fff;
+      color: #DCD9D6;
       font-size: 16px;
       display: block;
     }
@@ -688,7 +689,7 @@ hr {
     a.delete-item {
       margin: 15px 0 0 10px;
       padding: 10px 20px;
-      border-left: 1px solid #DEDEDE;
+      border-left: 1px solid black;
       display: inline-block;
     }
   }
@@ -702,7 +703,7 @@ span.subtotal {
 #cart-footer {
   color: #fff;
   padding: 5px 5px 0 0;
-  margin: 15px -15px 0px -15px;
+  margin: 1px -15px 0px -15px;
   border-radius: 0px 0px 5px 5px;
   
   #checkout-button {
@@ -724,11 +725,10 @@ span.subtotal {
 
 .share-button {
   @include social-button;
-  padding: 2px 0;
   width: 65px;
 
   a { text-decoration: none; }
-  span { background: none }
+  span { background: url('/assets/botonshare.png') no-repeat 0px 0px; }
 }
 
 .like-button {
@@ -982,7 +982,7 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 }
 
 .popover {
-  background: rgba(170, 170, 170, 0.8);
+  background: #525355;
   z-index: 1040;
 
   .arrow.arrow-gray{ border-bottom-color: rgba(170, 170, 170, 0.8) ;}
@@ -990,14 +990,15 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
   
   &.cart {
     position: fixed;
-    top: 45px !important;
+    top: 54px !important;
     width: 340px;
-    margin: 0 0 0 -150px;
+    margin: 0 0 0 -142px;
     
     .arrow {margin-left: 135px;}
     
     .popover-title {
       background-color: transparent;
+      border-bottom: 1px solid black;
     }
   }
   
@@ -1610,6 +1611,8 @@ ul.menu-iphone {
       font-size:11px;
       padding:3px 15px;
       text-decoration:none;
+      background-image: url('/assets/send.png');
+      background-repeat: no-repeat;
 
       &:hover {
         background-color: #393939;

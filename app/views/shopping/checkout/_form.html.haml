@@ -3,7 +3,7 @@
     - @order.order_items.each do |item|
       %fieldset.basic-info
         .row-fluid.span6
-          .span6
+          .span4
             = image_tag item.variant.product.decorator().featured_image(:small)
           .span6
             #name-product
@@ -36,25 +36,28 @@
                 = number_to_currency @order.total || 0
 
       %fieldset.social-web-info
-        %legend#shipping-address 2. SHIPPING ADDRESS
-        .social-info
-          %span.help-block
-            *Please fill your shipping address before checkout.
-          = text_field_tag 'order[ship_address_attributes][first_name]', @order.ship_address.try(:first_name), placeholder: 'FIRST NAME*'
-          %br
-          = text_field_tag 'order[ship_address_attributes][last_name]', @order.ship_address.try(:last_name), placeholder: 'LAST NAME*'
-          %br
-          = text_field_tag 'order[ship_address_attributes][address1]', @order.ship_address.try(:address1), placeholder: 'STREET ADDRESS*'
-          %br
-          = text_field_tag 'order[ship_address_attributes][address2]', @order.ship_address.try(:address2), placeholder: 'APT/FLR/BLDG'
-          %br
-          = text_field_tag 'order[ship_address_attributes][city]', @order.ship_address.try(:city), placeholder: 'CITY*'
-          %br
-          = country_select_tag 'order[ship_address_attributes][country]', {priority: %w(US CA MX), prompt: 'Please select a country'}, placeholder: 'INSTAGRAM URL'
-          %br
-          = text_field_tag 'order[ship_address_attributes][zip_code]', @order.ship_address.try(:zip_code), placeholder: 'ZIP CODE*'
+        .row-fluid#shipping-address
+          .span6.shipping-border
+            %legend 2. SHIPPING ADDRESS
+            .social-info
+              %span.help-block
+                *Please fill your shipping address before checkout.
+              = text_field_tag 'order[ship_address_attributes][first_name]', @order.ship_address.try(:first_name), placeholder: 'FIRST NAME*'
+              %br
+              = text_field_tag 'order[ship_address_attributes][last_name]', @order.ship_address.try(:last_name), placeholder: 'LAST NAME*'
+              %br
+              = text_field_tag 'order[ship_address_attributes][address1]', @order.ship_address.try(:address1), placeholder: 'STREET ADDRESS*'
+              %br
+              = text_field_tag 'order[ship_address_attributes][address2]', @order.ship_address.try(:address2), placeholder: 'APT/FLR/BLDG'
+              %br
+              = text_field_tag 'order[ship_address_attributes][city]', @order.ship_address.try(:city), placeholder: 'CITY*'
+              %br
+              = country_select_tag 'order[ship_address_attributes][country]', {priority: %w(US CA MX), prompt: 'Please select a country'}, placeholder: 'INSTAGRAM URL'
+              %br
+              = text_field_tag 'order[ship_address_attributes][zip_code]', @order.ship_address.try(:zip_code), placeholder: 'ZIP CODE*'
 
-        .web-info
-          %legend 3. PAYMENT METHOD
-          = render :partial => 'checkout_modal', :locals => {:order => @order}
+          .span6
+            %legend 3. METHOD PAY
+            .web-info
+              = render :partial => 'checkout_modal', :locals => {:order => @order}
 

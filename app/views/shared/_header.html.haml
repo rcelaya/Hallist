@@ -1,6 +1,6 @@
 %header.row-fluid
   #main-header-row
-    = link_to image_tag('logo.png', id: :logo), root_path, id: 'logo-link'
+    = link_to image_tag('BETA-01.png', id: :logo), root_path, id: 'logo-link'
 
     %nav.hidden-phone
       %ul.nav
@@ -38,7 +38,7 @@
             %li
               = link_to 'MY HALL', myprofile_path
             %li
-              = link_to 'PROFILE SETTINGS', edit_myaccount_overview_path
+              = link_to 'MY ACCOUNT', edit_myaccount_overview_path
             - if current_user.user.artist? || current_user.user.admin?
               %li
                 = link_to 'SELL ARTWORK', artwork_dashboard_path

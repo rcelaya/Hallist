@@ -3,9 +3,12 @@ class HallistsController < ApplicationController
     set_filters
     search = User.filters(params[:filters] || {}, params[:page])
     if search.hits.size == 1
+      puts 'filtro igual a 1'
       redirect_to UserDecorator.decorate(search.results.first).profile_path
     else
+      puts 'entro al else'
       @hallists = UserDecorator.decorate(search.results).map(&:hallist_to_json)
+      puts 'hallissttt' + @hallists.to_yaml
       respond_to do |format|
         format.html
         format.json { render json: @hallists }

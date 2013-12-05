@@ -1,9 +1,12 @@
-.product
-  = image_tag like.decorator().featured_image
-  .product-description
-    %span.name
-      = like.name
-    %br
-    %br
-    %span
-      = like.description.html_safe
+#products
+
+
+- content_for :javascript do
+  $(window).load(function() {
+  $container = $('#products');
+  $container.masonry({ isFitWidth: true, columnWidth: 240 });
+  $('.profile-collections').masonry({isFitWidth: true});
+  window.router = new Arto.Routers.ProductsRouter({products: #{@likes}});
+  Backbone.history.start({pushState: true});
+  //window.scrollInfinite.active = true;
+  });
