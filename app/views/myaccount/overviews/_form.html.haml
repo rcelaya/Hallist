@@ -9,10 +9,11 @@
       .image-information
         .image-details
           %span
-            = profile_form.label :avatar
+            = label_tag Profile.find_by_user_id(@user.id).avatar_file_name
+            = profile_form.file_field :avatar, class: 'file-field-avatar'
 
     .span5
-      = profile_form.text_field :username, placeholder: 'USERNAME'
+      //= profile_form.text_field :username, placeholder: 'USERNAME'
 
       = f.text_field :email, placeholder: 'EMAIL'
       %br
@@ -64,7 +65,7 @@
 
   $('.add-image').click(function() {
   buttonAddImage = $(this);
-  fileInput =  $('<input/>').attr('type','file').attr('name','product[images_attributes][][photo]').addClass('hide');
+  fileInput =  $('<input/>').attr('type','file').attr('name','user[profile_attributes][avatar]').addClass('hide');
 
   fileInput.change(function() {
   updateImage(this,'product_image');

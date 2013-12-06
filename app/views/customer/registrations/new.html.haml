@@ -10,7 +10,7 @@
         %fieldset.basic-info
           = f.fields_for :profile do |profile_form|
             %center
-              = profile_form.text_field :username, placeholder: 'Username'
+              = f.text_field :first_name, placeholder: 'Username'
 
               = f.text_field :email, placeholder: 'Email'
               %br
@@ -19,15 +19,16 @@
               = f.password_field :password_confirmation, placeholder: 'Password confirmation'
               %br
 
-              = f.label :artist, :class => 'checkbox-user span4' do
-                %span Artist
-                = f.check_box :artist
-              %label.checkbox-user.span4
-                %span Collector
-                %input{type: 'checkbox'}
-              = f.label 'Galleries', :class => 'checkbox-user span4' do
-                %span Galleries
-                = f.check_box :artist
+              .row-fluid
+                .span4
+                  Artist
+                  = f.radio_button :artist, 1, {class: 'check'}
+                .span4
+                  Collector
+                  = f.radio_button :artist, 0, {class: 'check'}
+                .span4
+                  Galleries
+                  = f.radio_button :artist, 1, {class: 'check'}
         %div
           = submit_tag 'Sign Up', class: 'pull-right'
           %label

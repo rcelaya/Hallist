@@ -2,9 +2,6 @@ class ProfileController < ApplicationController
   layout 'profile'
 
   def show
-    puts 'username' + params[:username].to_yaml
-    puts 'id' + params[:id].to_yaml
-
     if params[:artwork_type] == 'likes'
       @likeables = Like.find_all_by_liker_id(params[:id])
 

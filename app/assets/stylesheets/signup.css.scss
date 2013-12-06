@@ -5,6 +5,9 @@
 .registrations {
   #edit_user_section {
     max-width: 1024px;
+    label{
+      display: inline-block !important;
+    }
   }
 }
 
@@ -13,4 +16,9 @@
     position: relative;
     top: 26px;
   }
+}
+
+.check{
+  width: 20px !important;
+  margin: 0px !important;
 }

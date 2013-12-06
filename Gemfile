@@ -70,6 +70,8 @@ gem 'ffaker', '1.15.0'
 
 gem 'conekta', :git => 'git://github.com/conekta/conekta-ruby.git'
 
+gem 'redcarpet'
+
 group :development do
   gem 'sqlite3'
   gem "autotest-rails-pure" , '4.1.2'

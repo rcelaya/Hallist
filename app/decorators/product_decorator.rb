@@ -92,7 +92,7 @@ class ProductDecorator < Draper::Base
       brand_name: product.brand.name,
       brand_path: product.artist.profile_path,
       following: (h.current_user.user && h.current_user.follows?(product.artist.user)),
-      description: ActionView::Base.full_sanitizer.sanitize(product.description.html_safe),
+      description: product.description,
       height: product.original_variant.size['height'],
       width: product.original_variant.size['width'],
       measures: product.original_variant.size['measures'],
