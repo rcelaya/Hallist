@@ -16,12 +16,12 @@
     .container-fluid#header
       = render partial: 'shared/header'
 
-    /.container-fluid#banner
-    /= render partial: 'welcome/index'
+    .container-fluid#banner
+      = render partial: 'welcome/index'
 
-    /.container-fluid
-    /.container.dotted-line
-    /%h2#recent Recent Artworks
+    .container-fluid
+      .container.dotted-line
+        %h2#recent Recent Artworks
 
     .container-fluid
       #content.row-fluid

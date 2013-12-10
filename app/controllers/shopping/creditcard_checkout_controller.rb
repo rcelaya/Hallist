@@ -96,7 +96,6 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
         #redirect_to root_url, notice: "Purchase was Successful."
         render "shopping/checkout/pay_credit"
         flash[:notice] = "Purchase was Successful."
-
       elsif charge.status == 'pending_payment'
         print = charge.payment_method.values
 
