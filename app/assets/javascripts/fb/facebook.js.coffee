@@ -3,7 +3,7 @@ jQuery ->
 # Initializing the FB SDK with the correct app
 `
 window.fbAsyncInit = function() {
-  FB.init({appId: fb_app_id, status: true, xfbml: true});
+  FB.init({appId: '207443096095083', status: true, xfbml: true});
 };
 
 // Load the SDK asynchronously
