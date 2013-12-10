@@ -54,6 +54,13 @@
   window.resize = true;
   window.fb_app_id = '#{FACEBOOK_KEY}';
 
+%script{:type=>"text/javascript"}
+  var hblProto = document.location.protocol == 'https:' ? "https:" : "http:";
+  document.write(unescape('%3Cscript src=\'' + hblProto + '//static.olark.com/js/wc.js\' type=\'text/javascript\'%3E%3C/script%3E'));
+=link_to('Olark Livehelp','http://olark.com/#9429-145-10-2861',:id=>"hbl_code")
+%script{:type=>"text/javascript"}
+  wc_init()
+
   = yield :javascript
 
   - if current_user.user
@@ -68,6 +75,7 @@
   $('ul.carousel-container').css('margin-left', marginCarouselCalculation + 'px');
 
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
 
   - if alert
     $.jGrowl("#{alert}");
