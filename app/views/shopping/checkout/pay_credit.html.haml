@@ -1,0 +1,49 @@
+.header-info
+  %center
+    %h1 YOUR PURCHASE IS COMPLETE
+
+.static-content-purchased
+  %center
+    .form-contact
+      TRANSACTION DETAILS
+  .container#purchased
+    .row-fluid
+      = image_tag 'hallup.png', :class => 'hallup'
+    .row-fluid
+      .span8.offset1
+        #info_item_purchased
+          %p
+            ITEM:
+          %p
+            DESCRIPTION:
+          %p
+            TRANSACTION ID:
+          %br
+          %br
+        #info_user_purchased
+          %p
+            NAME:
+          %p
+            MAIL:
+          %br
+          %br
+        #info_purchased
+          %p
+            TOTAL AMOUNT: US $
+            = @total
+          %p
+            DATE:
+          %p
+            STATUS:
+    %center
+      = image_tag 'halldown.png', :class => 'halldown'
+      %br
+      .row-fluid#copyright
+        = image_tag 'logo.png'
+        %br
+        THANKS FOR YOUR PURCHASE!
+        %br
+        Don`t forget to keep sharing your HALLS
+  %br
+  %center
+    = link_to image_tag('BacktoHallist.png'), root_path, :class => 'back_to_hallist'

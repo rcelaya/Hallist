@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default :from => "support@hallist.com"
+  default :from => "HALLIST <support@hallist.com>"
 
   # Simple Welcome mailer
   # => CUSTOMIZE FOR YOUR OWN APP
@@ -33,7 +33,7 @@ class Notifier < ActionMailer::Base
     @order  = order
     @user   = order.user
     @url    = root_url
-    @site_name = 'site_name'
+    @site_name = 'HALLIST'
     mail(:to => order.email,
          :subject => "Order Confirmation")
   end

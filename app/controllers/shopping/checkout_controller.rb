@@ -54,4 +54,9 @@ class Shopping::CheckoutController < Shopping::BaseController
       redirect_to shopping_checkout_url, alert: 'Order Failed! MD5 Hash does not match!'
     end
   end
+
+  def pay_credit
+    puts 'este es el bueno ' + @expiry_date.to_yaml
+
+  end
 end

@@ -1,15 +1,29 @@
-= form_tag(pay_shopping_creditcard_checkout_path,:method => :post) do
-  = text_field_tag(:name, @credit_card.name , :placeholder => 'NAME IS AT APPEARS ON YOUR CARD*')
+= form_tag(pay_shopping_creditcard_checkout_path,:method => :post, :class => 'span12') do
+  = text_field_tag(:name, @credit_card.name , :placeholder => 'NAME IS AT APPEARS ON YOUR CARD*', :class => 'span8')
+  %div#error_card_name.buena.span3
+    *Escribe un nombre
+  = text_field_tag(:number, @credit_card.number , :placeholder => 'CARD NUMBER*', :class => 'span8')
+  %div#error_card_number.buena.span3
+    *El numero es incorrecto
+  = text_field_tag(:verification_value, @credit_card.verification_value , :placeholder => 'CVV*', :class => 'span8')
+  %div#error_card_cvc.buena.span3
+    *Escribe un cvc correcto
+  %br
+  = select_tag(:month, options_for_select(['01', '02',  '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']), { :class => 'span4' })
 
-  = text_field_tag(:number, @credit_card.number , :placeholder => 'CARD NUMBER*')
+  = select_tag(:year, options_for_select((Time.zone.now.year..(Time.zone.now.year + 10))), { :class => 'span4' })
 
-  = select_tag(:type, options_for_select(['visa', 'mastercard']))
+  = text_field_tag(:address, '', :placeholder => 'ADDRESS*', :class => 'span8')
+  %br
 
-  = text_field_tag(:verification_value, @credit_card.verification_value , :placeholder => 'CVV')
+  = text_field_tag(:state, '', :placeholder => 'STATE*', :class => 'span4')
 
-  = select_tag(:month, options_for_select(['01', '02',  '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']))
+  = text_field_tag(:city, '', :placeholder => 'CITY*', :class => 'span4')
+  %br
 
-  = select_tag(:year, options_for_select((Time.zone.now.year..(Time.zone.now.year + 10))))
+  = country_select_tag 'order[ship_address_attributes][country]', {priority: %w(US CA MX), prompt: 'Please select a country'}, {:class => 'span4'}
+
+  = text_field_tag(:zip, '', :placeholder => 'ZIP*', :class => 'span4')
 
   = hidden_field_tag(:total, @order.total)
   - products = []
@@ -17,4 +31,63 @@
     - products.push("#{item.variant.product.id}-#{item.variant.product.name}-#{item.price}")
   = hidden_field_tag(:products, products)
 
-  = submit_tag 'Complete Order' , class: 'complete-order pull-right'
+  = submit_tag 'Complete Order' , {:disabled => true, class: 'complete-order pull-right', id: 'complete_order'}
+
+- content_for :javascript do
+  var card_name = false,
+  card_number = false,
+  card_cvc = false;
+
+  $('#name').live('keyup',function(){
+  if($(this).val() != ''){
+  correct('name');
+  card_name = true;
+  $('#complete_order')[0].disabled = enable_submit();
+  } else{
+  error('name');
+  card_name = false;
+  $('#complete_order')[0].disabled = enable_submit();
+  }
+  });
+  $('#number').live('keyup',function(){
+  if(Conekta.card.validateNumber($(this).val())){
+  correct('number');
+  card_number = true;
+  $('#complete_order')[0].disabled = enable_submit();
+  } else{
+  error('number');
+  card_number = false;
+  $('#complete_order')[0].disabled = enable_submit();
+  }
+  });
+  $('#verification_value').live('keyup',function(){
+  if(Conekta.card.validateCVC($(this).val())){
+  correct('cvc');
+  card_cvc = true;
+  $('#complete_order')[0].disabled = enable_submit();
+  } else{
+  error('cvc');
+  card_cvc = false;
+  $('#complete_order')[0].disabled = enable_submit();
+  }
+  });
+
+  function correct(input){
+  $('#error_card_'+input).removeClass('mala');
+  $('#error_card_'+input).addClass('buena');
+  }
+
+  function error(input){
+  $('#error_card_'+input).removeClass('buena');
+  $('#error_card_'+input).addClass('mala');
+  }
+
+  function enable_submit(){
+  if(card_name && card_number && card_cvc){
+  return false;
+  }else{
+  return true;
+  }
+  }
+
+

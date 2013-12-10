@@ -1,7 +1,7 @@
 class ContactUsMailer < ActionMailer::Base
 
-  default to: 'info@hallist.com',
-          from: 'Hallist bot <bot@hallist.com>'
+  default to: 'HALLIST <info@hallist.com>',
+          from: 'HALLIST SUPPORT <bot@hallist.com>'
 
   def new_inquiry(email, name, message)
     @email = email

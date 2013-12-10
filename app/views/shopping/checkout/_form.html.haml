@@ -10,8 +10,6 @@
               = item.variant.product.name
             #description-product
               = item.variant.product.brand_name
-              %br
-              = strip_tags(item.variant.product.description_markup)
 
         .span6
           %legend
@@ -37,27 +35,148 @@
 
       %fieldset.social-web-info
         .row-fluid#shipping-address
-          .span6.shipping-border
-            %legend 2. SHIPPING ADDRESS
-            .social-info
-              %span.help-block
-                *Please fill your shipping address before checkout.
-              = text_field_tag 'order[ship_address_attributes][first_name]', @order.ship_address.try(:first_name), placeholder: 'FIRST NAME*'
-              %br
-              = text_field_tag 'order[ship_address_attributes][last_name]', @order.ship_address.try(:last_name), placeholder: 'LAST NAME*'
-              %br
-              = text_field_tag 'order[ship_address_attributes][address1]', @order.ship_address.try(:address1), placeholder: 'STREET ADDRESS*'
-              %br
-              = text_field_tag 'order[ship_address_attributes][address2]', @order.ship_address.try(:address2), placeholder: 'APT/FLR/BLDG'
-              %br
-              = text_field_tag 'order[ship_address_attributes][city]', @order.ship_address.try(:city), placeholder: 'CITY*'
-              %br
-              = country_select_tag 'order[ship_address_attributes][country]', {priority: %w(US CA MX), prompt: 'Please select a country'}, placeholder: 'INSTAGRAM URL'
-              %br
-              = text_field_tag 'order[ship_address_attributes][zip_code]', @order.ship_address.try(:zip_code), placeholder: 'ZIP CODE*'
+          = form_tag(pay_shopping_creditcard_checkout_path,:method => :post, :class => 'span12') do
+            .row-fluid
+              .span6.shipping-border
+                %legend 2. SHIPPING ADDRESS
+                .social-info.span12
+                  %span.help-block
+                    *Please fill your shipping address before checkout.
+                  = text_field_tag 'ship_address_first_name', @order.ship_address.try(:first_name), placeholder: 'FIRST NAME*', class: 'span7'
+                  %br
+                  = text_field_tag 'ship_address_last_name', @order.ship_address.try(:last_name), placeholder: 'LAST NAME*', class: 'span7'
+                  %br
+                  = text_field_tag 'ship_address_address1', @order.ship_address.try(:address1), placeholder: 'STREET ADDRESS*', class: 'span7'
+                  %br
+                  = text_field_tag 'ship_address_address2', @order.ship_address.try(:address2), placeholder: 'APT/FLR/BLDG', class: 'span7'
+                  %br
+                  = text_field_tag 'ship_address_city', @order.ship_address.try(:city), placeholder: 'CITY*', class: 'span7'
+                  %br
+                  = country_select_tag 'ship_address_country', {priority: %w(US CA MX), prompt: 'Please select a country'}, placeholder: 'Select Country', class: 'span7'
+                  %br
+                  = text_field_tag 'ship_address_zip_code]', @order.ship_address.try(:zip_code), placeholder: 'ZIP CODE*', class: 'span7'
 
-          .span6
-            %legend 3. METHOD PAY
-            .web-info
-              = render :partial => 'checkout_modal', :locals => {:order => @order}
+              .span6
+                %legend 3. PAYMENT METHOD
+                .span4#credit
+                  = radio_button_tag :payment_method, 'card', true
+                  CREDIT CARD
+                .span4#oxxo
+                  = radio_button_tag :payment_method, 'oxxo'
+                  OXXO
+                %br
+
+                .web-info#credit_card_payment
+                  = text_field_tag(:name, @credit_card.name , :placeholder => 'NAME IS AT APPEARS ON YOUR CARD*', :class => 'span8')
+                  %div#error_card_name.buena.span3
+                    *Escribe un nombre
+                  = text_field_tag(:number, @credit_card.number , :placeholder => 'CARD NUMBER*', :class => 'span8')
+                  %div#error_card_number.buena.span3
+                    *El numero es incorrecto
+                  = text_field_tag(:verification_value, @credit_card.verification_value , :placeholder => 'CVV*', :class => 'span8')
+                  %div#error_card_cvc.buena.span3
+                    *Escribe un cvc correcto
+                  %br
+                  = select_tag(:month, options_for_select(['01', '02',  '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']), { :class => 'span4' })
+
+                  = select_tag(:year, options_for_select((Time.zone.now.year..(Time.zone.now.year + 10))), { :class => 'span4' })
+
+                  = text_field_tag(:address_credit, '', :placeholder => 'ADDRESS*', :class => 'span8')
+                  %br
+
+                  = text_field_tag(:state, '', :placeholder => 'STATE*', :class => 'span4')
+
+                  = text_field_tag(:city, '', :placeholder => 'CITY*', :class => 'span4')
+                  %br
+
+                  //= country_select_tag 'order[ship_address_attributes][country]', {priority: %w(US CA MX), prompt: 'Please select a country'}, {:class => 'span4'}
+                  = text_field_tag(:country, '', :placeholder => 'COUNTRY*', :class => 'span4')
+
+                  = text_field_tag(:zip, '', :placeholder => 'ZIP*', :class => 'span4')
+
+                  = hidden_field_tag(:total, @order.total)
+                  - products = []
+                  - @order.order_items.each do |item, index|
+                    - products.push("#{item.variant.product.id}-#{item.variant.product.name}-#{item.price}")
+                  = hidden_field_tag(:products, products)
+
+                  = submit_tag 'Complete Order' , {:disabled => true, class: 'complete-order pull-right', id: 'complete_order'}
+
+                .web-info#oxxo_payment
+                  = hidden_field_tag(:total, @order.total)
+                  - products = []
+                  - @order.order_items.each do |item, index|
+                    - products.push("#{item.variant.product.id}-#{item.variant.product.name}-#{item.price}")
+                  = hidden_field_tag(:products, products)
+
+                  = submit_tag 'Complete Order' , {class: 'complete-order pull-right', id: 'complete_oxxo'}
+
+- content_for :javascript do
+  var card_name = false,
+  card_number = false,
+  card_cvc = false;
+
+  $('#name').live('keyup',function(){
+  if($(this).val() != ''){
+  correct('name');
+  card_name = true;
+  $('#complete_order')[0].disabled = enable_submit();
+  } else{
+  error('name');
+  card_name = false;
+  $('#complete_order')[0].disabled = enable_submit();
+  }
+  });
+  $('#number').live('keyup',function(){
+  if(Conekta.card.validateNumber($(this).val())){
+  correct('number');
+  card_number = true;
+  $('#complete_order')[0].disabled = enable_submit();
+  } else{
+  error('number');
+  card_number = false;
+  $('#complete_order')[0].disabled = enable_submit();
+  }
+  });
+  $('#verification_value').live('keyup',function(){
+  if(Conekta.card.validateCVC($(this).val())){
+  correct('cvc');
+  card_cvc = true;
+  $('#complete_order')[0].disabled = enable_submit();
+  } else{
+  error('cvc');
+  card_cvc = false;
+  $('#complete_order')[0].disabled = enable_submit();
+  }
+  });
+
+  $('#oxxo').live('change',function(){
+  $('#credit_card_payment').removeClass('mala');
+  $('#credit_card_payment').addClass('buena');
+  $('#oxxo_payment').removeClass('buena');
+  $('#oxxo_payment').addClass('mala');
+  });
+
+  $('#credit').live('change',function(){
+  $('#oxxo_payment').removeClass('mala');
+  $('#credit_card_payment').addClass('mala');
+  });
+
+  function correct(input){
+  $('#error_card_'+input).removeClass('mala');
+  $('#error_card_'+input).addClass('buena');
+  }
+
+  function error(input){
+  $('#error_card_'+input).removeClass('buena');
+  $('#error_card_'+input).addClass('mala');
+  }
+
+  function enable_submit(){
+  if(card_name && card_number && card_cvc){
+  return false;
+  }else{
+  return true;
+  }
+  }
 

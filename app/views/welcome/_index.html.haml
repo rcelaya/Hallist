@@ -6,7 +6,7 @@
           .item.row{class: "#{'active' if index==0}"}
             = link_to product_path(product) do
               .span12
-                = image_tag 'banner'+index.to_s+'.png'
+                = image_tag 'banner'+index.to_s+'.jpg'
               .span4
                 %h2= product.name
                 %p= product.description.html_safe

@@ -27,6 +27,8 @@ class UserSessionsController < ApplicationController
     current_user_session.destroy
     reset_session
     cookies.delete(:hadean_uid)
+
+    remove_user_store_credits
     redirect_to root_url, :notice => I18n.t('logout_successful')
   end
 
@@ -39,5 +41,9 @@ class UserSessionsController < ApplicationController
     session_cart.cart_items.each do |item|
       item.update_attributes(:user_id => @user_session.record.id ) if item.user_id != @user_session.record.id
     end
+  end
+
+  def remove_user_store_credits
+    User.find(params[:id]).store_credit.remove_credit(0)
   end
 end
