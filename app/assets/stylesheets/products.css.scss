@@ -58,7 +58,7 @@
         display: inline-block;
         font-size: 13px;
         font-family: Helvetica, sans-serif;
-        text-transform: uppercase;
+        text-transform: capitalize;
         margin: 0;
         width: 150px;
       }
@@ -346,7 +346,7 @@
   width: 544px;
   background: url('/assets/social-button-bg.png') no-repeat;*/
   position: relative;
-  bottom: 20px;
+  bottom: 10px;
   float: right;
   left: 10px;
   background: url("/assets/social-button-bg.png") no-repeat;

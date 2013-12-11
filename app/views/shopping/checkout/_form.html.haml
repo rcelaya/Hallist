@@ -9,7 +9,7 @@
             #name-product
               = item.variant.product.name
             #description-product
-              = item.variant.product.brand_name
+              = User.find_by_brand_id(item.variant.product.brand_id).first_name
 
         .span6
           %legend
@@ -113,7 +113,11 @@
                   - @order.order_items.each do |item, index|
                     - products.push("#{item.variant.product.id}-#{item.variant.product.name}-#{item.price}")
                   = hidden_field_tag(:products, products)
-
+                  %br
+                  %br
+                  * YOU WILL RECEIVE AN ORDER CONFIRMATION ONCE YOU COMPLETE THE PROCESS. THEN YOU SHOULD USE THIS INFORMATION TO PAY AT YOUR NEAREST OXXO.
+                  %br
+                  %br
                   = submit_tag 'Complete Order' , {class: 'complete-order pull-right', id: 'complete_oxxo'}
 
 - content_for :javascript do

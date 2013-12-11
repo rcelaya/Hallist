@@ -90,6 +90,7 @@ class ProductDecorator < Draper::Base
       artist_avatar: product.artist.featured_avatar,
       artist_id: product.artist.id,
       brand_name: product.brand.name,
+      username: User.find_by_brand_id(product.brand.id).first_name,
       brand_path: product.artist.profile_path,
       following: (h.current_user.user && h.current_user.follows?(product.artist.user)),
       description: product.description,
