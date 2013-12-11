@@ -50,8 +50,9 @@
             = @item_purchased_date
           %p
             STATUS: PAID
-          %br
-            = image_tag(@barcode_url)
+        #info_purchased
+          -if @barcode_url.present?
+            = image_tag(@barcode_url, :class => 'span12')
             .row-fluid
               .span7
                 = @barcode
