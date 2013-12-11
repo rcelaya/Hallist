@@ -60,7 +60,6 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
 
       if charge.status == 'paid'
         @shipping_address = Address.find_by_addressable_id(current_user)
-        #@shipping_address = current_user.addresses.new(params[:address])
         if @shipping_address.present?
           @shipping_address = Address.find_by_addressable_id(current_user)
           @shipping_address.update_attributes(
