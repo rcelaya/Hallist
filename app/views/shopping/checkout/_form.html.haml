@@ -60,22 +60,27 @@
                 %legend 3. PAYMENT METHOD
                 .span4#credit
                   = radio_button_tag :payment_method, 'card', true
-                  CREDIT CARD
+                  %span
+                  = image_tag 'mastercard.png', :class => 'imagenes-pago'
+                  %span
+                  %span
+                  = image_tag 'visa.png', :class => 'imagenes-pago'
                 .span4#oxxo
                   = radio_button_tag :payment_method, 'oxxo'
-                  OXXO
+                  %span
+                  = image_tag 'oxxo.png', :class => 'imagenes-pago'
                 %br
 
                 .web-info#credit_card_payment
-                  = text_field_tag(:name, @credit_card.name , :placeholder => 'NAME IS AT APPEARS ON YOUR CARD*', :class => 'span8')
+                  = text_field_tag(:name, @credit_card.name , :placeholder => 'NAME AS IT APPEARS ON YOUR CARD*', :class => 'span8')
                   %div#error_card_name.buena.span3
-                    *Escribe un nombre
+                    * Name is a required field
                   = text_field_tag(:number, @credit_card.number , :placeholder => 'CARD NUMBER*', :class => 'span8')
                   %div#error_card_number.buena.span3
-                    *El numero es incorrecto
+                    * Card number is incorrect
                   = text_field_tag(:verification_value, @credit_card.verification_value , :placeholder => 'CVV*', :class => 'span8')
                   %div#error_card_cvc.buena.span3
-                    *Escribe un cvc correcto
+                    * CVV is incorrect
                   %br
                   = select_tag(:month, options_for_select(['01', '02',  '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']), { :class => 'span4' })
 
