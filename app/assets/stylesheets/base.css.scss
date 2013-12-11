@@ -1741,3 +1741,23 @@ ul.menu-iphone {
 #uvTab {
   top: 70% !important;
 }
+
+/*@media print {
+  .static-content-purchased{
+    width: 100%;
+    margin-top: 10%;
+    height: 100%;
+    padding-bottom: 100px;
+    background-color: #e7e8ea;
+    color: #6E6B6B;
+    font-family: 'Gotham';
+
+    .form-contact{
+      display: inline-block;
+      margin-top: 60px;
+      color: #6E6C6C;
+      margin-bottom: 30px;
+      font-size: 17px;
+    }
+  }
+} */

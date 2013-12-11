@@ -1,3 +1,11 @@
+/%script{type: 'text/javascript'}
+/ printDivCSS = new String ('<link href="../../assets/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../../assets/checkout.css" rel="stylesheet" type="text/css">')
+/ function printDiv() {
+/ console.log($("#purchased")[0]);
+/ document.body.innerHTML=printDivCSS + $("#purchased")[0].innerHTML;
+/ window.focus();
+/ window.print();
+/ }
 .header-info
   %center
     %h1 YOUR PURCHASE IS COMPLETE
@@ -6,6 +14,7 @@
   %center
     .form-contact
       TRANSACTION DETAILS
+  //=link_to("Print this Page", "", :onclick =>"printDiv();", :target => "_blank")
   .container#purchased
     .row-fluid
       = image_tag 'hallup.png', :class => 'hallup'
@@ -14,17 +23,22 @@
         #info_item_purchased
           %p
             ITEM:
+            = @item
           %p
             DESCRIPTION:
+            = @item_description
           %p
             TRANSACTION ID:
+            = @reference_id
           %br
           %br
         #info_user_purchased
           %p
             NAME:
+            = @name_user
           %p
             MAIL:
+            = @name_email
           %br
           %br
         #info_purchased
@@ -33,8 +47,17 @@
             = @total
           %p
             DATE:
+            = @item_purchased_date
           %p
-            STATUS:
+            STATUS: PAID
+          %br
+            = image_tag(@barcode_url)
+            .row-fluid
+              .span7
+                = @barcode
+              .span5
+                .pull-right
+                  = @expiry_date
     %center
       = image_tag 'halldown.png', :class => 'halldown'
       %br

@@ -5,6 +5,8 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
 
 
   def pay
+    @name_user = current_user.first_name
+    @name_email = current_user.email
     @name = params[:name]
     @total = params[:total].to_f
     @order = find_or_create_order
@@ -57,6 +59,11 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
     ensure
       puts 'esta biennn'
       puts 'cargo tarjeta' + charge.to_yaml.as_json
+
+      @reference_id = charge.id
+      @item_description = charge.description
+      @item = charge.reference_id
+      @item_purchased_date = Date.today.to_s.to_date
 
       if charge.status == 'paid'
         @shipping_address = Address.find_by_addressable_id(current_user)
