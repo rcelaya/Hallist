@@ -104,20 +104,14 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
         flash[:notice] = "Purchase was Successful."
       elsif charge.status == 'pending_payment'
         print = charge.payment_method.values
-
-        puts "oxxo_printtt" + print.to_yaml
-
         @date = @charge
         @expiry_date = print[0]
         @barcode = print[1]
         @barcode_url = print[2]
 
-        puts "oxxooo_expiry_date" + @expiry_date.to_yaml
-        puts "oxxooo_barcode" + @barcode.to_yaml
-        puts "oxxooo_barcode_url" + @barcode_url.to_yaml
-
-        #redirect_to payment_credit_path(:expiry_date => @expiry_date, :barcode => @barcode, :barcode_url => @barcode_url), notice: "Purchase was Successful."
-        #render :partial => "shopping/checkout/pay_credit", :locals => {:expiry_date => @expiry_date}
+        #@order.create_paypal_invoice(purchase, @order.credited_total)
+        @order.remove_user_store_credits
+        session_cart.mark_items_purchased(@order)
         render "shopping/checkout/pay_credit"
       else
         redirect_to :controller => 'shopping/checkout', :action => 'show'
