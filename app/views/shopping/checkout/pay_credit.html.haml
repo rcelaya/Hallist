@@ -53,7 +53,7 @@
         #info_purchased
           %center
             -if @barcode_url.present?
-              = image_tag(@barcode_url)
+              = image_tag(@barcode_url, :class => 'oxxo-barcode')
               .row-fluid
                 = @barcode
                 %br
