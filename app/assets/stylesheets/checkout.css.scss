@@ -362,3 +362,9 @@ input.fail { border: 1px solid red;}
 .back_to_hallist{
   margin-top: 10%;
 }
+
+.complete-order{
+  width: 90px !important;
+  background-image: url('/assets/completeorder.png') !important;
+  background-repeat: no-repeat;
+}
