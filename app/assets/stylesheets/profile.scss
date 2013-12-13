@@ -62,15 +62,15 @@ h3.collection-name {
     p {
       font-size: 11px;
       text-transform: uppercase;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
   }
 
   .bio {
     height: 60px;
-    width: 70%;
-    margin-bottom: 10px;
-    p { font-size: 11px; }
+    width: 50%;
+    margin-bottom: 30px;
+    p { font-size: 11px; text-align: justify; }
   }
 
   .social {
