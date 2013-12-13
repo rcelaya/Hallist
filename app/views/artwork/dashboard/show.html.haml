@@ -8,7 +8,7 @@
       %li#upload-tab.active
         = link_to image_tag('artworks11dic.png', :id => 'artworks-image' ), '#artworks', 'data-toggle' => "tab"
       %li#order-tab
-        = link_to image_tag('orders11dic.png', :id => 'orders-image'), '#orders', 'data-toggle' => "tab"
+        = link_to image_tag('orders-notactive.png', :id => 'orders-image'), '#orders', 'data-toggle' => "tab"
   %br
   %br
   %br
@@ -70,14 +70,14 @@
 - content_for :javascript do
   $('#order-tab').click(function(event){
   event.preventDefault();
-  $('#artworks-image').attr('src', '/assets/orders11dic.png');
-  $('#orders-image').attr('src', '/assets/artworks11dic.png');
+  $('#artworks-image').attr('src', '/assets/artoworks-notactive.png');
+  $('#orders-image').attr('src', '/assets/orders11dic.png');
   $('.header-info').html('<div class="header-info"><center><h1> ORDERS </h1></center></div>');
   });
 
   $('#upload-tab').click(function(event){
   event.preventDefault();
-  $('#orders-image').attr('src', '/assets/artworks11dic.png');
-  $('#artworks-image').attr('src', '/assets/orders11dic.png');
+  $('#artworks-image').attr('src', '/assets/artworks11dic.png');
+  $('#orders-image').attr('src', '/assets/orders-notactive.png');
   $('.header-info').html('<div class="header-info"><center><h1> UPLOAD ARTWORK </h1></center></div>');
   });

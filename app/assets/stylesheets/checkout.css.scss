@@ -208,8 +208,11 @@ input.fail { border: 1px solid red;}
           background-color: $gray-bg-color;
         }
         .complete-order{
-          width: 50%;
-          margin-right: -12px;
+          width: 141px;
+          height: 36px;
+          margin-left: 105px;
+          margin-top: 0px;
+          background-color: transparent;
         }
       }
       #oxxo_payment{
@@ -259,22 +262,8 @@ input.fail { border: 1px solid red;}
 
   input[type=submit] {
     width: 70px;
-    background-color: #333;
-    border: 1px solid #000;
-    display: inline-block;
-    color: #ffffff;
-    font-size:11px;
-    padding:3px 15px;
-    text-decoration:none;
-
-    &:hover {
-      background-color: #393939;
-    }
-
-    &:active {
-      background-color: #666;
-    }
-
+    background-image: url('/assets/completeorder.png');
+    background-repeat: no-repeat;
   }
 
   #checkout_section {
@@ -303,7 +292,7 @@ input.fail { border: 1px solid red;}
 }
 
 #purchased{
-  background-color: #333;
+  background-color: #fff;
   .hallup{
     float: right;
     right: 10%;
@@ -316,27 +305,27 @@ input.fail { border: 1px solid red;}
     position: relative;
   }
   #info_item_purchased{
-    color: #fff;
+    color: #6E6C6C;
     margin-left: 25%;
     border-bottom: dotted 2px #999;
     margin-bottom: 7%;
     margin-top: 7%;
   }
   #info_user_purchased{
-    color: #fff;
+    color: #6E6C6C;
     margin-left: 25%;
     border-bottom: dotted 2px #999;
     margin-bottom: 7%;
     margin-top: 4%;
   }
   #info_purchased{
-    color: #fff;
+    color: #6E6C6C;
     margin-left: 25%;
     margin-bottom: 7%;
     margin-top: 4%;
   }
   #copyright{
-    color: #fff;
+    color: #6E6C6C;
     margin-bottom: 3%;
   }
 }

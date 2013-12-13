@@ -105,7 +105,7 @@
                     - products.push("#{item.variant.product.id}-#{item.variant.product.name}-#{item.price}")
                   = hidden_field_tag(:products, products)
 
-                  = submit_tag 'Complete Order' , {:disabled => true, class: 'complete-order pull-right', id: 'complete_order'}
+                  = submit_tag '' , {:disabled => true, class: 'complete-order', id: 'complete_order'}
 
                 .web-info#oxxo_payment
                   = hidden_field_tag(:total, @order.total)
@@ -118,7 +118,7 @@
                   * YOU WILL RECEIVE AN ORDER CONFIRMATION ONCE YOU COMPLETE THE PROCESS. THEN YOU SHOULD USE THIS INFORMATION TO PAY AT YOUR NEAREST OXXO.
                   %br
                   %br
-                  = submit_tag 'Complete Order' , {class: 'complete-order pull-right', id: 'complete_oxxo'}
+                  = submit_tag '' , {class: 'complete-order', id: 'complete_oxxo'}
 
 - content_for :javascript do
   var card_name = false,

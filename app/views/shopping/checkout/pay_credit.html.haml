@@ -53,7 +53,7 @@
         #info_purchased
           %center
             -if @barcode_url.present?
-              = image_tag(@barcode_url, :class => 'oxxo-barcode')
+              = image_tag(@barcode_url)
               .row-fluid
                 = @barcode
                 %br
@@ -63,7 +63,7 @@
       = image_tag 'halldown.png', :class => 'halldown'
       %br
       .row-fluid#copyright
-        = image_tag 'logo.png'
+        = image_tag 'HALLISTBETA-01.png', :width => '20%'
         %br
         THANKS FOR YOUR PURCHASE!
         %br
