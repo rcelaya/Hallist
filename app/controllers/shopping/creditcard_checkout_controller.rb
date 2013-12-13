@@ -12,7 +12,7 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
     @order = find_or_create_order
     @products = @order.id.to_s + ' - ' + @order.number.to_s + '  [' + params[:products] + ']'
     puts 'ordeennnn completaa' + @order.to_yaml
-    Conekta.api_key= "key_zsg3aghr2UzptsuF"
+    Conekta.api_key= "key_TyBDxik1uvixTnYv"
 
     begin
       if params[:payment_method] != 'oxxo'
