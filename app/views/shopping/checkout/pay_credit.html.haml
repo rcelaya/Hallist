@@ -51,14 +51,14 @@
           %p
             STATUS: PAID
         #info_purchased
-          -if @barcode_url.present?
-            = image_tag(@barcode_url, :class => 'span12')
-            .row-fluid
-              .span7
+          %center
+            -if @barcode_url.present?
+              = image_tag(@barcode_url)
+              .row-fluid
                 = @barcode
-              .span5
-                .pull-right
-                  = @expiry_date
+                %br
+                EXP.
+                = @expiry_date
     %center
       = image_tag 'halldown.png', :class => 'halldown'
       %br
