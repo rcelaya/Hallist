@@ -63,7 +63,7 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
       @reference_id = charge.id
       @item_description = charge.description
       @item = charge.reference_id
-      @item_purchased_date = Date.today.to_s.to_date
+      #@item_purchased_date = Date.today.to_s.to_date
 
       if charge.status == 'paid'
         @shipping_address = Address.find_by_addressable_id(current_user)
