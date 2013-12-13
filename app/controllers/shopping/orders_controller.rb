@@ -29,8 +29,13 @@ class Shopping::OrdersController < Shopping::BaseController
   def checkout
     #current or in-progress otherwise cart (unless cart is empty)
     order = find_or_create_order
-    @order = session_cart.add_items_to_checkout(order) # need here because items can also be removed
-    redirect_to shopping_orders_url
+
+    if order.present?
+      @order = session_cart.add_items_to_checkout(order) # need here because items can also be removed
+      redirect_to shopping_orders_url
+    else
+      redirect_to root_url
+    end
   end
 
   # POST /shopping/orders
@@ -42,11 +47,11 @@ class Shopping::OrdersController < Shopping::BaseController
     puts 'order' + @order.to_yaml
     if @order.ship_address.blank?
       puts 'order ship address' + @order.to_yaml
-      ship_address = @order.build_ship_address(params[:order][:ship_address_attributes]) 
+      ship_address = @order.build_ship_address(params[:order][:ship_address_attributes])
       ship_address.addressable = @order
       ship_address.save
     end
-    
+
     if @order.bill_address.blank?
       puts 'order bill address' + @order.to_yaml
       bill_address = @order.build_bill_address(params[:order][:bill_address_attributes])

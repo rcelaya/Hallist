@@ -29,410 +29,436 @@ var $window = $(window);
 var Arto = Arto || {}
 
 Arto.popovers = {
-  initialize: function() {
-    this.cart();
-  },
-  
-  cart: function() {
-    this.cartPopover = $("a.cart-link").popover({
-      trigger: 'manual',
-      placement: 'bottom',
-      content: $('#cart-popover-content').html(),
-      html: true,
-      template: '<div class="popover cart"><div class="arrow arrow-gray"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
-    }).click(function(e) {
-      e.preventDefault();
-      $(this).popover('toggle');
-    });
-  },
-  
-  closeCart: function() {
-    this.cartPopover.popover('hide')
-  }
+    initialize: function () {
+        this.cart();
+    },
+
+    cart: function () {
+        this.cartPopover = $("a.cart-link").popover({
+            trigger: 'manual',
+            placement: 'bottom',
+            content: $('#cart-popover-content').html(),
+            html: true,
+            template: '<div class="popover cart"><div class="arrow arrow-gray"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+        }).click(function (e) {
+                e.preventDefault();
+                $(this).popover('toggle');
+            });
+    },
+
+    closeCart: function () {
+        this.cartPopover.popover('hide')
+    }
 }
 
 Arto.modals = {
 
 
-  
+
 }
 
-titleResize = function() {
-  marginCalculation = (($(window).width() - $('.span12').width())/2);
-  $('#content h2.large, #content h3.large, #content h4.large, #content h5.large').each(function(index, value) {
-    $(value).css('margin-left', "-" + marginCalculation + "px");
-  });
-  
-  $('h2.large.custom-width').each(function(index, value) {
-    widthCalculation = marginCalculation + 210;
-    $(value).css('margin-left', "-" + marginCalculation + "px").css('width', widthCalculation);
-    
-  });
-  
-}
-
-
-
-$(document).ready(function() {
-  Arto.popovers.initialize();
-  titleResize();
-
-  $(document).on('click', '.close-artwork-button', function(event) {
-    $('#artwork-details-modal').modal('hide');
-  });
-
-});
-
-$(function() {
-  $('.add-to-collection-button').live('click', function(event){
-    event.preventDefault();
-    productId = $(this).data('product-id');
-    
-    $('#artwork-details-modal').modal('hide');
-    Arto.popovers.closeCart();
-    
-    if(window.current_user) {
-      productId = $(this).data('product-id');
-      if(productId) {
-        $('form#add-to-collection-form').attr('action','/products/' + productId +'/collection_cart_items');
-        $('#add-collection-product-id').val(productId);
-      }
-      $('#add-to-collection-modal').modal('show');
-      
-    } else {
-      openLoginModal();
-    }
-  });
-
-  $('#close-button').click(function(event) {
-    event.preventDefault()
-    $('.modal').modal('hide');
-  });
-
-  $('#create-to-collection').live('click', function(event) {
-    event.preventDefault();
-
-    if (_.isEmpty($('#add-to-collection-modal form#new_collection input#collection_name').val()) && !_.isEmpty($('#add-to-collection-modal form #collection_id'))) {
-      formUrl = $('form#add-to-collection-form').attr('action');
-      data = {collection_id: $('#add-to-collection-modal form select').val()};
-    } else {
-      createForm = $('#add-to-collection-modal form#new_collection')
-      formUrl = createForm.attr('action');
-      data = {
-        product_id: createForm.find('#add-collection-product-id').val(),
-        collection: {
-          name: createForm.find('#collection_name').val(),
-          description: createForm.find('#collection_description').val()
-        }
-      }
-    }
-    
-    $.ajax({
-      type: 'POST',
-      url: formUrl + '.json',
-      data: data,
-      success: function(data) {
-        $('.modal').modal('hide');
-      }
+titleResize = function () {
+    marginCalculation = (($(window).width() - $('.span12').width()) / 2);
+    $('#content h2.large, #content h3.large, #content h4.large, #content h5.large').each(function (index, value) {
+        $(value).css('margin-left', "-" + marginCalculation + "px");
     });
-  });
-  
-  $('#create-collection-modal #create-collection').live('click', function(event) {
-    event.preventDefault();
-    createForm = $('#create-collection-modal form#new_collection').submit();
-  });
+
+    $('h2.large.custom-width').each(function (index, value) {
+        widthCalculation = marginCalculation + 210;
+        $(value).css('margin-left', "-" + marginCalculation + "px").css('width', widthCalculation);
+
+    });
+
+}
+
+
+$(document).ready(function () {
+    Arto.popovers.initialize();
+    titleResize();
+
+    $(document).on('click', '.close-artwork-button', function (event) {
+        $('#artwork-details-modal').modal('hide');
+    });
+
 });
 
-$(function(){
-  $('.like-button').live('click', function(event) {
-    event.preventDefault();
-    if(window.current_user) {
-      url = '/products/' + $(this).data('product-id') + '/likes';
-      type = ($(this).data('like-action') == 'like') ? 'POST' : 'DELETE'
-      $.ajax({
-        type: type, 
-        url: url,
-        success: function(data) {
+$(function () {
+    $('.add-to-collection-button').live('click', function (event) {
+        event.preventDefault();
+        productId = $(this).data('product-id');
 
-          likeButton = $('div.like-button[data-product-id=' + data.product_id + ']');
-          likeButton.data('like-action', data.like_action);
-          
-          likeButton.find('span').html(data.like_action);
+        $('#artwork-details-modal').modal('hide');
+        Arto.popovers.closeCart();
+
+        if (window.current_user) {
+            productId = $(this).data('product-id');
+            if (productId) {
+                $('form#add-to-collection-form').attr('action', '/products/' + productId + '/collection_cart_items');
+                $('#add-collection-product-id').val(productId);
+            }
+            $('#add-to-collection-modal').modal('show');
+
+        } else {
+            openLoginModal();
         }
-      });
-    } else {
-      openLoginModal();
-    }
-  });
+    });
+
+    $('#close-button').click(function (event) {
+        event.preventDefault()
+        $('.modal').modal('hide');
+    });
+
+    $('#create-to-collection').live('click', function (event) {
+        event.preventDefault();
+
+        if (_.isEmpty($('#add-to-collection-modal form#new_collection input#collection_name').val()) && !_.isEmpty($('#add-to-collection-modal form #collection_id'))) {
+            formUrl = $('form#add-to-collection-form').attr('action');
+            data = {collection_id: $('#add-to-collection-modal form select').val()};
+        } else {
+            createForm = $('#add-to-collection-modal form#new_collection')
+            formUrl = createForm.attr('action');
+            data = {
+                product_id: createForm.find('#add-collection-product-id').val(),
+                collection: {
+                    name: createForm.find('#collection_name').val(),
+                    description: createForm.find('#collection_description').val()
+                }
+            }
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: formUrl + '.json',
+            data: data,
+            success: function (data) {
+                $('.modal').modal('hide');
+            }
+        });
+    });
+
+    $('#create-collection-modal #create-collection').live('click', function (event) {
+        event.preventDefault();
+        createForm = $('#create-collection-modal form#new_collection').submit();
+    });
 });
 
-$(function(){
-  $('.login-link').click(function(event) {
-    event.preventDefault();
-    openLoginModal();
-  });
+$(function () {
+    $('.like-button').live('click', function (event) {
+        event.preventDefault();
+        if (window.current_user) {
+            url = '/products/' + $(this).data('product-id') + '/likes';
+            type = ($(this).data('like-action') == 'like') ? 'POST' : 'DELETE'
+            $.ajax({
+                type: type,
+                url: url,
+                success: function (data) {
+
+                    likeButton = $('div.like-button[data-product-id=' + data.product_id + ']');
+                    likeButton.data('like-action', data.like_action);
+
+                    likeButton.find('span').html(data.like_action);
+                }
+            });
+        } else {
+            openLoginModal();
+        }
+    });
 });
 
-$(function(){
-    $('.pago').click(function(event) {
+$(function () {
+    $('.login-link').click(function (event) {
+        event.preventDefault();
+        openLoginModal();
+    });
+});
+
+$(function () {
+    $('.add-checkout').click(function (event) {
+        event.preventDefault();
+        if (window.current_user) {
+           alert(4224);
+        } else {
+            alert('login');
+            openLoginModal();
+        }
+    });
+});
+
+$(function () {
+    $('.pago').click(function (event) {
         event.preventDefault();
         openCheckoutModal();
     });
 });
 
-$(function(){
-    $('#terms').click(function(event) {
+$(function () {
+    $('#terms').click(function (event) {
         event.preventDefault();
         openTermsModal();
     });
 });
 
-$(function() {
-  window.onresize = function(event) {
-    $container = $('#products-list');
-    $container.masonry('destroy');
-    $container.masonry({isFitWidth: true});
-    resizeWidth = $container.width();
-    $('.carousel-container').width($container.width);
-    $('.footer-message').width($container.width());
-    titleResize();
-    
-    if(window.resize == false) {
-      resizeSize = $(window).width() - 40;
-      $('#main-header-row').width(resizeSize);
-      $('#filter-header-row-container').width(resizeSize);
-      $('.footer-message').width(resizeSize);
+$(function () {
+    window.onresize = function (event) {
+        $container = $('#products-list');
+        $container.masonry('destroy');
+        $container.masonry({isFitWidth: true});
+        resizeWidth = $container.width();
+        $('.carousel-container').width($container.width);
+        $('.footer-message').width($container.width());
+        titleResize();
+
+        if (window.resize == false) {
+            resizeSize = $(window).width() - 40;
+            $('#main-header-row').width(resizeSize);
+            $('#filter-header-row-container').width(resizeSize);
+            $('.footer-message').width(resizeSize);
+        }
+
+        if ($(window).width() <= 320){
+            $('#banners_hallist')[0].src = './assets/banners/banner_320.png';
+        } else if($(window).width() <= 480) {
+            $('#banners_hallist')[0].src = './assets/banners/banner_480.png';
+        } else if($(window).width() <= 620){
+            $('#banners_hallist')[0].src = './assets/banners/banner_600.png';
+        } else if($(window).width() <= 767){
+            $('#banners_hallist')[0].src = './assets/banners/banner_768.png';
+        } else if($(window).width() <= 990){
+            $('#banners_hallist')[0].src = './assets/banners/banner_900.png';
+        } else if($(window).width() <= 1180){
+            $('#banners_hallist')[0].src = './assets/banners/banner_1200.png';
+        }
     }
-  }
 
-  $('#artwork-details-modal').on('hidden', function() {
-    // Backbone.history.navigate("");
-    window.history.back();
-  });
-
-  $('#follow-link').live('ajax:beforeSend', function() { 
-    if(window.current_user == null) {
-      openLoginModal()
-      return false;
-    }
-  });
-
-  $('.carousel .item a').click(function(event) {
-    href = $(event.currentTarget).attr('href');
-    
-    if(!event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
-      event.preventDefault()
-      url = href.replace(/^\//,'').replace('\#\!\/','')
-      window.router.navigate(url, { trigger: true })
-      return false
-    }
-  });
-
-  $('#products, #collections, #hallists, #artists').resize(function() {
-    if($(window).width() < $(this).width()) {
-      resizeWidth = $('#content').width() - 20;
-    } else {
-      resizeWidth = $(this).width() - 20;
-    }
-    if(window.resize) {
-      $('#main-header-row').width(resizeWidth);
-      $('#filter-header-row-container').width(resizeWidth);
-      $('#responsive-title').width(resizeWidth);
-      if ($(window).width() > 400)
-        $('.carousel-container').width(resizeWidth);
-    }
-    $('.footer-message').width(resizeWidth);
-  });
-
-  $('.more-artworks').live('click', function(event) {
-    event.preventDefault();
-    profile_id = $(this).data('profile-id');
-    window.router.products.fetchNextProfile(profile_id);
-  });
-
-  $('.more-collections').live('click', function(event) {
-    event.preventDefault();
-    profile_id = $(this).data('profile-id');
-    $.ajax({
-      url: '/profile/' + profile_id + '/collections',
-      data: {page: window.profile_collections_page},
-      success: function(data) {
-        console.log(data);
-      }
+    $('#artwork-details-modal').on('hidden', function () {
+        // Backbone.history.navigate("");
+        window.history.back();
     });
-  });
-  
-  $('.search-contaniner a.search-link').live('click', function(event) {
-    event.preventDefault();
-    $('nav .search').hide(500);
-    searchLink = $(this).data('search-link');
-    
-    if(searchLink == 'halls' && $('nav .search.search-hallist').is(':hidden')) {
-        $('nav .search.search-hallist').show(500);
-    } else if(searchLink == 'artists' && $('nav .search.search-artist').is(':hidden')) {
-      $('nav .search.search-artist').show(500);
-    }
-  });
+
+    $('#follow-link').live('ajax:beforeSend', function () {
+        if (window.current_user == null) {
+            openLoginModal()
+            return false;
+        }
+    });
+
+    $('.carousel .item a').click(function (event) {
+        href = $(event.currentTarget).attr('href');
+
+        if (!event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+            event.preventDefault()
+            url = href.replace(/^\//, '').replace('\#\!\/', '')
+            window.router.navigate(url, { trigger: true })
+            return false
+        }
+    });
+
+    $('#products, #collections, #hallists, #artists').resize(function () {
+        if ($(window).width() < $(this).width()) {
+            resizeWidth = $('#content').width() - 20;
+        } else {
+            resizeWidth = $(this).width() - 20;
+        }
+        if (window.resize) {
+            $('#main-header-row').width(resizeWidth);
+            $('#filter-header-row-container').width(resizeWidth);
+            $('#responsive-title').width(resizeWidth);
+            if ($(window).width() > 400)
+                $('.carousel-container').width(resizeWidth);
+        }
+        $('.footer-message').width(resizeWidth);
+    });
+
+    $('.more-artworks').live('click', function (event) {
+        event.preventDefault();
+        profile_id = $(this).data('profile-id');
+        window.router.products.fetchNextProfile(profile_id);
+    });
+
+    $('.more-collections').live('click', function (event) {
+        event.preventDefault();
+        profile_id = $(this).data('profile-id');
+        $.ajax({
+            url: '/profile/' + profile_id + '/collections',
+            data: {page: window.profile_collections_page},
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+    $('.search-contaniner a.search-link').live('click', function (event) {
+        event.preventDefault();
+        $('nav .search').hide(500);
+        searchLink = $(this).data('search-link');
+
+        if (searchLink == 'halls' && $('nav .search.search-hallist').is(':hidden')) {
+            $('nav .search.search-hallist').show(500);
+        } else if (searchLink == 'artists' && $('nav .search.search-artist').is(':hidden')) {
+            $('nav .search.search-artist').show(500);
+        }
+    });
 });
 
-$(function() {
+$(function () {
 
-  // View in a room feature
+    // View in a room feature
 
-  $('.preview-link').live('click', function(event) {
-    event.preventDefault();
-    image = $('.artwork-image');
-    image_container = $('.img-product');
-    small_image = $('.small-image');
-    preview = $('.preview');
+    $('.preview-link').live('click', function (event) {
+        event.preventDefault();
+        image = $('.artwork-image');
+        image_container = $('.img-product');
+        small_image = $('.small-image');
+        preview = $('.preview');
 
-    image_height = image.height();
+        image_height = image.height();
 
-    if(small_image.data('artwork-measures') == 'inch' || _.isEmpty(small_image.data('artwork-measures'))) {
-      small_image.css('height', (small_image.data('artwork-height')*3));
-      small_image.css('width', (small_image.data('artwork-width')*3));
-    } else {
-      small_image.css('height', (small_image.data('artwork-height')));
-      small_image.css('width', (small_image.data('artwork-width')));
-    }
+        if (small_image.data('artwork-measures') == 'inch' || _.isEmpty(small_image.data('artwork-measures'))) {
+            small_image.css('height', (small_image.data('artwork-height') * 3));
+            small_image.css('width', (small_image.data('artwork-width') * 3));
+        } else {
+            small_image.css('height', (small_image.data('artwork-height')));
+            small_image.css('width', (small_image.data('artwork-width')));
+        }
 
-    small_image.draggable();
-    preview.show(500);
-    $('.social-buttons-container').hide(500);
-    image_container.hide(500);
-  });
+        small_image.draggable();
+        preview.show(500);
+        $('.social-buttons-container').hide(500);
+        image_container.hide(500);
+    });
 
-  $('.preview-close').live('click', function(event) {
-    event.preventDefault();
+    $('.preview-close').live('click', function (event) {
+        event.preventDefault();
 
-    image_container = $('.img-product');
-    preview = $('.preview');
+        image_container = $('.img-product');
+        preview = $('.preview');
 
-    preview.hide(500);
-    image_container.show(500);
-    $('.social-buttons-container').show(500);
-  });
+        preview.hide(500);
+        image_container.show(500);
+        $('.social-buttons-container').show(500);
+    });
 
 });
 
-$(function(){
-  $('.social-buttons-container > .social-button-trigger').live('click', function(event) {
-    event.preventDefault();
-    window.open($(this).data('url'), this.target, 'width=600,height=400'); return false;
-  });
+$(function () {
+    $('.social-buttons-container > .social-button-trigger').live('click', function (event) {
+        event.preventDefault();
+        window.open($(this).data('url'), this.target, 'width=600,height=400');
+        return false;
+    });
 
-  if(window.resize == false) {
-    resizeSize = $(window).width() - 40;
-    $('#main-header-row').width(resizeSize);
-    $('#filter-header-row-container').width(resizeSize);
-    $('#responsive-title').width(resizeSize);
-    $('.footer-message').width(resizeSize);
-  }
-  
-  $('.no-collection > .create-collection').live('click', function(event) {
-    event.preventDefault();
-    $('#create-collection-modal').modal();
-  });
-  
-  $('.link-menu-iphone').live('click', function() {
-    $('body').toggleClass('iphone-menu-visible');
-    if(window.current_user == null)
-      $('body').toggleClass('no-user');
-  });
-  
-  $('.checkout-button').click(function(event) {
-      event.preventDefault();
-      $('.edit_order input').removeClass('fail');
-    
-    shippingAddressComplete = true;
-    if(_.isEmpty($('#order_ship_address_attributes_first_name').val())) {
-      shippingAddressComplete = false;
-      $('#order_ship_address_attributes_first_name').addClass('fail');
-    }
-    
-    if(_.isEmpty($('#order_ship_address_attributes_last_name').val())) {
-      shippingAddressComplete = false;
-      $('#order_ship_address_attributes_last_name').addClass('fail');
+    if (window.resize == false) {
+        resizeSize = $(window).width() - 40;
+        $('#main-header-row').width(resizeSize);
+        $('#filter-header-row-container').width(resizeSize);
+        $('#responsive-title').width(resizeSize);
+        $('.footer-message').width(resizeSize);
     }
 
-    if(_.isEmpty($('#order_ship_address_attributes_address1').val())) {
-      shippingAddressComplete = false;
-      $('#order_ship_address_attributes_address1').addClass('fail');
-    }
+    $('.no-collection > .create-collection').live('click', function (event) {
+        event.preventDefault();
+        $('#create-collection-modal').modal();
+    });
 
-    if(_.isEmpty($('#order_ship_address_attributes_country').val())) {
-      shippingAddressComplete = false;
-      $('#order_ship_address_attributes_country').addClass('fail');
-    }
-/*if(_.isEmpty($('#order_ship_address_attributes_state').val())) {
-      shippingAddressComplete = false;
-      $('#order_ship_address_attributes_state').addClass('fail');
-    }  */
+    $('.link-menu-iphone').live('click', function () {
+        $('body').toggleClass('iphone-menu-visible');
+        if (window.current_user == null)
+            $('body').toggleClass('no-user');
+    });
 
-    if(_.isEmpty($('#order_ship_address_attributes_city').val())) {
-      shippingAddressComplete = false;
-      $('#order_ship_address_attributes_city').addClass('fail');
-    }
+    $('.checkout-button').click(function (event) {
+        event.preventDefault();
+        $('.edit_order input').removeClass('fail');
 
-    if(_.isEmpty($('#order_ship_address_attributes_zip_code').val())) {
-      shippingAddressComplete = false;
-      $('#order_ship_address_attributes_zip_code').addClass('fail');
-    }
+        shippingAddressComplete = true;
+        if (_.isEmpty($('#order_ship_address_attributes_first_name').val())) {
+            shippingAddressComplete = false;
+            $('#order_ship_address_attributes_first_name').addClass('fail');
+        }
 
-    if(shippingAddressComplete == false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  });
+        if (_.isEmpty($('#order_ship_address_attributes_last_name').val())) {
+            shippingAddressComplete = false;
+            $('#order_ship_address_attributes_last_name').addClass('fail');
+        }
+
+        if (_.isEmpty($('#order_ship_address_attributes_address1').val())) {
+            shippingAddressComplete = false;
+            $('#order_ship_address_attributes_address1').addClass('fail');
+        }
+
+        if (_.isEmpty($('#order_ship_address_attributes_country').val())) {
+            shippingAddressComplete = false;
+            $('#order_ship_address_attributes_country').addClass('fail');
+        }
+        /*if(_.isEmpty($('#order_ship_address_attributes_state').val())) {
+         shippingAddressComplete = false;
+         $('#order_ship_address_attributes_state').addClass('fail');
+         }  */
+
+        if (_.isEmpty($('#order_ship_address_attributes_city').val())) {
+            shippingAddressComplete = false;
+            $('#order_ship_address_attributes_city').addClass('fail');
+        }
+
+        if (_.isEmpty($('#order_ship_address_attributes_zip_code').val())) {
+            shippingAddressComplete = false;
+            $('#order_ship_address_attributes_zip_code').addClass('fail');
+        }
+
+        if (shippingAddressComplete == false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    });
 });
 
 
-$(document).ready(function() {  
-  $('input[id*=order_ship_address_attributes], select[id*=order_ship_address_attributes]').live('change', function(event) {
-      event.preventDefault();
-      var shippingAddressComplete = true;
+$(document).ready(function () {
+    $('input[id*=order_ship_address_attributes], select[id*=order_ship_address_attributes]').live('change', function (event) {
+        event.preventDefault();
+        var shippingAddressComplete = true;
 
-    if(_.isEmpty($('#order_ship_address_attributes_first_name').val())) {
-      shippingAddressComplete = false;
-    }
+        if (_.isEmpty($('#order_ship_address_attributes_first_name').val())) {
+            shippingAddressComplete = false;
+        }
 
-    if(_.isEmpty($('#order_ship_address_attributes_last_name').val())) {
-      shippingAddressComplete = false;
-    }
+        if (_.isEmpty($('#order_ship_address_attributes_last_name').val())) {
+            shippingAddressComplete = false;
+        }
 
-    if(_.isEmpty($('#order_ship_address_attributes_address1').val())) {
-      shippingAddressComplete = false;
-    }
+        if (_.isEmpty($('#order_ship_address_attributes_address1').val())) {
+            shippingAddressComplete = false;
+        }
 
-    if(_.isEmpty($('#order_ship_address_attributes_country').val())) {
-      shippingAddressComplete = false;
-    }
+        if (_.isEmpty($('#order_ship_address_attributes_country').val())) {
+            shippingAddressComplete = false;
+        }
 
-    /*if(_.isEmpty($('#order_ship_address_attributes_state').val())) {
-      shippingAddressComplete = false;
-    } */
+        /*if(_.isEmpty($('#order_ship_address_attributes_state').val())) {
+         shippingAddressComplete = false;
+         } */
 
-    if(_.isEmpty($('#order_ship_address_attributes_city').val())) {
-      shippingAddressComplete = false;
-    }
+        if (_.isEmpty($('#order_ship_address_attributes_city').val())) {
+            shippingAddressComplete = false;
+        }
 
-    if(_.isEmpty($('#order_ship_address_attributes_zip_code').val())) {
-      shippingAddressComplete = false;
-    }
-    
-    if(shippingAddressComplete) {
-      $('.checkout-button').removeClass('checkout-disabled')
-    } else {
-      $('.checkout-button').addClass('checkout-disabled')
-    }
-  });
+        if (_.isEmpty($('#order_ship_address_attributes_zip_code').val())) {
+            shippingAddressComplete = false;
+        }
+
+        if (shippingAddressComplete) {
+            $('.checkout-button').removeClass('checkout-disabled')
+        } else {
+            $('.checkout-button').addClass('checkout-disabled')
+        }
+    });
 });
 
 
 function openLoginModal() {
-  $('#artwork-details-modal').modal('hide');
-  Arto.popovers.closeCart();
-  $('#login-modal').modal(); 
+    $('#artwork-details-modal').modal('hide');
+    Arto.popovers.closeCart();
+    $('#login-modal').modal();
 }
 
 function openCheckoutModal() {
@@ -447,87 +473,87 @@ function openTermsModal() {
     $('#terms-modal').modal();
 }
 
-$('#about-profile').live('click', function(event) {
-  event.preventDefault();
-  
-  $('#followers-profile').removeClass('selected');
-  $('#followings-profile').removeClass('selected');
-  
-  $('#followers').hide(500);
-  $('#followings').hide(500);
-  $('#about').toggle(500);
-  
-  $(this).toggleClass('selected');
+$('#about-profile').live('click', function (event) {
+    event.preventDefault();
+
+    $('#followers-profile').removeClass('selected');
+    $('#followings-profile').removeClass('selected');
+
+    $('#followers').hide(500);
+    $('#followings').hide(500);
+    $('#about').toggle(500);
+
+    $(this).toggleClass('selected');
 });
 
-$('#followers-profile').live('click', function(event) {
-  event.preventDefault();
-  
-  $('#about-profile').removeClass('selected');
-  $('#followings-profile').removeClass('selected');
-  
-  
-  $('#about').hide(500);
-  $('#followings').hide(500);
-  $('#followers').toggle(500);
-  
-  $(this).toggleClass('selected');
+$('#followers-profile').live('click', function (event) {
+    event.preventDefault();
+
+    $('#about-profile').removeClass('selected');
+    $('#followings-profile').removeClass('selected');
+
+
+    $('#about').hide(500);
+    $('#followings').hide(500);
+    $('#followers').toggle(500);
+
+    $(this).toggleClass('selected');
 });
 
-$('#followings-profile').live('click', function(event) {
-  event.preventDefault();
-  
-  $('#about-profile').removeClass('selected');
-  $('#followers-profile').removeClass('selected');
-  
-  $('#followers').hide(500);
-  $('#about').hide(500);
-  $('#followings').toggle(500);
-  
-  $(this).toggleClass('selected');
+$('#followings-profile').live('click', function (event) {
+    event.preventDefault();
+
+    $('#about-profile').removeClass('selected');
+    $('#followers-profile').removeClass('selected');
+
+    $('#followers').hide(500);
+    $('#about').hide(500);
+    $('#followings').toggle(500);
+
+    $(this).toggleClass('selected');
 });
 
 $(document).ready(function () {
-  var $win = $(window);
+    var $win = $(window);
 
-  $win.scroll(function () {
-    if ($win.height() + $win.scrollTop() == $(document).height()) {
-      $('div.footer-gif').css({})
-    }
-  });
+    $win.scroll(function () {
+        if ($win.height() + $win.scrollTop() == $(document).height()) {
+            $('div.footer-gif').css({})
+        }
+    });
 
-  // hide #back-top first
-  $("#back-top").hide();
+    // hide #back-top first
+    $("#back-top").hide();
 
 });
 
 
-$(document).ready(function(){
+$(document).ready(function () {
 
-    $('.list-icon').toggle(function(){
+    $('.list-icon').toggle(function () {
 
-        $('footer').animate({
+            $('footer').animate({
 
-            height: '170px'
-        });
+                height: '170px'
+            });
 
 
-        $('.footer-message').css('display','block');
-        $('.arto-sign').hide('slow');
-    },
+            $('.footer-message').css('display', 'block');
+            $('.arto-sign').hide('slow');
+        },
 
-    function(){
+        function () {
 
-        $('footer').animate({
+            $('footer').animate({
 
-            height: '20px'
+                height: '20px'
 
-        });
+            });
 
-        $('.footer-message').css('display', 'none');
-        $('.arto-sign').show();
+            $('.footer-message').css('display', 'none');
+            $('.arto-sign').show();
 
-    }
+        }
 
     );
 
@@ -547,20 +573,21 @@ $(document).ready(function(){
  *
  * http://cameronspear.com/blog/twitter-bootstrap-dropdown-on-hover-plugin/
  */
-;(function($, window, undefined) {
+;
+(function ($, window, undefined) {
     // outside the scope of the jQuery plugin to
     // keep track of all dropdowns
     var $allDropdowns = $();
 
     // if instantlyCloseOthers is true, then it will instantly
     // shut other nav items when a new one is hovered over
-    $.fn.dropdownHover = function(options) {
+    $.fn.dropdownHover = function (options) {
 
         // the element we really care about
         // is the dropdown-toggle's parent
         $allDropdowns = $allDropdowns.add(this.parent());
 
-        return this.each(function() {
+        return this.each(function () {
             var $this = $(this).parent(),
                 defaults = {
                     delay: 500,
@@ -573,31 +600,31 @@ $(document).ready(function(){
                 settings = $.extend(true, {}, defaults, options, data),
                 timeout, subTimeout;
 
-            $this.hover(function() {
-                if(shouldHover()) {
-                    if(settings.instantlyCloseOthers === true)
+            $this.hover(function () {
+                if (shouldHover()) {
+                    if (settings.instantlyCloseOthers === true)
                         $allDropdowns.removeClass('open');
 
                     window.clearTimeout(timeout);
                     $(this).addClass('open');
                 }
-            }, function() {
-                if(shouldHover()) {
-                    timeout = window.setTimeout(function() {
+            }, function () {
+                if (shouldHover()) {
+                    timeout = window.setTimeout(function () {
                         $this.removeClass('open');
                     }, settings.delay);
                 }
             });
 
-            $this.find('.dropdown-submenu').hover(function() {
-                if(shouldHover()) {
+            $this.find('.dropdown-submenu').hover(function () {
+                if (shouldHover()) {
                     window.clearTimeout(subTimeout);
                 }
                 $(this).children('.dropdown-menu').show();
-            }, function() {
+            }, function () {
                 var $submenu = $(this).children('.dropdown-menu');
-                if(shouldHover()) {
-                    subTimeout = window.setTimeout(function() {
+                if (shouldHover()) {
+                    subTimeout = window.setTimeout(function () {
                         $submenu.hide();
                     }, settings.delay);
                 } else {
@@ -609,8 +636,10 @@ $(document).ready(function(){
     };
 
     // helper function to see if we should hover
-    var shouldHover = function() { return !!$('#cwspear-is-awesome').height(); };
-    $(document).ready(function() {
+    var shouldHover = function () {
+        return !!$('#cwspear-is-awesome').height();
+    };
+    $(document).ready(function () {
         // apply dropdownHover to all elements with the data-hover="dropdown" attribute
         $('[data-hover="dropdown"]').dropdownHover();
 
