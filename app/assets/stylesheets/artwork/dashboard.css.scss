@@ -12,7 +12,7 @@
 .gray-main-container-upload {
   @include gray-container-section;
 
-  .nav-tabs>.active>a, .nav-tabs>.active>a:hover{
+  .nav-tabs>.active>a, .nav-tabs>.active>a:hover {
     color: transparent;
     cursor: default;
     background-color: transparent;
@@ -30,14 +30,14 @@
     border-radius: 0;
   }
 
-  .nav-tabs>li>a, .nav-pills>li>a{
+  .nav-tabs>li>a, .nav-pills>li>a {
     padding-right: 0px;
     padding-left: 0px;
     margin-right: 0px;
     line-height: 0px;
   }
 
-  #content-info-artwork{
+  #content-info-artwork {
     position: relative;
     top: 80px;
   }
@@ -75,12 +75,12 @@
         margin: 10px 0 30px 25px;
         width: 450px;
       }
-      #name-product{
+      #name-product {
         text-transform: uppercase;
         color: #666;
         font-size: 16px;
       }
-      description-product{
+      description-product {
         font-size: 14px;
       }
     }
@@ -113,7 +113,7 @@
           margin-left: 0px;
           background-color: $gray-bg-color;
         }
-        .complete-order{
+        .complete-order {
           margin-top: 77px;
           width: 50%;
           margin-right: -12px;
@@ -121,7 +121,7 @@
       }
     }
 
-    #shipping-address{
+    #shipping-address {
       border-top: dotted 2px #999;
     }
 
@@ -140,8 +140,9 @@
 
   }
 
-
-  textarea { resize: none; }
+  textarea {
+    resize: none;
+  }
 
   input[type=submit] {
     width: 100px !important;
@@ -149,7 +150,7 @@
     background-repeat: no-repeat;
   }
 
-  #update-artwork{
+  #update-artwork {
     background-color: transparent;
   }
 
@@ -176,34 +177,34 @@
     }
   }
 
-  .border-artwork{
+  .border-artwork {
     border-bottom: dotted 2px #999;
     margin-bottom: 30px;
   }
 
-  .original-artwork{
+  .original-artwork {
     border-right: dotted 2px #999;
   }
 
-  #shipping-address{
+  #shipping-address {
     margin-left: 30px;
   }
 
-  #link-new{
+  #link-new {
     display: inline-block;
-    padding:3px 15px;
+    padding: 3px 15px;
     margin-left: 10%;
   }
 
-  #link-button{
+  #link-button {
     width: 50px;
     background-color: #fff;
     border: 1px solid #000;
     display: inline-block;
     color: #000;
-    font-size:11px;
-    padding:3px 15px;
-    text-decoration:none;
+    font-size: 11px;
+    padding: 3px 15px;
+    text-decoration: none;
 
     &:hover {
       background-color: #393939;
@@ -214,21 +215,26 @@
     }
   }
 
-  #header_artwork{
+  #header_artwork {
     margin-left: 1.9%;
     margin-top: 30px;
   }
 
-  #nav_artwork{
+  #nav_artwork {
     margin-left: 1.9%;
   }
 
-  #space_artwork{
+  #space_artwork {
     border-top: dotted 2px #999;
     margin-top: 30px;
   }
 
-  #align_artwork{
+  #align_artwork {
     margin-top: 4%;
+  }
+
+  #orders-image {
+    position: relative;
+    right: 22px;
   }
 }
