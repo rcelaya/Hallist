@@ -46,7 +46,8 @@
                                 'scaffold.css',
                                 'admin/foundation.css',
                                 'admin/app.css',
-                                'admin/ie.css', 'markitup/skins/markitup/style.css','markitup/sets/default/style','colorpicker.css']
+                                'admin/ie.css', 'markitup/skins/markitup/style.css','markitup/sets/default/style','colorpicker.css',
+                                'artwork/dashboard.css']
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
