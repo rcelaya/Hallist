@@ -2,14 +2,14 @@
   .span12
     #myCarousel.carousel.slide
       .carousel-inner
-        //- Product.last(3).each_with_index do |product, index|
-        .item.row
-          //= link_to product_path(product) do
-          .span12
-            = image_tag 'banners/banner_1200.png', :id => 'banners_hallist'
-          //.span4
-          //%h2= product.name
-          //%p= product.description.html_safe
+        - Product.last(2).each_with_index do |product, index|
+          .item.row{class: "#{'active' if index==0}"}
+            = link_to product_path(product) do
+              .span12
+                = image_tag 'banners/banner'+index.to_s+'_1200.png', :id => 'banners_'+index.to_s
+              .span4
+                %h2= product.name
+                %p= product.description.html_safe
 
       %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :id => "carousel-control-left"} ‹
       %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel", :id => "carousel-control-right"} ›

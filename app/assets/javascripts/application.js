@@ -216,17 +216,47 @@ $(function () {
         }
 
         if ($(window).width() <= 320){
-            $('#banners_hallist')[0].src = './assets/banners/banner_320.png';
+            $('#publicidad-header').hide();
+            $('#nombre-publicidad').hide();
+            $('#carousel-control-right').addClass('move-control-right');
+            $('#banners_0')[0].src = './assets/banners/banner0_320.png';
+            $('#banners_1')[0].src = './assets/banners/banner1_320.png';
+            $('#banners_2')[0].src = './assets/banners/banner2_320.png';
         } else if($(window).width() <= 480) {
-            $('#banners_hallist')[0].src = './assets/banners/banner_480.png';
+            $('#publicidad-header').hide();
+            $('#nombre-publicidad').hide();
+            $('#carousel-control-right').removeClass('move-control-right')
+            $('#banners_0')[0].src = './assets/banners/banner0_480.png';
+            $('#banners_1')[0].src = './assets/banners/banner1_480.png';
+            $('#banners_2')[0].src = './assets/banners/banner2_480.png';
         } else if($(window).width() <= 620){
-            $('#banners_hallist')[0].src = './assets/banners/banner_600.png';
+            $('#publicidad-header').hide();
+            $('#nombre-publicidad').hide();
+            $('#carousel-control-right').removeClass('move-control-right')
+            $('#banners_0')[0].src = './assets/banners/banner0_620.png';
+            $('#banners_1')[0].src = './assets/banners/banner1_620.png';
+            $('#banners_2')[0].src = './assets/banners/banner2_620.png';
         } else if($(window).width() <= 767){
-            $('#banners_hallist')[0].src = './assets/banners/banner_768.png';
+            $('#publicidad-header').show();
+            $('#nombre-publicidad').show();
+            $('#carousel-control-right').removeClass('move-control-right')
+            $('#banners_0')[0].src = './assets/banners/banner0_767.png';
+            $('#banners_1')[0].src = './assets/banners/banner1_767.png';
+            $('#banners_2')[0].src = './assets/banners/banner2_767.png';
         } else if($(window).width() <= 990){
-            $('#banners_hallist')[0].src = './assets/banners/banner_900.png';
+            $('#publicidad-header').show();
+            $('#nombre-publicidad').show();
+            $('#carousel-control-right').removeClass('move-control-right')
+            $('#banners_0')[0].src = './assets/banners/banner0_990.png';
+            $('#banners_1')[0].src = './assets/banners/banner1_990.png';
+            $('#banners_2')[0].src = './assets/banners/banner2_990.png';
         } else if($(window).width() <= 1180){
-            $('#banners_hallist')[0].src = './assets/banners/banner_1200.png';
+            $('#publicidad-header').show();
+            $('#nombre-publicidad').show();
+            $('#carousel-control-right').removeClass('move-control-right')
+            $('#banners_0')[0].src = './assets/banners/banner0_1200.png';
+            $('#banners_1')[0].src = './assets/banners/banner1_1200.png';
+            $('#banners_2')[0].src = './assets/banners/banner2_1200.png';
         }
     }
 
