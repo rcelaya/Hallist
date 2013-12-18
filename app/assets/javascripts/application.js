@@ -207,6 +207,7 @@ $(function () {
         $('.carousel-container').width($container.width);
         $('.footer-message').width($container.width());
         titleResize();
+        console.log(document);
 
         if (window.resize == false) {
             resizeSize = $(window).width() - 40;
@@ -219,44 +220,44 @@ $(function () {
             $('#publicidad-header').hide();
             $('#nombre-publicidad').hide();
             $('#carousel-control-right').addClass('move-control-right');
-            $('#banners_0')[0].src = './assets/banners/banner0_320.png';
-            $('#banners_1')[0].src = './assets/banners/banner1_320.png';
-            $('#banners_2')[0].src = './assets/banners/banner2_320.png';
+            $('#banners_0')[0].src = '/assets/banners/banner0_320.png';
+            $('#banners_1')[0].src = '/assets/banners/banner1_320.png';
+            $('#banners_2')[0].src = '/assets/banners/banner2_320.png';
         } else if($(window).width() <= 480) {
             $('#publicidad-header').hide();
             $('#nombre-publicidad').hide();
             $('#carousel-control-right').removeClass('move-control-right')
-            $('#banners_0')[0].src = './assets/banners/banner0_480.png';
-            $('#banners_1')[0].src = './assets/banners/banner1_480.png';
-            $('#banners_2')[0].src = './assets/banners/banner2_480.png';
+            $('#banners_0')[0].src = '/assets/banners/banner0_480.png';
+            $('#banners_1')[0].src = '/assets/banners/banner1_480.png';
+            $('#banners_2')[0].src = '/assets/banners/banner2_480.png';
         } else if($(window).width() <= 620){
             $('#publicidad-header').hide();
             $('#nombre-publicidad').hide();
             $('#carousel-control-right').removeClass('move-control-right')
-            $('#banners_0')[0].src = './assets/banners/banner0_620.png';
-            $('#banners_1')[0].src = './assets/banners/banner1_620.png';
-            $('#banners_2')[0].src = './assets/banners/banner2_620.png';
+            $('#banners_0')[0].src = '/assets/banners/banner0_620.png';
+            $('#banners_1')[0].src = '/assets/banners/banner1_620.png';
+            $('#banners_2')[0].src = '/assets/banners/banner2_620.png';
         } else if($(window).width() <= 767){
             $('#publicidad-header').show();
             $('#nombre-publicidad').show();
             $('#carousel-control-right').removeClass('move-control-right')
-            $('#banners_0')[0].src = './assets/banners/banner0_767.png';
-            $('#banners_1')[0].src = './assets/banners/banner1_767.png';
-            $('#banners_2')[0].src = './assets/banners/banner2_767.png';
+            $('#banners_0')[0].src = '/assets/banners/banner0_767.png';
+            $('#banners_1')[0].src = '/assets/banners/banner1_767.png';
+            $('#banners_2')[0].src = '/assets/banners/banner2_767.png';
         } else if($(window).width() <= 990){
             $('#publicidad-header').show();
             $('#nombre-publicidad').show();
-            $('#carousel-control-right').removeClass('move-control-right')
-            $('#banners_0')[0].src = './assets/banners/banner0_990.png';
-            $('#banners_1')[0].src = './assets/banners/banner1_990.png';
-            $('#banners_2')[0].src = './assets/banners/banner2_990.png';
+            $('#carousel-control-right').removeClass('move-control-right');
+            $('#banners_0')[0].src = '/assets/banners/banner0_990.png';
+            $('#banners_1')[0].src = '/assets/banners/banner1_990.png';
+            $('#banners_2')[0].src = '/assets/banners/banner2_990.png';
         } else if($(window).width() <= 1180){
             $('#publicidad-header').show();
             $('#nombre-publicidad').show();
             $('#carousel-control-right').removeClass('move-control-right')
-            $('#banners_0')[0].src = './assets/banners/banner0_1200.png';
-            $('#banners_1')[0].src = './assets/banners/banner1_1200.png';
-            $('#banners_2')[0].src = './assets/banners/banner2_1200.png';
+            $('#banners_0')[0].src = '/assets/banners/banner0_1200.png';
+            $('#banners_1')[0].src = '/assets/banners/banner1_1200.png';
+            $('#banners_2')[0].src = '/assets/banners/banner2_1200.png';
         }
     }
 
