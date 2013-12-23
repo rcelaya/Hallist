@@ -104,6 +104,10 @@
                   - @order.order_items.each do |item, index|
                     - products.push("#{item.variant.product.id}-#{item.variant.product.name}-#{item.price}")
                   = hidden_field_tag(:products, products)
+                  %br
+
+                  %span#siteseal
+                    %script{type: 'text/javascript', src:'https://seal.godaddy.com/getSeal?sealID=hFpmKOe1nFTz1D0JePmpnEpKMe7tLZrKKTTO075feiBPI2prRql'}
 
                   = submit_tag '' , {:disabled => true, class: 'complete-order', id: 'complete_order'}
 

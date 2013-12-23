@@ -3,8 +3,8 @@
 .white-box {
   background-color: #fff;
   -webkit-box-shadow: 1px 1px 2px rgba(180, 180, 180, 0.75);
-  -moz-box-shadow:    1px 1px 2px rgba(180, 180, 180, 0.75);
-  box-shadow:         1px 1px 2px rgba(180, 180, 180, 0.75);
+  -moz-box-shadow: 1px 1px 2px rgba(180, 180, 180, 0.75);
+  box-shadow: 1px 1px 2px rgba(180, 180, 180, 0.75);
   padding: 10px;
   margin-bottom: 20px;
 }
@@ -15,7 +15,7 @@ ul.cards {
   padding: 0;
   list-style: none;
   overflow: hidden;
-  
+
   li {
     background: url('/assets/card-types.png') no-repeat;
     float: right;
@@ -24,34 +24,34 @@ ul.cards {
     text-indent: -9999px;
     padding-bottom: 7px;
     margin-right: 17px;
-    
+
     &.visa {
       background-position: -125px 0px;
-      
+
       &.not-selected {
         background-position: -125px -25px;
       }
     }
-    
+
     &.mastercard {
       background-position: 0px 0px;
-      
+
       &.not-selected {
         background-position: 0px -25px;
       }
     }
-    
+
     &.discover {
       background-position: -85px 0px;
-      
+
       &.not-selected {
         background-position: -85px -25px;
       }
     }
-    
+
     &.amex {
       background-position: -43px 0px;
-      
+
       &.not-selected {
         background-position: -43px -25px;
       }
@@ -72,16 +72,19 @@ h3 {
   #items-header {
     //padding-bottom: 5px;
   }
-  
+
   .line-item {
     margin-bottom: 10px;
 
-    .item-name {color: #596D80;}
-  
-    .item-qty {text-align: center;}
+    .item-name {
+      color: #596D80;
+    }
+
+    .item-qty {
+      text-align: center;
+    }
   }
 }
-
 
 #subtotal {
   border-top: 1px solid #DEDEDE;
@@ -112,14 +115,15 @@ h3 {
   }
 }
 
-.order_item{
+.order_item {
   border-bottom: 1px solid #DEDEDE;
 }
 
+input.fail {
+  border: 1px solid red;
+}
 
-input.fail { border: 1px solid red;}
-
-.top-line{
+.top-line {
   border-top: 1px solid #DEDEDE;
   width: 30px;
 }
@@ -138,7 +142,7 @@ input.fail { border: 1px solid red;}
   color: #6E6B6B;
   font-family: 'Gotham';
 
-  #title-checkout{
+  #title-checkout {
     margin-top: 40px;
   }
 
@@ -174,12 +178,12 @@ input.fail { border: 1px solid red;}
         margin: 10px 0 30px 25px;
         width: 450px;
       }
-      #name-product{
+      #name-product {
         text-transform: uppercase;
         color: #666;
         font-size: 16px;
       }
-      description-product{
+      description-product {
         font-size: 14px;
       }
     }
@@ -207,24 +211,31 @@ input.fail { border: 1px solid red;}
           margin-left: 0px;
           background-color: $gray-bg-color;
         }
-        .complete-order{
+        .complete-order {
           width: 141px;
           height: 36px;
-          margin-left: 105px;
+          margin-left: 40px;
           margin-top: 0px;
           background-color: transparent;
         }
       }
-      #oxxo_payment{
+      #credit_card_payment {
+        #siteseal {
+          img {
+            margin-bottom: 33px;
+          }
+        }
+      }
+      #oxxo_payment {
         display: none;
       }
-      .buena{
+      .buena {
         display: none !important;
       }
-      .mala{
+      .mala {
         display: block !important;
       }
-      .imagenes-pago{
+      .imagenes-pago {
         bottom: 12px;
         position: relative;
         height: 30%;
@@ -233,7 +244,7 @@ input.fail { border: 1px solid red;}
       }
     }
 
-    #shipping-address{
+    #shipping-address {
       border-top: dotted 2px #999;
       height: 90%;
     }
@@ -251,14 +262,15 @@ input.fail { border: 1px solid red;}
       }
     }
 
-    .shipping-border{
+    .shipping-border {
       border-right: dotted 2px #999;
     }
 
   }
 
-
-  textarea { resize: none; }
+  textarea {
+    resize: none;
+  }
 
   input[type=submit] {
     width: 70px;
@@ -276,61 +288,61 @@ input.fail { border: 1px solid red;}
       color: #666;
       font-size: 18px;
     }
-    #error_card_number, #error_card_name, #error_card_cvc{
+    #error_card_number, #error_card_name, #error_card_cvc {
       color: red;
       float: right;
       margin-right: 10px;
       width: 150px;
     }
-    .buena{
+    .buena {
       display: none;
     }
-    .mala{
+    .mala {
       display: block;
     }
   }
 }
 
-#purchased{
+#purchased {
   background-color: #fff;
-  .hallup{
+  .hallup {
     float: right;
     right: 10%;
     position: relative;
     margin-top: 5%;
   }
-  .halldown{
+  .halldown {
     float: left;
     left: 10%;
     position: relative;
   }
-  #info_item_purchased{
+  #info_item_purchased {
     color: #6E6C6C;
     margin-left: 25%;
     border-bottom: dotted 2px #999;
     margin-bottom: 7%;
     margin-top: 7%;
   }
-  #info_user_purchased{
+  #info_user_purchased {
     color: #6E6C6C;
     margin-left: 25%;
     border-bottom: dotted 2px #999;
     margin-bottom: 7%;
     margin-top: 4%;
   }
-  #info_purchased{
+  #info_purchased {
     color: #6E6C6C;
     margin-left: 25%;
     margin-bottom: 7%;
     margin-top: 4%;
   }
-  #copyright{
+  #copyright {
     color: #6E6C6C;
     margin-bottom: 3%;
   }
 }
 
-.static-content-purchased{
+.static-content-purchased {
   width: 100%;
   margin-top: 10%;
   height: 100%;
@@ -339,7 +351,7 @@ input.fail { border: 1px solid red;}
   color: #6E6B6B;
   font-family: 'Gotham';
 
-  .form-contact{
+  .form-contact {
     display: inline-block;
     margin-top: 60px;
     color: #6E6C6C;
@@ -347,12 +359,12 @@ input.fail { border: 1px solid red;}
     font-size: 17px;
   }
 
-  .oxxo-barcode{
+  .oxxo-barcode {
     width: 225px;
     height: 75px;
   }
 }
 
-.back_to_hallist{
+.back_to_hallist {
   margin-top: 10%;
 }
