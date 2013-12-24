@@ -81,7 +81,7 @@
   # config.action_controller.asset_host = "http://assets.example.com"
   
   ActionMailer::Base.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'arto-dev.heroku.com' }
+  config.action_mailer.default_url_options = { :host => 'hallist.com' }
   #config.action_mailer.smtp_settings = {
       #address: Settings.email.server,
       #port: Settings.email.port,

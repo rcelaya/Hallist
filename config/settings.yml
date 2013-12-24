@@ -16,9 +16,9 @@ braintree:
   public_key: '52bb84mg4sqgpcnx'
   private_key: 'eac177db25b5c60d49345050ffc8d7bd'
 amazon_s3:
-  access_key_id: "AKIAIMYIAP4I5LHK7TWQ"
-  bucket: "arto-beta"
-  secret_key: "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"
+  access_key_id: "AKIAJ6B5TMBHLMSVLE7A"
+  bucket: "hallist"
+  secret_key: "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"
 email:
   server: 'smtp.gmail.com'
   username: 'support@hallist.com'
