@@ -21,7 +21,7 @@ amazon_s3:
   secret_key: "2JVfJe/YXOlMjAixscR44ZRSxxkMRWWw/TyLmW2f"
 email:
   server: 'smtp.gmail.com'
-  username: 'support@hallist.com'
+  username: 'info@hallist.com'
   password: 'donartohallcanvas'
   domain: 'gmail.com'
   port: 587
