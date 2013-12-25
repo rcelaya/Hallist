@@ -16,6 +16,16 @@ class ApplicationController < ActionController::Base
   before_filter :secure_session
   before_filter :set_search
 
+  before_filter :add_www_subdomain
+
+  private
+  def add_www_subdomain
+    unless /^www/.match(request.host)
+      redirect_to("#{request.protocol}x.com#{request.request_uri}",
+                  :status => 301)
+    end
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied."
     if current_user.user && current_user.admin?
