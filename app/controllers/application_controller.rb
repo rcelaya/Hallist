@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
 
   before_filter :secure_session
   before_filter :set_search
+  before_filter :check_domain
+
+  def check_domain
+    if Rails.env.production? || Rails.env.testing? and request.host.downcase != 'www.hallist.com'
+      redirect_to request.protocol + 'www.hallist.com' + request.fullpath, :status => 301
+    end
+  end
+
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied."
