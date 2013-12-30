@@ -9,21 +9,28 @@ class ProfileController < ApplicationController
       @likeables.each do |like|
         @likes.push(Product.find(like.likeable_id))
       end
-      @likes = ProductDecorator.decorate(@likes).map(&:json_to_browse).to_json.html_safe
+      if !@likes.empty?
+         @likes = ProductDecorator.decorate(@likes).map(&:json_to_browse).to_json.html_safe
+      end
     end
 
     @user_profile = if params[:username].present?
+      puts 'entro al ifffff'
       Profile.find_by_username params[:username]
-    elsif params[:id].present?
+      elsif params[:id].present?
+      puts 'entro al elseeeeeeifffff'
       User.find(params[:id]).profile
     else
-      current_user.profile
+    params[:artwork_type] = 'collections'
+    current_user.profile
     end
 
     if @user_profile
+      puts 'entro al user_profile'
       @user = UserDecorator.decorate(@user_profile.user)
       @products = @user.products_for_profile
       @collections = @user.sample_collections
+      puts 'collections' + @collections.to_s.to_yaml
     else
       raise ActiveRecord::RecordNotFound
     end

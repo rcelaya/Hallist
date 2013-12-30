@@ -35,6 +35,10 @@
 - if @products.blank? and @user.artist?
   - if params[:artwork_type] == 'collections' and @collections
     %p.no-products= "No collections to show yet."
+  - elsif params[:artwork_type] == 'works'
+    %p.no-products= "No works to show yet."
+  - elsif params[:artwork_type] == 'likes'
+    %p.no-products= "No likes to show yet."
   - else
     %p.no-products= "No products to show yet."
 - elsif params[:artwork_type] == 'collections'
@@ -54,13 +58,10 @@
     %p.no-products= "No likes to show yet."
 - elsif params[:artwork_type] == 'works'
   #products
-- elsif @user.artist?
-  - if !@collections.blank?
-    .span12.profile-collections.my-profile
-      - @collections.each do |collection|
-        = render partial: 'collections/collection', locals: {collection: collection}
-  - else
-    %p.no-products= "No collections to show yet."
+- elsif !@collections.blank?
+  .span12.profile-collections.my-profile
+    - @collections.each do |collection|
+      = render partial: 'collections/collection', locals: {collection: collection}
 - else
   #products
 
