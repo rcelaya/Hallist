@@ -7,7 +7,10 @@
 <a href="/artworks/<%= permalink %>">
   <img src="<%= image %>" height="<%= image_height %>" width="220" style="width:220px;height:<%= image_height%>px"/>
   <div class='product-description'>
-    <span class='name'><%= name %></span>
+    <span class='name'>
+      <p><%= name %></p>
+      <p>US <%= price %></p>
+    </span>
   </div>
 </a>
 <form accept-charset="UTF-8" action="/shopping/cart_items" class="new_cart_item pull-right" id="new_cart_item" method="post" >
