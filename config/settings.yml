@@ -44,6 +44,8 @@ omniauth:
     facebook:
       key: '207443096095083'
       secret: '6b763af5f0b2a36213efb96c85a5afb5'
+      #key: '214052588781540'
+      #secret: '49eb6a292a56bc1f0c3655aa0aa75d04'
 
   staging:
     twitter:

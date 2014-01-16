@@ -30,13 +30,16 @@
       - if current_user.user
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", "data-hover"=>"dropdown","href" => "#", class: 'profile-link'}
-            - if current_user.first_name.nil? || current_user.first_name.empty?
+            - if current_user.profile.username.nil? || current_user.profile.username.empty?
               = current_user.email
             - else 
-              = "Hi " + current_user.first_name + "!"
+              = "Hi " + current_user.profile.username + "!"
           %ul.dropdown-menu{"role" => "menu", "aria-labelledby" => "dLabel"}
             %li
-              = link_to 'MY HALL', myprofile_path
+              - if current_user.profile.username.nil? || current_user.profile.username.empty?
+                = link_to 'MY HALL', myprofile_path
+              - else
+                = link_to 'MY HALL', '/' + current_user.profile.username
             %li
               = link_to 'MY ACCOUNT', edit_myaccount_overview_path
             - if current_user.user.artist? || current_user.user.admin?

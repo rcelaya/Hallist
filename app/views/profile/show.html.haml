@@ -1,7 +1,7 @@
 .row-fluid#user-profile
   .span10
     .profile-header
-      %h1= @user.first_name.upcase
+      %h1= @user.name.upcase
       = @user.artist? ? image_tag('artist_icon.png') : image_tag('hallist_icon.png')
       = link_to('Edit Profile >', edit_myaccount_overview_path, class: 'edit-link') if @user.user.id == current_user_id
       %p= @user_profile.city

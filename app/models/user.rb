@@ -352,7 +352,7 @@ class User < ActiveRecord::Base
   # @param [none]
   # @return [ String ]
   def name
-    (first_name? && last_name?) ? [first_name.capitalize, last_name.capitalize ].join(" ") : (email.match(/@arto.temporal.user.com/)? '' : email)
+    (first_name? && last_name?) ? [first_name.capitalize, last_name.capitalize ].join(" ") : (email.match(/@arto.temporal.user.com/)? '' : Profile.find_by_user_id(id).username)
   end
 
   # sanitizes the saving of data.  removes white space and assigns a free account type if one doesn't exist
@@ -532,7 +532,7 @@ class User < ActiveRecord::Base
   end
   
   def create_profile
-    self.create_profile!
+    #self.create_profile!
   end
 
   def validate_age

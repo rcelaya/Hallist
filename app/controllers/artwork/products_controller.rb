@@ -38,7 +38,6 @@ class Artwork::ProductsController < ApplicationController
   
   def update
     @product = Product.find params[:id]
-    puts 'update params' + @product.to_yaml
     if @product.update_attributes params[:product]
       redirect_to artwork_dashboard_url
     else

@@ -10,7 +10,7 @@
         %fieldset.basic-info
           = f.fields_for :profile do |profile_form|
             %center
-              = f.text_field :first_name, placeholder: 'Username'
+              = profile_form.text_field :username, placeholder: 'Username'
 
               = f.text_field :email, placeholder: 'Email'
               %br
