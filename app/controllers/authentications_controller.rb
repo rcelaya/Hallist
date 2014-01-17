@@ -3,13 +3,16 @@ class AuthenticationsController < ApplicationController
   def create
       omniauth = request.env['omniauth.auth']
       authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-
+      puts 'modelooo_face' + omniauth.to_yaml
+      puts 'modelooo_face' + authentication.to_yaml
       if authentication
+        puts 'authentication'
         # User is already registered with application        
         flash[:info] = 'Signed in successfully.'
 
         sign_in_and_redirect(authentication.user)
       elsif current_user.user
+        puts 'current user'
         # User is signed in but has not already authenticated with this social network
         current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
         current_user.apply_omniauth(omniauth)
@@ -18,11 +21,14 @@ class AuthenticationsController < ApplicationController
         flash[:info] = 'Authentication successful.'
         redirect_to root_url
       else
+        puts 'entro new to aplication'
         # User is new to this application
         user = User.find_or_initialize_by_email(omniauth['extra']['raw_info']['email'])
+        puts 'userrr' + user.to_yaml
         user.apply_authorization
 
         if user.save!
+          puts 'save'
           user.apply_omniauth(omniauth)
           flash[:info] = 'User created and signed in successfully.'
           sign_in_and_redirect(user)

@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default :from => "HALLIST <support@hallist.com>"
+  default :from => "HALLIST <info@hallist.com>"
 
   # Simple Welcome mailer
   # => CUSTOMIZE FOR YOUR OWN APP
@@ -7,6 +7,7 @@ class Notifier < ActionMailer::Base
   # @param [user] user that signed up
   # => user must respond to email_address_with_name and name
   def signup_notification(recipient)
+    puts recipient.to_yaml
     @account = recipient
 
     #attachments['an-image.jp'] = File.read("an-image.jpg")
@@ -15,7 +16,7 @@ class Notifier < ActionMailer::Base
     mail(:to => recipient.email_address_with_name,
          :subject => "New account information") do |format|
       format.text { render :text => "Welcome!  #{recipient.name} go to #{customer_activation_url(:a => recipient.perishable_token )}" }
-      format.html { render :text => "<h1>Welcome to HALLIST!</h1> <p>Your account has been created for the following email address: <br> #{recipient.name}</p> <p>Please finish your registration process here: <a href='#{customer_activation_url(:a => recipient.perishable_token )}'>Click to Activate</a></p>  <p>Sincerely, <br> The HALLIST team</p>" }
+      format.html { render :text => "<h1>Welcome to HALLIST!</h1> <p>Your account has been created for the following email address: <br> #{recipient.email}</p> <p>Please finish your registration process here: <a href='#{customer_activation_url(:a => recipient.perishable_token )}'>Click to Activate</a></p>  <p>Sincerely, <br> The HALLIST team</p>" }
     end
 
   end

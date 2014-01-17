@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |config|
     config.validate_email_field
-    config.validates_length_of_password_field_options( :minimum => 6, :on => :update, :if => :password_changed? )
+    config.validates_length_of_password_field_options(:minimum => 6, :on => :update, :if => :password_changed?)
 
     # So that Authlogic will not use the LOWER() function when checking login, allowing for benefit of column index.
     config.validates_uniqueness_of_login_field_options :case_sensitive => true
@@ -67,92 +67,92 @@ class User < ActiveRecord::Base
 
   belongs_to :account
 
-  has_one     :store_credit
-  has_many    :orders
-  has_many    :finished_orders,          :class_name => 'Order',
-                                          :conditions => {:orders => { :state => ['complete', 'paid']}}
-  has_many    :completed_orders,          :class_name => 'Order',
-                                          :conditions => {:orders => { :state => 'complete'}}
-  has_many    :phones,                    :dependent => :destroy,
-                                          :as => :phoneable
+  has_one :store_credit
+  has_many :orders
+  has_many :finished_orders, :class_name => 'Order',
+           :conditions => {:orders => {:state => ['complete', 'paid']}}
+  has_many :completed_orders, :class_name => 'Order',
+           :conditions => {:orders => {:state => 'complete'}}
+  has_many :phones, :dependent => :destroy,
+           :as => :phoneable
 
-  has_one     :primary_phone,             :conditions => {:phones => { :primary => true}},
-                                          :as => :phoneable,
-                                          :class_name => 'Phone'
+  has_one :primary_phone, :conditions => {:phones => {:primary => true}},
+          :as => :phoneable,
+          :class_name => 'Phone'
 
-  has_many    :addresses,                 :dependent => :destroy,
-                                          :as => :addressable
+  has_many :addresses, :dependent => :destroy,
+           :as => :addressable
 
-  has_one     :default_billing_address,   :conditions => {:addresses => { :billing_default => true, :active => true}},
-                                          :as => :addressable,
-                                          :class_name => 'Address'
+  has_one :default_billing_address, :conditions => {:addresses => {:billing_default => true, :active => true}},
+          :as => :addressable,
+          :class_name => 'Address'
 
-  has_many    :billing_addresses,         :conditions => {:addresses => { :active => true}},
-                                          :as => :addressable,
-                                          :class_name => 'Address'
+  has_many :billing_addresses, :conditions => {:addresses => {:active => true}},
+           :as => :addressable,
+           :class_name => 'Address'
 
-  has_one     :default_shipping_address,  :conditions => {:addresses => { :default => true, :active => true}},
-                                          :as => :addressable,
-                                          :class_name => 'Address'
+  has_one :default_shipping_address, :conditions => {:addresses => {:default => true, :active => true}},
+          :as => :addressable,
+          :class_name => 'Address'
 
-  has_many     :shipping_addresses,       :conditions => {:addresses => { :active => true}},
-                                          :as => :addressable,
-                                          :class_name => 'Address'
+  has_many :shipping_addresses, :conditions => {:addresses => {:active => true}},
+           :as => :addressable,
+           :class_name => 'Address'
 
-  has_many    :user_roles,                :dependent => :destroy
-  has_many    :roles,                     :through => :user_roles
+  has_many :user_roles, :dependent => :destroy
+  has_many :roles, :through => :user_roles
 
-  has_many    :carts,                     :dependent => :destroy
+  has_many :carts, :dependent => :destroy
 
-  has_many    :cart_items
-  has_many    :shopping_cart_items,       :conditions => {:cart_items => { :active        => true,
-                                                                           :item_type_id  => ItemType::SHOPPING_CART_ID}},
-                                          :class_name => 'CartItem'
+  has_many :cart_items
+  has_many :shopping_cart_items, :conditions => {:cart_items => {:active => true,
+                                                                 :item_type_id => ItemType::SHOPPING_CART_ID}},
+           :class_name => 'CartItem'
 
-  has_many    :wish_list_items,           :conditions => {:cart_items => { :active        => true,
-                                                                           :item_type_id  => ItemType::WISH_LIST_ID}},
-                                          :class_name => 'CartItem'
+  has_many :wish_list_items, :conditions => {:cart_items => {:active => true,
+                                                             :item_type_id => ItemType::WISH_LIST_ID}},
+           :class_name => 'CartItem'
 
-  has_many    :saved_cart_items,           :conditions => {:cart_items => { :active        => true,
-                                                                            :item_type_id  => ItemType::SAVE_FOR_LATER}},
-                                          :class_name => 'CartItem'
+  has_many :saved_cart_items, :conditions => {:cart_items => {:active => true,
+                                                              :item_type_id => ItemType::SAVE_FOR_LATER}},
+           :class_name => 'CartItem'
 
-  has_many    :purchased_items,           :conditions => {:cart_items => { :active        => true,
-                                                                           :item_type_id  => ItemType::PURCHASED_ID}},
-                                          :class_name => 'CartItem'
+  has_many :purchased_items, :conditions => {:cart_items => {:active => true,
+                                                             :item_type_id => ItemType::PURCHASED_ID}},
+           :class_name => 'CartItem'
 
-  has_many    :deleted_cart_items,        :conditions => {:cart_items => { :active => false}}, :class_name => 'CartItem'
-  has_many    :payment_profiles
-  has_many    :transaction_ledgers, :as => :accountable
+  has_many :deleted_cart_items, :conditions => {:cart_items => {:active => false}}, :class_name => 'CartItem'
+  has_many :payment_profiles
+  has_many :transaction_ledgers, :as => :accountable
 
-  has_many    :return_authorizations
-  has_many    :authored_return_authorizations, :class_name => 'ReturnAuthorization', :foreign_key => 'author_id'
-  
-  has_many    :collections
+  has_many :return_authorizations
+  has_many :authored_return_authorizations, :class_name => 'ReturnAuthorization', :foreign_key => 'author_id'
+
+  has_many :collections
   belongs_to :brand
   has_many :authentications, dependent: :destroy
-  
-  has_one     :profile
-  
+
+  has_one :profile
+
   has_many :bids
 
-  validates :first_name,  :presence => true, :if => :registered_user?,
-                          :format   => { :with => CustomValidators::Names.name_validator },
-                          :length => { :maximum => 30 }
-  validates :last_name,   :presence => true, :if => :registered_user?,
-                          :format   => { :with => CustomValidators::Names.name_validator },
-                          :length => { :maximum => 35 }
-  validates :email,       :presence => true,
-                          :uniqueness => true,##  This should be done at the DB this is too expensive in rails
-                          :format   => { :with => CustomValidators::Emails.email_validator },
-                          :length => { :maximum => 255 }
+  validates :first_name, :presence => true, :if => :registered_user?,
+            :format => {:with => CustomValidators::Names.name_validator},
+            :length => {:maximum => 30}
+  validates :last_name, :presence => true, :if => :registered_user?,
+            :format => {:with => CustomValidators::Names.name_validator},
+            :length => {:maximum => 35}
+  validates :email, :presence => true,
+            :uniqueness => true, ##  This should be done at the DB this is too expensive in rails
+            :format => {:with => CustomValidators::Emails.email_validator},
+            :length => {:maximum => 255}
   validate :validate_age
   #validates :password,    :presence => { :if => :password_required? }, :confirmation => true
 
   accepts_nested_attributes_for :addresses, :user_roles
-  accepts_nested_attributes_for :phones, :reject_if => lambda { |t| ( t['display_number'].gsub(/\D+/, '').blank?) }
+  accepts_nested_attributes_for :phones, :reject_if => lambda { |t| (t['display_number'].gsub(/\D+/, '').blank?) }
   accepts_nested_attributes_for :profile
-  
+
   attr_accessible :profile_attributes
 
   #
@@ -162,7 +162,7 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_liker
   acts_as_mentioner
-  
+
 
   state_machine :state, :initial => :active do
     state :inactive
@@ -179,11 +179,11 @@ class User < ActiveRecord::Base
 
     event :register do
       #transition :to => 'registered', :from => :all
-      transition :from => :active,                 :to => :registered
-      transition :from => :inactive,               :to => :registered
-      transition :from => :unregistered,           :to => :registered
+      transition :from => :active, :to => :registered
+      transition :from => :inactive, :to => :registered
+      transition :from => :unregistered, :to => :registered
       transition :from => :registered_with_credit, :to => :registered
-      transition :from => :canceled,               :to => :registered
+      transition :from => :canceled, :to => :registered
     end
 
     event :cancel do
@@ -191,56 +191,56 @@ class User < ActiveRecord::Base
     end
 
   end
-  
+
   TEMPORAL_EMAIL = "@temp-hallist.com"
-  
+
   #
   # Extends
   #
   include Publisher
-  
+
   BROWSE_PER_PAGE = 30
-  
+
   searchable auto_index: true, auto_remove: true do
     text :name_text, stored: true do
       name
     end
-    
+
     text :artworks, stored: true do
       brand.products.active.map(&:name).to_sentence
     end
-    
+
     text :profile_about, stored: true do
       profile.about
     end
-    
+
     string :name, stored: true
     time :created_at, stored: true
     boolean :artist, stored: true do
       artist ? artist : false
     end
-    
+
     integer :collections_count, stored: true do
       collections.count
     end
   end
-  
+
   def self.filters(filters, page = 1)
-    (search do      
+    (search do
       fulltext(filters[:search]) if filters[:search].present?
-      
+
       if filters[:artist] == true || filters[:artist] == 'true'
-        with(:artist, true) 
+        with(:artist, true)
       else
         with(:artist, false)
         with(:collections_count).greater_than(1)
-      end 
+      end
 
       paginate :page => page, :per_page => BROWSE_PER_PAGE
       order_by :created_at, :desc
     end)
   end
-  
+
   def self.artists
     where(artist: true, state: :active)
   end
@@ -250,7 +250,7 @@ class User < ActiveRecord::Base
   # @param [none]
   # @return [ Boolean ]
   def active?
-    !['canceled', 'inactive'].any? {|s| self.state == s }
+    !['canceled', 'inactive'].any? { |s| self.state == s }
   end
 
   # in plain english returns 'true' or 'false' if the user is active or not
@@ -266,7 +266,7 @@ class User < ActiveRecord::Base
   # @param [String] role name the user should have
   # @return [ Boolean ]
   def role?(role_name)
-    roles.any? {|r| r.name == role_name.to_s}
+    roles.any? { |r| r.name == role_name.to_s }
   end
 
   # returns true or false if the user is an admin or not
@@ -276,7 +276,7 @@ class User < ActiveRecord::Base
   def admin?
     role?(:administrator) || role?(:super_administrator)
   end
-  
+
   # returns true or false if the user is a super admin or not
   # FYI your IT staff might be an admin but your CTO and IT director is a super admin
   #
@@ -309,6 +309,7 @@ class User < ActiveRecord::Base
   def form_birth_date
     birth_date.present? ? birth_date.strftime("%m/%d/%Y") : nil
   end
+
   # formats the String
   #
   # @param [String] formatted in Euro-time
@@ -352,7 +353,10 @@ class User < ActiveRecord::Base
   # @param [none]
   # @return [ String ]
   def name
-    (first_name? && last_name?) ? [first_name.capitalize, last_name.capitalize ].join(" ") : (email.match(/@arto.temporal.user.com/)? '' : Profile.find_by_user_id(id).username)
+    prof_username = Profile.find_by_user_id(id)
+    if prof_username
+      (first_name? && last_name?) ? [first_name.capitalize, last_name.capitalize].join(" ") : (email.match(/@arto.temporal.user.com/) ? '' : prof_username.username)
+    end
   end
 
   # sanitizes the saving of data.  removes white space and assigns a free account type if one doesn't exist
@@ -360,9 +364,9 @@ class User < ActiveRecord::Base
   # @param  [ none ]
   # @return [ none ]
   def sanitize_data
-    self.email      = self.email.strip.downcase       unless email.blank?
-    self.first_name = self.first_name.strip.capitalize  unless first_name.nil?
-    self.last_name  = self.last_name.strip.capitalize   unless last_name.nil?
+    self.email = self.email.strip.downcase unless email.blank?
+    self.first_name = self.first_name.strip.capitalize unless first_name.nil?
+    self.last_name = self.last_name.strip.capitalize unless last_name.nil?
 
     ## CHANGE THIS IF YOU HAVE DIFFERENT ACCOUNT TYPES
     unless account_id
@@ -410,7 +414,7 @@ class User < ActiveRecord::Base
   # @params [ none ]
   # @return [ Arel ]
   def self.find_subscription_users
-    where('account_id NOT IN (?)', Account::FREE_ACCOUNT_IDS )
+    where('account_id NOT IN (?)', Account::FREE_ACCOUNT_IDS)
   end
 
   # include addresses in Find
@@ -429,8 +433,8 @@ class User < ActiveRecord::Base
     grid = self
     grid = grid.includes(:roles)
     grid = grid.where("users.first_name LIKE ?", "%#{params[:first_name]}%") if params[:first_name].present?
-    grid = grid.where("users.last_name LIKE ?",  "%#{params[:last_name]}%")  if params[:last_name].present?
-    grid = grid.where("users.email LIKE ?",      "%#{params[:email]}%")      if params[:email].present?
+    grid = grid.where("users.last_name LIKE ?", "%#{params[:last_name]}%") if params[:last_name].present?
+    grid = grid.where("users.email LIKE ?", "%#{params[:email]}%") if params[:email].present?
     grid
   end
 
@@ -444,21 +448,21 @@ class User < ActiveRecord::Base
   end
 
   def number_of_finished_orders_at(at)
-    finished_orders.select{|o| o.completed_at < at }.size
+    finished_orders.select { |o| o.completed_at < at }.size
   end
-  
+
   def most_recent_likes
     likes.order('created_at').limit(4)
   end
-  
+
   def twitter_authentication
     authentications.where(provider: 'twitter').first
   end
-  
+
   def facebook_authentication
     authentications.where(provider: 'facebook').first
   end
-  
+
   def apply_authorization
     if new_record?
       _password = SecureRandom.hex(5)
@@ -467,22 +471,23 @@ class User < ActiveRecord::Base
       self.email = "#{_password}#{TEMPORAL_EMAIL}" if email.blank?
     end
   end
-  
+
   def apply_omniauth(omniauth)
+    puts 'modelooo_face' + omniauth.to_yaml
     case omniauth['provider']
-    when 'facebook'
-      self.apply_facebook(omniauth)
-    when 'twitter'
-      self.apply_twitter(omniauth)
+      when 'facebook'
+        self.apply_facebook(omniauth)
+      when 'twitter'
+        self.apply_twitter(omniauth)
     end
     authentications.build(hash_from_omniauth(omniauth))
     save!
   end
-  
+
   def missing_complete_register?
     email.nil? || email.match(/#{User::TEMPORAL_EMAIL}/)
   end
-  
+
 
   protected
 
@@ -513,26 +518,26 @@ class User < ActiveRecord::Base
 
   def hash_from_omniauth(omniauth)
     {
-      :provider => omniauth['provider'],
-      :uid => omniauth['uid'],
-      :token => (omniauth['credentials']['token'] rescue nil),
-      :secret => (omniauth['credentials']['secret'] rescue nil)
+        :provider => omniauth['provider'],
+        :uid => omniauth['uid'],
+        :token => (omniauth['credentials']['token'] rescue nil),
+        :secret => (omniauth['credentials']['secret'] rescue nil)
     }
   end
 
   private
-  
+
   def get_facebook_avatar(fb_id)
     res = open("http://graph.facebook.com/#{fb_id}/picture?type=large")
     get_avatar(res.base_uri.to_s)
   end
-  
+
   def get_avatar(image_url)
     self.profile.avatar = open(URI.escape(image_url))
   end
-  
+
   def create_profile
-    #self.create_profile!
+    self.create_profile!
   end
 
   def validate_age
@@ -591,13 +596,13 @@ class User < ActiveRecord::Base
   def before_validation_on_create
     self.access_token = SecureRandom::hex(9+rand(6)) if new_record? and access_token.nil?
   end
-  
+
   def create_brand
     the_brand = Brand.new(name: self.name)
     the_brand.save!(:validate => false)
     self.update_attribute(:brand_id, the_brand.id)
   end
-  
+
   def update_brand
     if brand
       self.brand.update_attribute(:name, self.name) if first_name_changed? or last_name_changed?
@@ -605,18 +610,18 @@ class User < ActiveRecord::Base
       create_brand
     end
   end
-  
+
   def extract_name(name)
     name_splited = name.split(' ')
     case name_splited.size
-    when 1
-      return [name_splited[0]]
-    when 2
-      return [name_splited[0], name_splited[1]]
-    when 3
-      return [name_splited[0] , "#{name_splited[1]} #{name_splited[2]}"]
-    when 4
-      return ["#{name_splited[0]} #{name_splited[1]}", "#{name_splited[2]} #{name_splited[3]}"]
+      when 1
+        return [name_splited[0]]
+      when 2
+        return [name_splited[0], name_splited[1]]
+      when 3
+        return [name_splited[0], "#{name_splited[1]} #{name_splited[2]}"]
+      when 4
+        return ["#{name_splited[0]} #{name_splited[1]}", "#{name_splited[2]} #{name_splited[3]}"]
     end
   end
 end
