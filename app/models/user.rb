@@ -388,7 +388,7 @@ class User < ActiveRecord::Base
   # @param  [ none ]
   # @return [ String ]
   def email_address_with_name
-    "\"#{name}\" <#{email}>"
+    "#{@username} <#{email}>"
   end
 
   # place holder method for creating cim profiles for recurring billing
@@ -473,7 +473,7 @@ class User < ActiveRecord::Base
   end
 
   def apply_omniauth(omniauth)
-    puts 'modelooo_face' + omniauth.to_yaml
+    #puts 'modelooo_face' + omniauth.to_yaml
     case omniauth['provider']
       when 'facebook'
         self.apply_facebook(omniauth)
@@ -488,11 +488,17 @@ class User < ActiveRecord::Base
     email.nil? || email.match(/#{User::TEMPORAL_EMAIL}/)
   end
 
+  def create_username(username)
+    @username = username
+    self.profile.username = @username
+    save!
+  end
+
 
   protected
 
   def apply_facebook(omniauth)
-    puts 'modelooo_face' + omniauth.to_yaml
+    #puts 'modelooo_face' + omniauth.to_yaml
     if omniauth['extra']['raw_info'].present?
       self.email = omniauth['extra']['raw_info']['email'] if omniauth['extra']['raw_info']['email'].present? && email.blank?
       self.first_name = omniauth['extra']['raw_info']['first_name'] if omniauth['extra']['raw_info']['first_name'].present? && first_name.blank?
@@ -503,7 +509,7 @@ class User < ActiveRecord::Base
   end
 
   def apply_twitter(omniauth)
-    puts 'modelooo_twitter' + omniauth.to_yaml
+    #puts 'modelooo_twitter' + omniauth.to_yaml
     if omniauth['extra']['raw_info'].present?
       self.email = omniauth['extra']['raw_info']['email'] if omniauth['extra']['raw_info']['email'].present? && email.blank?
       if omniauth['extra']['raw_info']['name'].present?

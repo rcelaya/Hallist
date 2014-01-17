@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default :from => "HALLIST <info@hallist.com>"
+  default :from => "HALLIST <support@hallist.com>"
 
   # Simple Welcome mailer
   # => CUSTOMIZE FOR YOUR OWN APP
@@ -7,7 +7,6 @@ class Notifier < ActionMailer::Base
   # @param [user] user that signed up
   # => user must respond to email_address_with_name and name
   def signup_notification(recipient)
-    puts recipient.to_yaml
     @account = recipient
 
     #attachments['an-image.jp'] = File.read("an-image.jpg")
