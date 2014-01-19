@@ -1,5 +1,4 @@
 module Shopping::PaypalCheckoutHelper
-  puts 'entraaa paypalll'
   def get_setup_purchase_params(request)
     return {
         :ip => request.remote_ip,
