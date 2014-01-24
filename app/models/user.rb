@@ -233,7 +233,7 @@ class User < ActiveRecord::Base
         with(:artist, true)
       else
         with(:artist, false)
-        with(:collections_count).greater_than(1)
+        with(:collections_count).greater_than(0)
       end
 
       paginate :page => page, :per_page => BROWSE_PER_PAGE
