@@ -12,16 +12,18 @@
             %legend BASIC INFORMATION
             .row-fluid
               .span5
-                .add-image
+                %center.add-image.span12
                   = image_tag '/assets/Artworkphoto.png', :id => 'product_image'
-                .image-information
-                  %span
-                    Max size of 3Mb, JPG or PNG
-
-                  .image-details
-                    - @product.images.each do |image|
-                      %span
-                        = image.photo_file_name
+                .image-information.span12
+                  %center.image-center
+                    .image-details
+                      - @product.images.each do |image|
+                        %span
+                          = image.photo_file_name
+                    %p.size_image
+                      Max size of 3Mb, JPG or PNG
+                      %p.size_image#error_file_size.hidden
+                        "Load New Image"
 
               .span7
                 = form.text_field :name, class: 'span12', placeholder: 'NAME OF ARTWORK'
@@ -218,11 +220,19 @@
   $('.add-image').click(function() {
   buttonAddImage = $(this);
   fileInput =  $('<input/>').attr('type','file').attr('name','product[images_attributes][][photo]').addClass('hide');
-
   fileInput.change(function() {
+  var iSize = (this.files[0].size / 1024);
+  if (Math.round((iSize / 1024) * 100) / 100 < 3){
   updateImage(this,'product_image');
   $('.image-details').html($('<span/>').html(this.files[0].name));
   $('.image-details').append(fileInput);
+  $('.size_image').addClass('load-file-size');
+  $('#error_file_size').addClass('hidden');
+  }else{
+  $('.size_image').removeClass('load-file-size');
+  $('.size_image').addClass('error-file-size');
+  $('#error_file_size').removeClass('hidden');
+  }
   });
   fileInput.click();
   });

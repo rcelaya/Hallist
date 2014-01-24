@@ -825,14 +825,14 @@ label.error {color: #b94a48;}
 .add-image {
   cursor: pointer;
   float: left;
-  width: 95%;
+  width: 100%;
   height: 250px;
-  background-color: #f4f4f4;
-  border: 2px solid #eee;
+  //background-color: #f4f4f4;
+  //border: 2px solid #eee;
   margin: 0 20px 10px 0;
   border-radius: 5px;
   
-  &:hover {background-color: #eee;}
+  //&:hover {background-color: #eee;}
   
   img {
     //margin: 45px auto 0 auto;
@@ -853,7 +853,12 @@ label.error {color: #b94a48;}
   }
   
   img { width: 180px; margin: 0 10px}
-  
+
+  .image-center{
+    position: relative;
+    right: 6px;
+  }
+
   .image-details {
     
     span {
@@ -861,6 +866,14 @@ label.error {color: #b94a48;}
       font-size: 12px;
     }
   }
+}
+
+.error-file-size{
+  color: red;
+}
+
+.load-file-size{
+  color: #72A7C0;
 }
 
 .chzn-container {
