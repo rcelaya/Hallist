@@ -232,7 +232,7 @@ class User < ActiveRecord::Base
       if filters[:artist] == true || filters[:artist] == 'true'
         with(:artist, true)
       else
-        with(:artist, false)
+        #with(:artist, true)
         with(:collections_count).greater_than(0)
       end
 
