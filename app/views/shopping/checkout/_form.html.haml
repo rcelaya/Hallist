@@ -17,8 +17,10 @@
               .span4
                 1
               .span4
+                USD
                 = number_to_currency item.price
               .span4
+                USD
                 = number_to_currency item.price
     %br
 
@@ -31,6 +33,7 @@
                 Total:
               .span4
               .span4
+                USD
                 = number_to_currency @order.total || 0
 
       %fieldset.social-web-info
