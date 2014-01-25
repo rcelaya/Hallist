@@ -39,7 +39,9 @@
 
 
 - content_for :javascript do
-  $('.carousel').carousel();
+  $('.carousel').carousel({
+  interval: 10000
+  });
 
   $container = $('#recent-products-container');
   $(window).load(function(){
