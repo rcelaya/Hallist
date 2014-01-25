@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
     @product = ProductDecorator.decorate(Product.active.find(params[:id]))
     fbgraph_object
     form_info
-    puts @product.json_to_details.to_yaml
+    #puts @product.json_to_details.to_yaml
     respond_to do |format|
       format.html {render :index}
       format.json { render json: @product.json_to_details }
