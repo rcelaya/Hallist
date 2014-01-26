@@ -9,14 +9,14 @@ class Notifier < ActionMailer::Base
   def signup_notification(recipient)
     @account = recipient
 
-    #attachments['an-image.jp'] = File.read("an-image.jpg")
+    #attachments['LogoMailingHallist_head.png'] = File.read("#{Rails.root}/assets/images/LogoMailingHallist_head.png")
     #attachments['terms.pdf'] = {:content => generate_your_pdf_here() }
 
     mail(:to => recipient.email_address_with_name,
-         :subject => "New account information") do |format|
-      format.text { render :text => "Welcome!  #{recipient.name} go to #{customer_activation_url(:a => recipient.perishable_token )}" }
-      format.html { render :text => "<h1>Welcome to HALLIST!</h1> <p>Your account has been created for the following email address: <br> #{recipient.email}</p> <p>Please finish your registration process here: <a href='#{customer_activation_url(:a => recipient.perishable_token )}'>Click to Activate</a></p>  <p>Sincerely, <br> The HALLIST team</p>" }
-    end
+         :subject => "New account information") #do |format|
+      #format.text { render :text => "Welcome!  #{recipient.name} go to #{customer_activation_url(:a => recipient.perishable_token )}" }
+      #format.html { render :text => "<h1>Welcome to HALLIST!</h1> <p>Your account has been created for the following email address: <br> #{recipient.email}</p> <p>Please finish your registration process here: <a href='#{customer_activation_url(:a => recipient.perishable_token )}'>Click to Activate</a></p>  <p>Sincerely, <br> The HALLIST team</p>" }
+    #end
 
   end
 

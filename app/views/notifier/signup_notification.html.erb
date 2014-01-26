@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  <title></title>
+  <%= stylesheet_link_tag 'mail.css', :media => 'screen, projection' %>
+</head>
+<body>
+<div class='static-content-purchased'>
+  <center>
+    <div class='form-contact'>
+      <%= image_tag 'LogoMailingHallist_head.png' %>
+    </div>
+    <div class="center-block">
+      <div class="title">Thanks for subscribing to HALLIST!</div>
+      <p>Your account has been created for the following email address:<br><%= @account.email %></p>
+
+      <div class="activation">Please finish your registration process here:
+        <a href=<%= "#{customer_activation_url(:a => @account.perishable_token)}" %>>Click to Activate</a></div>
+      <div class="regrats">
+        <p>We´re happy to have you as a member of our community. Your email<br> address and interest preferences have been
+          recorded in our database.<br> In the future, you will receive periodic emails specific to your interest.</p>
+
+        <p>HALLIST is the perfect tool to connect artist with followers, fans and<br> collectors in their own space, with
+          your own artistc tastes.</p>
+
+        <p>We know how important privacy is to you. HALLIST will not sell,<br> rent or give your name or e-mail to
+          anyone.</p>
+
+        <p>If you have any questions or comments,<br> feel free to contact us.</p>
+      </div>
+      <%= image_tag 'Hall_Mailing.png' %>
+    </div>
+    <div>
+      Sincerely.
+      <div class="team">The HALLIST team</div>
+    </div>
+  </center>
+</div>
+</body>
+</html>

@@ -47,7 +47,8 @@
                                 'admin/foundation.css',
                                 'admin/app.css',
                                 'admin/ie.css', 'markitup/skins/markitup/style.css','markitup/sets/default/style','colorpicker.css',
-                                'artwork/dashboard.css']
+                                'artwork/dashboard.css',
+                                'mail.css']
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
@@ -82,6 +83,10 @@
   
   ActionMailer::Base.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => 'hallist.com' }
+
+  #Configuration assets for email delivery
+  config.action_controller.asset_host = 'https://hallist.com'
+  config.action_mailer.asset_host = config.action_controller.asset_host
   #config.action_mailer.smtp_settings = {
       #address: Settings.email.server,
       #port: Settings.email.port,
