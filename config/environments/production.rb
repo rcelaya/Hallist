@@ -84,7 +84,7 @@
   ActionMailer::Base.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => 'hallist.com' }
 
-  #Configuration assets for email delivery
+  #Configuration assets for email deliveryy
   config.action_controller.asset_host = 'https://hallist.com'
   config.action_mailer.asset_host = config.action_controller.asset_host
   #config.action_mailer.smtp_settings = {
