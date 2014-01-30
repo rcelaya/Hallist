@@ -73,6 +73,7 @@ class UserDecorator < Draper::Base
 
   def products_for_profile
     products = self.sample_products
+    puts 'produc' + products.to_yaml
     products.blank? ? products : products.to_json.html_safe
   end
 

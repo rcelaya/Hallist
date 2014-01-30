@@ -109,7 +109,7 @@
             %fieldset
               %legend PRINT
               = link_to 'X', artwork_product_variant_path(variant_print.product_id, variant_print), confirm: 'Are you sure you want to delete this print?', method: :delete, class: 'close-print'
-              = hidden_field_tag 'product[variants_attributes][][name]', 'PRINT'
+              = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
               = hidden_field_tag 'product[variants_attributes][][sku]', variant_print.sku
 
               = text_field_tag 'product[variants_attributes][][price]', variant_print.price, class: 'required span10', placeholder: 'PRICE TO THE PUBLIC'

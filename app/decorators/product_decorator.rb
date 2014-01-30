@@ -60,19 +60,27 @@ class ProductDecorator < Draper::Base
   
   def json_to_browse
     like_action = (h.current_user.user && h.current_user.user.likes?(product)) ? 'unlike' : 'like'
-    { id: product.id, 
+    if original_variant && original_variant.primary_property.nil?
+      primary_property = original_variant.primary_property.description
+    end
+
+    if print_variants && print_variants.first && print_variants.first.primary_property.nil?
+      primary_property = print_variants.first.primary_property.description
+    end
+
+    { id: product.id,
       name: product.name, 
       image: small_image, 
       price: price, 
       permalink: product.permalink, 
       brand_name: product.brand.name,
       brand_path: product.artist.profile_path,
-      original_size: original_variant.primary_property.description,
+      original_size: primary_property,
       image_height: small_image_height,
       like_action: like_action,
       variants: {
         original: {
-          id: product.original_variant.id
+          id: product.original_variant.present? ? product.original_variant.id : product.print_variants.first.id
         }
       }
     }
@@ -80,6 +88,7 @@ class ProductDecorator < Draper::Base
   
   def json_to_details
     like_action = (h.current_user.user && h.current_user.user.likes?(product)) ? 'unlike' : 'like'
+    variants = product.original_variant.present? ?  {original: { price: h.number_to_currency(product.original_variant.price),size: product.original_variant.primary_property.description,id: product.original_variant.id,amount_inventory: product.original_variant.inventory.count_on_hand},prints: product.print_variants.collect {|print| {id: print.id,name: print.name,size: print.primary_property.description,price: h.number_to_currency(print.price),amount_inventory: print.inventory.count_on_hand}}} : {prints: product.print_variants.collect {|print| {id: print.id,name: print.name,size: print.primary_property.description,price: h.number_to_currency(print.price),amount_inventory: print.inventory.count_on_hand}}}
     { id: product.id,
       name: product.name, 
       image: detail_image,
@@ -93,17 +102,10 @@ class ProductDecorator < Draper::Base
       brand_path: product.artist.profile_path,
       following: (h.current_user.user && h.current_user.follows?(product.artist.user)),
       description: product.description,
-      height: product.original_variant.size['height'],
-      width: product.original_variant.size['width'],
-      measures: product.original_variant.size['measures'],
-      variants: {
-        original: {
-          price: h.number_to_currency(product.original_variant.price),
-          size: product.original_variant.primary_property.description,
-          id: product.original_variant.id
-        },
-        prints: product.print_variants.collect {|print| {id: print.id, name: print.name, size: print.primary_property.description, price: h.number_to_currency(print.price)}}
-      },
+      height: product.original_variant.present? ? product.original_variant.size['height'] : product.print_variants.first.size['height'],
+      width: product.original_variant.present? ? product.original_variant.size['width'] : product.print_variants.first.size['width'],
+      measures: product.original_variant.present? ? product.original_variant.size['measures'] : product.print_variants.first.size['measures'],
+      variants: variants,
       auction: {
         id: product.auction.try(:id),
         minimun_bid: product.auction.try(:minimum_bid),

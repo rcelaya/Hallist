@@ -31,6 +31,7 @@ class ProfileController < ApplicationController
       @products = @user.products_for_profile
       @collections = @user.sample_collections
       puts 'collections' + @collections.to_s.to_yaml
+      puts 'products' + @products.to_yaml
     else
       raise ActiveRecord::RecordNotFound
     end
