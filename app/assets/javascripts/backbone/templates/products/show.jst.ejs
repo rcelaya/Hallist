@@ -53,10 +53,10 @@
       <%= description %>
       <span class="description-title">
         <% if(!_.isEmpty(variants.original)) { %>
-          SERIE: <%= variants.original.amount_inventory %> ORIGINAL
+          Total Number of Original in The Edition: <%= variants.original.amount_inventory %>
         <%} else {%>
           <% _.each(variants.prints, function(print) { %>
-            SERIE: <%= print.amount_inventory %> PRINTS
+            Total Number of Prints in The Edition: <%= print.amount_inventory %>
           <% }) %>
         <% } %>
       </span>
