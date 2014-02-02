@@ -17,8 +17,10 @@ class Artwork::ProductsController < ApplicationController
     if @product.save
       @product = Product.find_by_name(@product.name)
       @variant_original = Variant.find_by_product_id_and_name(@product.id, "Original")
-      @variant_original.sku = @product.id.to_s+"-Original"
-      @variant_original.save
+      if @variant_original
+        @variant_original.sku = @product.id.to_s+"-Original"
+        @variant_original.save
+      end
       @variant_print = Variant.find_by_product_id_and_name(@product.id, "Print")
       if !@variant_print.nil?
         @variant_print.sku = @product.id.to_s+"-Print"

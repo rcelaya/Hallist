@@ -27,8 +27,17 @@ fieldset {
   margin-top: -35px;
   float: right;
   font-size: 20px;
+  right: 30px;
+  position: relative;
 }
 
+.remove-original {
+  margin-top: -35px;
+  float: right;
+  font-size: 16px;
+  right: 10px;
+  position: relative;
+}
 
 .artwork-auction {
   display: inline-block;
@@ -158,6 +167,10 @@ fieldset {
       }
     }
 
+    &.print-fielset{
+      margin-left: 30px;
+    }
+
   }
 
 
@@ -208,13 +221,19 @@ fieldset {
     }
   }
 
+  .block-print{
+    border-right: dotted 2px #999;
+    height: 350px;
+  }
+
   .border-artwork{
     border-bottom: dotted 2px #999;
     margin-bottom: 30px;
   }
 
-  .original-artwork{
-    border-right: dotted 2px #999;
+  .print-artwork{
+    border-left: dotted 2px #999;
+    margin-left: 15px;
   }
 
   #shipping-address{
@@ -224,7 +243,7 @@ fieldset {
   #add-print-button{
     color: #ffffff;
     font-size:11px;
-    padding:3px 15px;
+    //padding:3px 15px;
     text-decoration:none;
   }
 

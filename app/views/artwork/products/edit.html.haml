@@ -75,7 +75,7 @@
 
         .span12.border-artwork
 
-        .span5.original-artwork
+        .span6
           %fieldset#original-artwork{rel: 'popover', 'data-content' => 'Tell us the information of the original artwork.', 'data-original-title' => 'Original Artwork', 'data-placement' => 'bottom', 'data-trigger' => 'hover'}
             %legend ORIGINAL ARTWORK
             = hidden_field_tag 'product[variants_attributes][][name]', 'Original'
@@ -83,34 +83,37 @@
             = hidden_field_tag 'product[variants_attributes][][product_id]', @product.id
             = hidden_field_tag 'product[variants_attributes][][id]', @product.original_variant.id if @product.original_variant.present?
 
-            = text_field_tag 'product[variants_attributes][][price]', @product.original_variant.try(:price), class: 'span10', placeholder: 'PRICE TO THE PUBLIC'
+            = text_field_tag 'product[variants_attributes][][price]', @product.original_variant.try(:price), class: 'required span10', placeholder: 'PRICE TO THE PUBLIC'
 
-            = text_field_tag 'product[variants_attributes][][cost]', @product.original_variant.try(:cost), disabled: :disabled, class: 'span10', placeholder: 'YOUR PROFIT'
+            = text_field_tag 'product[variants_attributes][][cost]', @product.original_variant.try(:cost), disabled: :disabled, class: 'span10', placeholder: '* YOUR PROFIT'
 
-            = text_field_tag 'product[variants_attributes][][size][width]', (@product.original_variant.size['width'] if @product.original_variant) , class: 'span5', placeholder: 'Width'
-            = text_field_tag 'product[variants_attributes][][size][height]', (@product.original_variant.size['height'] if @product.original_variant), class: 'span5', placeholder: 'Height'
+            = text_field_tag 'product[variants_attributes][][size][width]', (@product.original_variant.size['width'] if @product.original_variant) , class: 'span5', placeholder: 'WIDTH'
+            = text_field_tag 'product[variants_attributes][][size][height]', (@product.original_variant.size['height'] if @product.original_variant), class: 'span5', placeholder: 'HEIGHT'
             = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']], (@product.original_variant.size['measures'] if @product.original_variant)), prompt: 'SELECT A MEASURE', class: 'span9'
+            = hidden_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', 1
+
 
             = label_tag '* This is your estimated profit', nil, class: 'profit'
 
             //= label_tag 'artwork auction', nil, class: 'artwork-auction span5'
             //= check_box_tag 'artwork_auction', '1', @product.auction.present?, class: 'span4'
-            %br
 
             //.auction-config
             //= text_field_tag 'product[auction_attributes][minimum_bid]', @product.auction.try(:minimum_bid), placeholder: 'MINIMUM BID AMOUNT', class: 'span10'
             //= text_field_tag 'product[auction_attributes][deadline]', @product.auction.try(:deadline), placeholder: 'WHAT TIME THE AUCTION ENDS?', class: 'span10'
 
             %br
-            = link_to image_tag('boton1.jpg'), '', id: 'add-print-button'
+          = link_to image_tag('AddPRINT.png'), '', id: 'add-print-button'
 
-        .span6#prints-container
+        .span5#prints-container.print-artwork
           - @product.print_variants.each do |variant_print|
-            %fieldset
+            %fieldset.print-fielset
               %legend PRINT
               = link_to 'X', artwork_product_variant_path(variant_print.product_id, variant_print), confirm: 'Are you sure you want to delete this print?', method: :delete, class: 'close-print'
               = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
               = hidden_field_tag 'product[variants_attributes][][sku]', variant_print.sku
+              = hidden_field_tag 'product[variants_attributes][][product_id]', @product.id
+              = hidden_field_tag 'product[variants_attributes][][id]', variant_print.id
 
               = text_field_tag 'product[variants_attributes][][price]', variant_print.price, class: 'required span10', placeholder: 'PRICE TO THE PUBLIC'
 
@@ -122,32 +125,29 @@
 
               = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', variant_print.inventory.count_on_hand, class: 'required span9', placeholder: 'PRINTS AVAILABLE TO SELL'
 
-              = hidden_field_tag 'product[variants_attributes][][product_id]', variant_print.product_id
 
         .span12.border-artwork
 
         .span5
-          = form.submit 'UPDATE'
+          = form.submit '', :id => 'update-artwork'
 
-      .span#print-template.hide
-        %fieldset
-          .span12
-            %legend PRINT
-            = link_to 'X', '', class: 'close-print'
-            = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
-            = hidden_field_tag 'product[variants_attributes][][sku]', "#{@product.id}-Print"
+      .span5#print-template.hide.print-artwork
+        %fieldset.print-fielset
+          %legend PRINT
+          = link_to 'X', '', class: 'close-print'
+          = hidden_field_tag 'product[variants_attributes][][name]', 'Print'
+          = hidden_field_tag 'product[variants_attributes][][sku]', "#{@product.id}-Print"
+          = hidden_field_tag 'product[variants_attributes][][product_id]', @product.id
 
-            = text_field_tag 'product[variants_attributes][][price]','', class: 'required span10', placeholder: 'Price'
+          = text_field_tag 'product[variants_attributes][][price]','', class: 'required span10', placeholder: 'PRICE TO THE PUBLIC'
 
-            = text_field_tag 'product[variants_attributes][][cost]', '', disabled: :disabled, class: 'span10', placeholder: "Your profit"
+          = text_field_tag 'product[variants_attributes][][cost]', '', disabled: :disabled, class: 'span10', placeholder: "YOUR PROFIT"
 
-            = text_field_tag 'product[variants_attributes][][size][width]', '', class: 'span5', placeholder: 'Width'
-            = text_field_tag 'product[variants_attributes][][size][height]', '', class: 'span5', placeholder: 'Height'
-            = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']]), prompt: 'Select a measure', class: 'span9'
+          = text_field_tag 'product[variants_attributes][][size][width]', '', class: 'span5', placeholder: 'WIDTH'
+          = text_field_tag 'product[variants_attributes][][size][height]', '', class: 'span5', placeholder: 'HEIGHT'
+          = select_tag 'product[variants_attributes][][size][measures]', options_for_select([['Cms.','cms'],['Inch.','inch']]), prompt: 'SELECT A MEASURE', class: 'span9'
 
-            = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', '', class: 'required span9', placeholder: 'Prints available to sell'
-
-            = hidden_field_tag 'product[variants_attributes][][product_id]', @product.id
+          = text_field_tag 'product[variants_attributes][][inventory_attributes][count_on_hand]', '', class: 'required span9', placeholder: 'PRINTS AVAILABLE TO SELL'
           %br
 
 - content_for :head do
@@ -197,7 +197,20 @@
 
   $('.close-print').live('click',function(event){
   event.preventDefault();
-  $($(this).parent().parent()).remove();
+  $($(this).parent()).remove();
+  });
+
+  $('.remove-original').live('click',function(event){
+  event.preventDefault();
+  if($('.remove-original').text() != 'Active'){
+  $($(this).parent())[0].disabled = true;
+  $('.remove-original').text('Active');
+  $('#prints-container').append($('#print-template').html()).show(500);
+  validateVariant();
+  }else{
+  $($(this).parent())[0].disabled = false;
+  $('.remove-original').text('Not Active');
+  }
   });
 
 
@@ -219,7 +232,6 @@
   $('.add-image').click(function() {
   buttonAddImage = $(this);
   fileInput =  $('<input/>').attr('type','file').attr('name','product[images_attributes][][photo]').addClass('hide');
-
   fileInput.change(function() {
   var iSize = (this.files[0].size / 1024);
   if (Math.round((iSize / 1024) * 100) / 100 < 3){

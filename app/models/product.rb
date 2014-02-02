@@ -305,8 +305,6 @@ class Product < ActiveRecord::Base
   end
 
   def create_original_variant(variant_attributes)
-    puts 'variants' + variant_attributes.to_yaml
-    puts 'idd' + id.to_yaml
     property_size = Property.find_by_identifing_name('Size')
     variant = variants.create(name: 'Original', sku: "#{id}-Original", brand_id: brand.id, price: variant_attributes['price'], cost: variant_attributes['cost'])
     variant.variant_properties.create(property_id: property_size.id, description: "#{variant_attributes['size']['width']} x #{variant_attributes['size']['height']} #{variant_attributes['size']['measures']}")
