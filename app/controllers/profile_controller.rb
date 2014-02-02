@@ -15,10 +15,10 @@ class ProfileController < ApplicationController
     end
 
     @user_profile = if params[:username].present?
-      puts 'entro al ifffff'
+      #puts 'entro al ifffff'
       Profile.find_by_username params[:username]
       elsif params[:id].present?
-      puts 'entro al elseeeeeeifffff'
+      #puts 'entro al elseeeeeeifffff'
       User.find(params[:id]).profile
     else
     params[:artwork_type] = 'collections'
@@ -26,12 +26,12 @@ class ProfileController < ApplicationController
     end
 
     if @user_profile
-      puts 'entro al user_profile'
+      #puts 'entro al user_profile'
       @user = UserDecorator.decorate(@user_profile.user)
       @products = @user.products_for_profile
       @collections = @user.sample_collections
-      puts 'collections' + @collections.to_s.to_yaml
-      puts 'products' + @products.to_yaml
+      #puts 'collections' + @collections.to_s.to_yaml
+      #puts 'products' + @products.to_yaml
     else
       raise ActiveRecord::RecordNotFound
     end

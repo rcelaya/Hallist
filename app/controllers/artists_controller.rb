@@ -3,7 +3,7 @@ class ArtistsController < ApplicationController
   def index
     set_filters
     search = User.filters(params[:filters] || {}, params[:page])
-    puts search.to_yaml + 'search'
+    #puts search.to_yaml + 'search'
     if search.hits.size == 1
       redirect_to UserDecorator.decorate(search.results.first).profile_path
     else
