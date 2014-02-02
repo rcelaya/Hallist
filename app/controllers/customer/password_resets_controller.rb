@@ -32,7 +32,7 @@ class Customer::PasswordResetsController < ApplicationController
       if @user.save
         #@user.activate!
         flash[:notice] = 'Your password has been reset'
-        redirect_to login_url
+        redirect_to root_url
       else
         render :action => :edit
       end

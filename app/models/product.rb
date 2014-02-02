@@ -335,17 +335,26 @@ class Product < ActiveRecord::Base
     def create_content
       require 'redcarpet/compat'
 
-      description =  self.description.gsub("\r", "<br>")
-      description =  description.gsub("\n", " ")
+      description = self.description.gsub("\r", "<br>")
+      description = description.gsub("\n", " ")
+      description = description.gsub('"', "'")
+      description = description.gsub("\"", "'")
+
+      description_markup =  self.description_markup.gsub("\r", "<br>")
+      description_markup =  description_markup.gsub("\n", " ")
+      description_markup = description_markup.gsub('"', "'")
+      description_markup = description_markup.gsub("\"", "'")
 
       if self.description_markup.present?
         #Checarlo correctamente que funcione el BlueCloth
         #self.description = BlueCloth.new(self.description_markup).to_html
         self.description = description
-      elsif description.present?
+        #self.description_markup = description
+      elsif self.description.present?
         #Checarlo correctamente que funcione el BlueCloth
         #self.description_markup = BlueCloth.new(self.description).to_html
-        self.description_markup = Markdown.new(description).to_html
+        #self.description_markup = description
+        self.description = description
       end
     end
 
