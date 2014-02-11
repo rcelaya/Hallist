@@ -47,18 +47,23 @@
             = @total
           %p
             DATE:
-            12/12/2013
+            = Time.now.strftime("%d/%m/%Y")
           %p
-            STATUS: PAID
+            STATUS:
+            -if @print_oxxo.present?
+              Pending Payment
+            -else
+              Paid
+
         #info_purchased
           %center
-            -if @barcode_url.present?
-              = image_tag(@barcode_url, :class => 'oxxo-barcode')
+            -if @print_oxxo.present?
+              = image_tag(@print_oxxo[2], :class => 'oxxo-barcode')
               .row-fluid
-                = @barcode
+                = @print_oxxo[1]
                 %br
                 EXP.
-                = @expiry_date
+                = @print_oxxo[0]
     %center
       = image_tag 'halldown.png', :class => 'halldown'
       %br

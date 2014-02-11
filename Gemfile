@@ -68,7 +68,7 @@ gem 'dynamic_form', '1.1.4'
 
 gem 'ffaker', '1.15.0'
 
-gem 'conekta', :git => 'git://github.com/conekta/conekta-ruby.git'
+gem 'conekta', '0.3.0'
 
 gem 'redcarpet'
 

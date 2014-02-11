@@ -105,7 +105,7 @@
                   = hidden_field_tag(:total, @order.total)
                   - products = []
                   - @order.order_items.each do |item, index|
-                    - products.push("#{item.variant.product.id}-#{item.variant.product.name}-#{item.price}")
+                    - products.push("#{item.variant.product.id}-#{item.variant.product.name}")
                   = hidden_field_tag(:products, products)
                   %br
 
@@ -118,7 +118,7 @@
                   = hidden_field_tag(:total, @order.total)
                   - products = []
                   - @order.order_items.each do |item, index|
-                    - products.push("#{item.variant.product.id}-#{item.variant.product.name}-#{item.price}")
+                    - products.push("#{item.variant.product.id}-#{item.variant.product.name}")
                   = hidden_field_tag(:products, products)
                   %br
                   %br

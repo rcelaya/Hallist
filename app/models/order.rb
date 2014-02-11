@@ -514,7 +514,18 @@ class Order < ActiveRecord::Base
       save!
     end
   end
-  
+
+  def create_conekta_invoice(charge, charge_amount)
+    transaction do
+      invoice_statement = Invoice.generate(self.id, charge_amount, 0.0)
+      invoice_statement.save
+      #invoice_statement.paypal_payment(response)
+      invoices.push(invoice_statement)
+      order_complete!
+      save!
+    end
+  end
+
   
   def create_2checkout_invoice(response, charge_amount)
     transaction do

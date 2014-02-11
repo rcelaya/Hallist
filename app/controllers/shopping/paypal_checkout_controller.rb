@@ -1,5 +1,4 @@
 class Shopping::PaypalCheckoutController < Shopping::BaseController
-  puts 'entraaa paypalll'
   include Shopping::PaypalCheckoutHelper
 
   def create

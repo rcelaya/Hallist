@@ -1,0 +1,78 @@
+body{
+  background-color: #e7e8ea;
+}
+
+.title{
+  font-size: 15pt;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+  font-family: 'Gotham HTF';
+}
+
+.details{
+  font-family: 'Helvetica Neue LT Std';
+  font-size: 10pt;
+}
+
+.l2{
+  position: relative;
+  top: 25px;
+  text-align: right;
+  width: 95% !important;
+}
+
+.l1{
+  width: 95% !important;
+  bottom: 25px;
+  text-align: left;
+  position: relative;
+}
+
+.purchase{
+  margin-top: 1%;
+  text-align: left;
+  font-weight:bold;
+  font-size: 11pt;
+  margin-bottom: 1%;
+  width: 80% !important;
+  color: black;
+}
+
+.purchase-detail{
+  margin-bottom: 4%;
+  font-family: 'Gotham HTF';
+  font-weight: bold;
+  font-size: 11pt;
+}
+
+.static-content-purchased {
+  width: 90%;
+  margin: 3% auto;
+  padding-bottom: 3%;
+  background-color: #fff;
+  color: #6E6B6B;
+  font-family: 'Helvetica Neue LT Std 55 Roman';
+  font-size: 10pt;
+}
+
+.form-contact {
+  display: inline-block;
+  margin-top: 30px;
+  color: #6E6C6C;
+  font-size: 17px;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  font-family: 'Helvetica Neue LT Std 55 Roman';
+  font-size: 10pt;
+}
+
+.oxxo-barcode {
+  width: 226px;
+  height: 76px;
+}

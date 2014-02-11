@@ -48,7 +48,8 @@
                                 'admin/app.css',
                                 'admin/ie.css', 'markitup/skins/markitup/style.css','markitup/sets/default/style','colorpicker.css',
                                 'artwork/dashboard.css',
-                                'mail.css']
+                                'mail.css',
+                                'pay.css']
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
