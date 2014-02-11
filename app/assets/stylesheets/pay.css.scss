@@ -11,7 +11,7 @@ body{
 }
 
 .details{
-  font-family: 'Helvetica Neue LT Std';
+  font-family: 'Helvetica Neue LT Std 55 Roman';
   font-size: 10pt;
 }
 
@@ -47,9 +47,8 @@ body{
 }
 
 .static-content-purchased {
-  width: 90%;
+  width: 80%;
   margin: 3% auto;
-  padding-bottom: 3%;
   background-color: #fff;
   color: #6E6B6B;
   font-family: 'Helvetica Neue LT Std 55 Roman';
@@ -75,4 +74,11 @@ body{
 .oxxo-barcode {
   width: 226px;
   height: 76px;
+}
+
+.copyright{
+  top: 30px;
+  position: relative;
+  font-family: 'Helvetica Neue LT Std 55 Roman';
+  font-size: 9pt;
 }
