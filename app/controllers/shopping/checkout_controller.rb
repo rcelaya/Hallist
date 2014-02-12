@@ -9,7 +9,7 @@ class Shopping::CheckoutController < Shopping::BaseController
   before_filter :user_exists?
   
   def show
-    
+
     @order = find_or_create_order
     if @order.bill_address.blank? || @order.bill_address.first_name.blank?
       if current_user.default_billing_address

@@ -186,6 +186,12 @@ input.fail {
       description-product {
         font-size: 14px;
       }
+      .divisas {
+        left: 45%;
+        position: relative;
+        top: 3px;
+      }
+
     }
 
     &.social-web-info {
@@ -351,6 +357,12 @@ input.fail {
   color: #6E6B6B;
   font-family: 'Gotham';
 
+  .print_pay{
+    right: 13.2%;
+    position: relative;
+    bottom: 17px;
+  }
+
   .form-contact {
     display: inline-block;
     margin-top: 60px;
@@ -360,11 +372,26 @@ input.fail {
   }
 
   .oxxo-barcode {
-    width: 226px;
-    height: 76px;
+    width: 276px;
+    height: 96px;
   }
 }
 
 .back_to_hallist {
   margin-top: 10%;
+}
+
+@media print{
+  div.header-info, div#filter-header-row, header, a.back_to_hallist, footer, a.print_pay{
+    display: none;
+  }
+
+  #purchased {
+    background-color: #e7e8ea;
+  }
+
+  #info_item_purchased, #info_user_purchased, #info_purchased{
+    color: #000 !important;
+    font-weight: bold !important;
+  }
 }

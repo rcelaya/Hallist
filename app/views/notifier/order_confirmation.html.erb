@@ -31,7 +31,7 @@
           <p>MAIL: <%= @user.email %></p>
         </div>
         <div>
-          <p>TOTAL AMOUNT: USD <%= number_to_currency @order.total %></p>
+          <p>TOTAL AMOUNT: <%= number_to_currency @total %> <%= @currency %></p>
 
           <p>DATE: <%= Time.now.strftime("%d/%m/%Y") %></p>
 

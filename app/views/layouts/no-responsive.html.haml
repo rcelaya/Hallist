@@ -5,9 +5,7 @@
       Hallist
 
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    //%link{:rel=>"stylesheet", :type=>"text/css", :media=>"print", :href=>"../../assets/checkout.css.scss"}
-    //%link{:rel=>"stylesheet", :type=>"text/css", :media=>"print", :href=>"../../assets/base.css.scss"}
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'application', :media => 'all'
     = csrf_meta_tag
     = global_meta_tags(@fbgraph_object) if @fbgraph_object
     = yield :head

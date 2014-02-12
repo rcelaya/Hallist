@@ -28,12 +28,14 @@ class Notifier < ActionMailer::Base
   end
 
 
-  def order_confirmation(order, print_oxxo, reference_id, item_description)
+  def order_confirmation(order, print_oxxo, reference_id, item_description, total, currency)
     @order  = order
     @user   = order.user
     @print_oxxo = print_oxxo
     @reference_id = reference_id
     @item_description = item_description
+    @total = total
+    @currency = currency
     mail(:to => order.email,
          :subject => "Order Confirmation")
   end

@@ -1,20 +1,24 @@
-/%script{type: 'text/javascript'}
-/ printDivCSS = new String ('<link href="../../assets/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../../assets/checkout.css" rel="stylesheet" type="text/css">')
-/ function printDiv() {
-/ console.log($("#purchased")[0]);
-/ document.body.innerHTML=printDivCSS + $("#purchased")[0].innerHTML;
-/ window.focus();
-/ window.print();
-/ }
+%script{type: 'text/javascript'}
+  printDivCSS = new String ('<link href="../../assets/application.css" rel="stylesheet" media="all" type="text/css"><link href="../../assets/checkout.css" rel="stylesheet" media="all" type="text/css">')
+  function printDiv() {
+  console.log($("#purchased")[0]);
+  document.body.innerHTML=printDivCSS + $("#purchased")[0].innerHTML;
+  window.focus();
+  window.print();
+  }
+
 .header-info
   %center
-    %h1 YOUR PURCHASE IS COMPLETE
+    -if @print_oxxo.present?
+      %h1 YOUR PURCHASE IS PENDING PAYMENT
+    -else
+      %h1 YOUR PURCHASE IS COMPLETE
 
 .static-content-purchased
   %center
     .form-contact
       TRANSACTION DETAILS
-  //=link_to("Print this Page", "", :onclick =>"printDiv();", :target => "_blank")
+  =link_to_function("PRINT THIS PAGE", "javascript:print()", class: 'pull-right print_pay')
   .container#purchased
     .row-fluid
       = image_tag 'hallup.png', :class => 'hallup'
@@ -43,8 +47,9 @@
           %br
         #info_purchased
           %p
-            TOTAL AMOUNT: US $
-            = @total
+            TOTAL AMOUNT:
+            = number_to_currency @total
+            = @currency
           %p
             DATE:
             = Time.now.strftime("%d/%m/%Y")

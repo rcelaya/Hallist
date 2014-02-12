@@ -32,9 +32,10 @@
               .charge-title.span4
                 Total:
               .span4
-              .span4
-                USD
+                = select_tag("select_divisa", options_for_select(['USD', 'MXN']), { :class => 'span6 divisas' })
+              .span4#total_item
                 = number_to_currency @order.total || 0
+
 
       %fieldset.social-web-info
         .row-fluid#shipping-address
@@ -103,6 +104,7 @@
                   = text_field_tag(:zip, '', :placeholder => 'ZIP*', :class => 'span4')
 
                   = hidden_field_tag(:total, @order.total)
+                  = hidden_field_tag(:currency, 'USD')
                   - products = []
                   - @order.order_items.each do |item, index|
                     - products.push("#{item.variant.product.id}-#{item.variant.product.name}")
@@ -116,6 +118,7 @@
 
                 .web-info#oxxo_payment
                   = hidden_field_tag(:total, @order.total)
+                  = hidden_field_tag(:currency, 'USD')
                   - products = []
                   - @order.order_items.each do |item, index|
                     - products.push("#{item.variant.product.id}-#{item.variant.product.name}")
@@ -196,3 +199,20 @@
   }
   }
 
+  $('#select_divisa').live('change',function(){
+  var value = $(this).val(), rate, exchange;
+  var url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USD"+value+"%22)&format=json&env=store://datatables.org/alltableswithkeys";
+  $.getJSON(url + "&callback=?", null, function(response) {
+  rate = response.query.results.rate.Rate;
+  exchange = formatCurrency(rate * #{@order.total});
+  $('#total_item').text('$'+exchange);
+  $('input:hidden[name="total"]').val(exchange);
+  $('input:hidden[name="currency"]').val(value);
+  });
+
+  function formatCurrency(num) {
+  num = isNaN(num) || num === '' || num === null ? 0.00 : num;
+  return parseFloat(num).toFixed(2);
+  }
+
+  });
