@@ -201,7 +201,7 @@
 
   $('#select_divisa').live('change',function(){
   var value = $(this).val(), rate, exchange;
-  var url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USD"+value+"%22)&format=json&env=store://datatables.org/alltableswithkeys";
+  var url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USD"+value+"%22)&format=json&env=store://datatables.org/alltableswithkeys";
   $.getJSON(url + "&callback=?", null, function(response) {
   rate = response.query.results.rate.Rate;
   exchange = formatCurrency(rate * #{@order.total});
