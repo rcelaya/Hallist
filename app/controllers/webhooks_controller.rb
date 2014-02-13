@@ -9,10 +9,10 @@ class WebhooksController < ApplicationController
     request.body.rewind  # in case someone already read it
     event_json = JSON.parse(request.body.read)
     puts event_json.as_json.to_yaml + 'webhokss'
-    data = event_json.data.object
+    data = event_json['data']['object']
 
-    @order.number = data.id
-    @order.user.name = data.id
+    @order.number = data.id.to_i
+    @order.user.name = data.id.to_i
     @order.user.mail = data.description
 
     if data.status == 'paid'
