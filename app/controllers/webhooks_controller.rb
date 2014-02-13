@@ -10,7 +10,8 @@ class WebhooksController < ApplicationController
     event_json = JSON.parse(request.body.read)
     puts event_json.as_json.to_yaml + 'webhokss'
 
-    @order =  Order.find_by_number(event_json['data']['object']['reference_id'].to_i).to_yaml + 'encontre la orden'
+    puts event_json['data']['object']['reference_id'].to_yaml + ' refenrence_id'
+    @order =  Order.find_by_number(event_json['data']['object']['reference_id']).to_yaml + 'encontre la orden'
     puts @order.to_yaml
     if data['status'] == 'paid'
       Notifier.order_confirmation(@order, nil, event_json['data']['object']['reference_id'].to_i, event_json['data']['object']['description'], event_json['data']['object']['amount'].to_i, event_json['data']['object']['currency']).deliver
