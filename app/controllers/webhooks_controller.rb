@@ -11,10 +11,20 @@ class WebhooksController < ApplicationController
     puts event_json.as_json.to_yaml + 'webhokss'
 
     puts event_json['data']['object']['reference_id'].to_yaml + ' refenrence_id'
-    @order =  Order.find_by_number(event_json['data']['object']['reference_id']).to_yaml + 'encontre la orden'
+    reference_id = event_json['data']['object']['reference_id'].to_i
+    description = event_json['data']['object']['description']
+    amount = event_json['data']['object']['amount'].to_i
+    currency = event_json['data']['object']['currency']
+
+    puts reference_id.to_yaml
+    puts description.to_yaml
+    puts amount.to_yaml
+    puts currency.to_yaml
+
+    @order =  Order.find_by_number(reference_id).to_yaml + 'encontre la orden'
     puts @order.to_yaml
     if data['status'] == 'paid'
-      Notifier.order_confirmation(@order, nil, event_json['data']['object']['reference_id'].to_i, event_json['data']['object']['description'], event_json['data']['object']['amount'].to_i, event_json['data']['object']['currency']).deliver
+      Notifier.order_confirmation(@order, nil, reference_id, description, amount, currency).deliver
       render "shopping/checkout/pay_credit"
 
     end
