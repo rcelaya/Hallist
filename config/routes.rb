@@ -252,4 +252,5 @@ Hadean::Application.routes.draw do
   match '/profile/:profile_id/collections', :to => 'profiles/collections#index', :as => 'profile_collections'
   match '/profile/:id', :to => 'profile#show', :as => 'profile'
   match '/:username', :to => 'profile#show', :as => 'personal_urls'
+  post '/webhooks/receptor'
 end

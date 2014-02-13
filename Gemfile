@@ -72,6 +72,9 @@ gem 'conekta', '0.3.0'
 
 gem 'redcarpet'
 
+gem 'json'
+gem 'yajl-ruby'
+
 group :development do
   gem 'sqlite3'
   gem "autotest-rails-pure" , '4.1.2'
