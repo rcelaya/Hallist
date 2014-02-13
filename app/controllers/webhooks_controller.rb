@@ -6,16 +6,20 @@ class WebhooksController < ApplicationController
   require 'yajl/json_gem'
 
   def receptor
-    # Recibe el objeto de la notificación en JSON
-    #request.body.rewind
-    #data_json = JSON.parse(request.body.read)
     request.body.rewind  # in case someone already read it
-    data = JSON.parse(request.body.read)
+    event_json = JSON.parse(request.body.read)
+    puts event_json.as_json.to_yaml + 'webhokss'
+    data = event_json.data.object
 
-    puts data.as_json.to_yaml + 'webhokss'
-    # Haz algo con data_json, por ejemplo:
-    # @payment = Payment.find_by_id(data_json['data']['object']['id'].to_i)
-    # send_email_to_customer(@payment.user)
+    @order.number = data.id
+    @order.user.name = data.id
+    @order.user.mail = data.description
+
+    if data.status == 'paid'
+      Notifier.order_confirmation(@order, nil, data.id, data.description, data.amount, data.currency).deliver
+      render "shopping/checkout/pay_credit"
+
+    end
     msg = { :status => "200"}
     render json: msg
   end
