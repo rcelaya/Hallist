@@ -9,14 +9,11 @@ class WebhooksController < ApplicationController
     request.body.rewind  # in case someone already read it
     event_json = JSON.parse(request.body.read)
     puts event_json.as_json.to_yaml + 'webhokss'
-    data = event_json['data']['object']
 
-    @order.number = data.id.to_i
-    @order.user.name = data.id.to_i
-    @order.user.mail = data.description
-
-    if data.status == 'paid'
-      Notifier.order_confirmation(@order, nil, data.id, data.description, data.amount, data.currency).deliver
+    @order =  Order.find_by_number(event_json['data']['object']['reference_id'].to_i).to_yaml + 'encontre la orden'
+    puts @order.to_yaml
+    if data['status'] == 'paid'
+      Notifier.order_confirmation(@order, nil, event_json['data']['object']['reference_id'].to_i, event_json['data']['object']['description'], event_json['data']['object']['amount'].to_i, event_json['data']['object']['currency']).deliver
       render "shopping/checkout/pay_credit"
 
     end
