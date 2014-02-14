@@ -43,7 +43,6 @@ class Notifier < ActionMailer::Base
   def order_complete(order, reference_id, item_description, total, currency)
     @order  = order
     @user   = order.user
-    @print_oxxo = print_oxxo
     @reference_id = reference_id
     @item_description = item_description
     @total = total
