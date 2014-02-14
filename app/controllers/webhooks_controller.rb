@@ -11,7 +11,7 @@ class WebhooksController < ApplicationController
     puts event_json.as_json.to_yaml + 'webhokss'
 
     puts event_json['data']['object']['reference_id'].to_yaml + ' refenrence_id'
-    reference_id = event_json['data']['object']['reference_id'].to_i
+    reference_id = event_json['data']['object']['reference_id']
     description = event_json['data']['object']['description']
     amount = event_json['data']['object']['amount'].to_i
     currency = event_json['data']['object']['currency']
