@@ -38,12 +38,6 @@
           <p>STATUS: Pending Payment </p>
         </div>
       </div>
-      <% if !@print_oxxo.nil? %>
-          <div>
-            <%= image_tag @print_oxxo[2], :class => 'oxxo-barcode' %>
-            <p><%= @print_oxxo[1] %><br>EXP. <%= @print_oxxo[0] %></p>
-          </div>
-      <% end %>
       <%= image_tag 'purchase_logopequeno.png' %>
       <div>
         Don`t forget to keep sharing your HALLS
