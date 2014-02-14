@@ -107,7 +107,7 @@
                   = hidden_field_tag(:currency, 'USD')
                   - products = []
                   - @order.order_items.each do |item, index|
-                    - products.push("#{item.variant.product.id}-#{item.variant.product.name}")
+                    - products.push("#{item.variant.product.id}-#{item.variant.product.name} ,")
                   = hidden_field_tag(:products, products)
                   %br
 

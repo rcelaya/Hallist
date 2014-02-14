@@ -10,7 +10,7 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
     @total = params[:total].to_f
     @currency = params[:currency]
     @order = find_or_create_order
-    @products = @order.id.to_s + ' - ' + @order.number.to_s + '  [' + params[:products] + ']'
+    @products = params[:products]
     puts 'ordeennnn completaa' + @order.to_yaml
     Conekta.api_key= "key_zsg3aghr2UzptsuF"
 
