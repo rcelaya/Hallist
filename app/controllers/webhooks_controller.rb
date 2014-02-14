@@ -10,11 +10,12 @@ class WebhooksController < ApplicationController
     request.body.rewind  # in case someone already read it
     event_json = JSON.parse(request.body.read)
 
+    item = event_json['data']['object']['reference_id']
     reference_id = event_json['data']['object']['id']
     description = event_json['data']['object']['description']
     amount = event_json['data']['object']['amount'].to_i
     currency = event_json['data']['object']['currency']
-    @order =  Order.find_by_number(reference_id)
+    @order =  Order.find_by_number(item)
 
     if event_json['data']['object']['status'] == 'paid'
       @order.create_conekta_invoice(nil, @order.credited_total)
