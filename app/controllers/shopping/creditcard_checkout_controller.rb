@@ -91,7 +91,7 @@ class Shopping::CreditcardCheckoutController < Shopping::BaseController
           invoice = @order.create_conekta_invoice(charge, @order.credited_total)
           @order.remove_user_store_credits
           session_cart.mark_items_purchased(@order)
-          Notifier.order_confirmation(@order, nil, @reference_id, @item_description, @total, @currency).deliver
+          Notifier.order_complete(@order, @reference_id, @item_description, @total, @currency).deliver
           render "shopping/checkout/pay_credit"
           flash[:notice] = "Purchase was Successful."
 

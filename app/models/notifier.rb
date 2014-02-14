@@ -36,10 +36,23 @@ class Notifier < ActionMailer::Base
     @item_description = item_description
     @total = total
     @currency = currency
+    mail(:to => order.email,
+         :subject => "Order Confirmation")
+  end
+
+  def order_complete(order, reference_id, item_description, total, currency)
+    @order  = order
+    @user   = order.user
+    @print_oxxo = print_oxxo
+    @reference_id = reference_id
+    @item_description = item_description
+    @total = total
+    @currency = currency
 
     mail(:to => order.email,
-         :bcc => "Purchase Complete <info@hallist.com>",
-         :subject => "Order Confirmation")
+         :cc => "HALLIST <info@hallist.com>",
+         :subject => 'Purchase Complete!')
+
   end
 
 end
