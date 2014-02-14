@@ -23,10 +23,11 @@ class WebhooksController < ApplicationController
 
     @order =  Order.find_by_number(reference_id)
     puts @order.to_yaml + 'encontre la orden'
-    if data['status'] == 'paid'
+    if event_json['data']['object']['status'] == 'paid'
       @order.create_conekta_invoice(nil, @order.credited_total)
       Notifier.order_confirmation(@order, nil, reference_id, description, amount, currency).deliver
     end
+    Notifier.order_confirmation(@order, nil, reference_id, description, amount, currency).deliver
     msg = { :status => "200"}
     render json: msg
   end
