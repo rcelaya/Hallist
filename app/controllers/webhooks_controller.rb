@@ -21,12 +21,11 @@ class WebhooksController < ApplicationController
     puts amount.to_yaml
     puts currency.to_yaml
 
-    @order =  Order.find_by_number(reference_id).to_yaml + 'encontre la orden'
-    puts @order.to_yaml
+    @order =  Order.find_by_number(reference_id)
+    puts @order.to_yaml + 'encontre la orden'
     if data['status'] == 'paid'
+      @order.create_conekta_invoice(nil, @order.credited_total)
       Notifier.order_confirmation(@order, nil, reference_id, description, amount, currency).deliver
-      render "shopping/checkout/pay_credit"
-
     end
     msg = { :status => "200"}
     render json: msg

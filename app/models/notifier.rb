@@ -37,7 +37,7 @@ class Notifier < ActionMailer::Base
     @total = total
     @currency = currency
     mail(:to => order.email,
-         :reply_to => 'support@hallist.com',
+         :reply_to => 'info@hallist.com',
          :subject => "Order Confirmation")
   end
 
