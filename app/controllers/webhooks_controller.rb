@@ -12,7 +12,6 @@ class WebhooksController < ApplicationController
     reference_id = event_json['data']['object']['reference_id']
     description = event_json['data']['object']['description']
     amount = event_json['data']['object']['amount'].to_i
-    amount = number_to_currency amount
     currency = event_json['data']['object']['currency']
     @order =  Order.find_by_number(reference_id)
 
