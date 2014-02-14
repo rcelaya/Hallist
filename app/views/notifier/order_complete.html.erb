@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  <title></title>
+  <%= stylesheet_link_tag 'pay.css', :media => 'all' %>
+</head>
+<body>
+<div class="static-content-purchased">
+  <center>
+    <div class="form-contact">
+      <%= image_tag 'purchase_hallistlogo.png' %>
+    </div>
+    <div class="center-block">
+      <div class="l2 container">
+        <%= image_tag 'purchase_l2.png' %>
+      </div>
+      <div class="title">Your purchase is Complete!</div>
+      <div class="details">TRANSACTION DETAILS</div>
+      <div class="purchase">
+        <div class="purchase-detail">
+          <p>ITEM: <%= @order.number %></p>
+
+          <p>DESCRIPTION: <%= @item_description %></p>
+
+          <p>TRANSACTION ID: <%= @reference_id %></p>
+        </div>
+        <div class="purchase-detail">
+          <p>NAME: <%= @user.name %></p>
+
+          <p>MAIL: <%= @user.email %></p>
+        </div>
+        <div>
+          <p>TOTAL AMOUNT: <%= number_to_currency @total %> <%= @currency %></p>
+
+          <p>DATE: <%= Time.now.strftime("%d/%m/%Y") %></p>
+
+          <p>STATUS: Pending Payment </p>
+        </div>
+      </div>
+      <% if !@print_oxxo.nil? %>
+          <div>
+            <%= image_tag @print_oxxo[2], :class => 'oxxo-barcode' %>
+            <p><%= @print_oxxo[1] %><br>EXP. <%= @print_oxxo[0] %></p>
+          </div>
+      <% end %>
+      <%= image_tag 'purchase_logopequeno.png' %>
+      <div>
+        Don`t forget to keep sharing your HALLS
+      </div>
+      <div class="l1 container">
+        <%= image_tag 'purchase_l1.png' %>
+      </div>
+    </div>
+    <div class="copyright">© 2013 HALLIST All rights reserved. | Terms of service, Privacy Policy, Copyright - Updated May 2013.</div>
+  </center>
+</div>
+</body>
+</html>
