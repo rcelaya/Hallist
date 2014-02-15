@@ -79,9 +79,13 @@ class UserDecorator < Draper::Base
 
   def artist_to_json
     featured_product = ProductDecorator.decorate(brand.products.active.first)
+    featured_artwork = profile.avatar(:profile)
+    if featured_artwork == '/avatars/profile/missing.png'
+      featured_artwork = "/assets/missing.png"
+    end
     {
       profile_path: profile_path,
-      featured_artwork: profile.avatar(:profile),
+      featured_artwork: featured_artwork,
       image_height: featured_product.small_image_height,
       about:  profile_about,
       artworks_count: brand.products.active.count,
