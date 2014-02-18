@@ -45,6 +45,7 @@ config/environment.rb
 config/hallist.pem
 config/newrelic.yml
 config/initializers/omniauth.rb
+config/initializers/airbrake.rb
 *.dump
 *.dat
 ssl/*
