@@ -47,5 +47,5 @@ config/newrelic.yml
 config/initializers/omniauth.rb
 *.dump
 *.dat
-
+ssl/*
 
