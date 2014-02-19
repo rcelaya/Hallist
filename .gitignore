@@ -33,16 +33,6 @@ db/*.db
 
 doc/*
 
-config/settings.local.yml
-config/settings/*.local.yml
-config/environments/*.local.yml
-config/settings.yml
-config/config.yml
-config/database.yml
-config/database.yml.mysql
-config/database.yml.sqlite3
-config/hallist.pem
-config/newrelic.yml
 *.dump
 *.dat
 ssl/*
