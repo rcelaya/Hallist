@@ -92,7 +92,7 @@ class Order < ActiveRecord::Base
   # @param [none]
   # @return [String] user name on the order
   def name
-    self.user.name
+    self.user.name.present? ? self.user.name : ''
   end
 
   # formated date of the complete_at datetime on the order

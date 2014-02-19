@@ -53,20 +53,34 @@
 
       #orders.tab-pane
         #upload-section.span10
-          %legend
-            %center
-              .span3
-                BUYER
-              .span3
-                ADDRESS
-              .span2
-                STATUS
-              .span2
-                ITEM
-              .span2
-                ACTIONS
+          .span12#header_artwork
+            %legend
+              %center
+                .span3
+                  BUYER
+                .span3
+                  ADDRESS
+                .span3
+                  STATUS
+                .span3
+                  ITEM
 
           .row.span12#space_artwork
+
+          - @orders.each do |order|
+            .span12
+              %center
+                .span3
+                  = order.email
+                .span3
+                  = order.bill_address.address1 + ' ' + order.bill_address.address2 + ' ' + order.bill_address.city + ' ' + order.bill_address.zip_code + ' ' + order.bill_address.country
+                .span3
+                  = order.state
+                .span3
+                  = Product.find(Variant.find(order.variant_ids.first()).product_id).name
+
+            .row.span12#space_artwork
+
 
 - content_for :javascript do
   $('#order-tab').click(function(event){

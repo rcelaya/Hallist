@@ -5,6 +5,7 @@ class Artwork::DashboardController < ApplicationController
   
   def show
     @products = ProductDecorator.decorate(current_user.brand.products)
+    @orders = Order.includes([{:order_items => {:variant => {:product => {:brand => :artist}}}}]).where(['users.id = ?', current_user.id])
   end
   
   private
