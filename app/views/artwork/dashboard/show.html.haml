@@ -73,7 +73,7 @@
                 .span3
                   = order.email
                 .span3
-                  = order.bill_address.present? && order.bill_address.address1.present? && order.bill_address.address2.present? ? order.bill_address.address1 + ' ' + order.bill_address.address2 + ' ' + order.bill_address.city + ' ' + order.bill_address.zip_code + ' ' + order.bill_address.country : ''
+                  = order.bill_address.address1 + ' ' + order.bill_address.address2 + ' ' + order.bill_address.city + ' ' + order.bill_address.zip_code + ' ' + order.bill_address.country
                 .span3
                   = order.state
                 .span3
