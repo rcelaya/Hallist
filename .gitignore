@@ -41,7 +41,6 @@ config/config.yml
 config/database.yml
 config/database.yml.mysql
 config/database.yml.sqlite3
-config/environment.rb
 config/hallist.pem
 config/newrelic.yml
 config/initializers/omniauth.rb
