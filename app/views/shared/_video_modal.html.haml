@@ -1,4 +1,4 @@
 #video-modal.modal.video.hide.fade
   .modal-body
     %center
-      %iframe{src:'https://prezi.com/embed/gkrikzhfq50j/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=1&amp;autohide_ctrls=0&amp;features=undefined&amp;disabled_features=undefined', width:'550', height:'400', frameBorder:'0', webkitAllowFullScreen: 'true', mozAllowFullscreen: 'true', allowfullscreen: 'true'}
+      = video_tag('/assets/Hallist.mp4', size: '550x400', :controls => true, autoplay: false, id: 'video-modal-hallsit')

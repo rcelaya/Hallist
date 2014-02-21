@@ -176,6 +176,8 @@ $(function () {
     $('#banners_0').click(function (event) {
         event.preventDefault();
         openVideoModal();
+        $('#video-modal-hallsit')[0].load();
+        $('#video-modal-hallsit')[0].play();
     });
 });
 
