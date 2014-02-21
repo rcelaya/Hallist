@@ -1158,6 +1158,11 @@ table {
   }
 }
 
+.video{
+  height: 430px !important;
+  width: 600px !important;
+}
+
 .modal-body {
   color: #525355;
 
@@ -1206,6 +1211,16 @@ table {
   }
 
   a.terms-close-modal {
+    background: url(/assets/close-icon.png) no-repeat;
+    display: inline-block;
+    height: 28px;
+    width: 29px;
+    position: relative;
+    left: 480px;
+    margin-bottom: -15px;
+  }
+
+  a.video-close-modal {
     background: url(/assets/close-icon.png) no-repeat;
     display: inline-block;
     height: 28px;

@@ -173,6 +173,13 @@ $(function () {
 });
 
 $(function () {
+    $('#banners_0').click(function (event) {
+        event.preventDefault();
+        openVideoModal();
+    });
+});
+
+$(function () {
     $('.add-checkout').click(function (event) {
         event.preventDefault();
         if (window.current_user) {
@@ -502,6 +509,12 @@ function openTermsModal() {
     $('#artwork-details-modal').modal('hide');
     Arto.popovers.closeCart();
     $('#terms-modal').modal();
+}
+
+function openVideoModal() {
+    $('#artwork-details-modal').modal('hide');
+    Arto.popovers.closeCart();
+    $('#video-modal').modal();
 }
 
 $('#about-profile').live('click', function (event) {
