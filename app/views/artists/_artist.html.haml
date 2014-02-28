@@ -1,0 +1,9 @@
+%div.span3.container.masonry
+  %div.artist.masonry_brick
+    %a{href: artist[:profile_path]}
+      %img{src:artist[:featured_artwork].to_s, height:artist[:image_height].to_s, width:"220", style:"width:220px;height:"+artist[:image_height].to_s+"px"}
+      %div.collection-description
+        %span.name
+          = artist[:name]
+        %br
+          = artist[:about]

@@ -29,7 +29,7 @@
     .row.follow-numbers
       = link_to "#{@user.followers.count} Followers", profile_path(id: @user.id, artwork_type: 'followers'), id: 'followers-num'
       %span ∙
-      = link_to "#{@user.followings.count} following", ''
+      = link_to "#{@user.followings.count} following", profile_path(id: @user.id, artwork_type: 'followings')
 
 .row-fluid.user-products
 - if @products.blank? and @user.artist?
@@ -39,6 +39,9 @@
     %p.no-products= "No works to show yet."
   - elsif params[:artwork_type] == 'likes'
     %p.no-products= "No likes to show yet."
+  - elsif params[:artwork_type] == 'followers' || params[:artwork_type] == 'followings'
+    - @artists.each do |artist|
+      = render partial: 'artists/artist', locals: {artist: artist}
   - else
     %p.no-products= "No products to show yet."
 - elsif params[:artwork_type] == 'collections'
@@ -50,14 +53,14 @@
     %p.no-products= "No collections to show yet."
 - elsif params[:artwork_type] == 'likes'
   - if !@likes.blank?
-    //.span12.profile-collections.my-profile
-    //- @likes.each do |like|
-    //= render partial: 'likes/like', locals: {likes: @likes}
     #products
   - else
     %p.no-products= "No likes to show yet."
 - elsif params[:artwork_type] == 'works'
   #products
+- elsif params[:artwork_type] == 'followers' || params[:artwork_type] == 'followings'
+  - @artists.each do |artist|
+    = render partial: 'artists/artist', locals: {artist: artist}
 - elsif !@collections.blank?
   .span12.profile-collections.my-profile
     - @collections.each do |collection|

@@ -1,5 +1,4 @@
 class CollectionsController < ApplicationController
-  
   def index
     set_filters
     search = Collection.filters(params[:filters] || {}, params[:page])

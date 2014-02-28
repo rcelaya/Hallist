@@ -1,6 +1,6 @@
-.container-fluid
-  .span12
-    %h2 #{@collection.name}
+.header-artists
+  %center
+    %h1 #{@collection.name}
     //.social-section.collection-actions
     //  - share_message = "#{@collection.name} : #{site_name}"
     //  .share-facebook.social-button{"data-url" => "http://www.facebook.com/sharer.php?u=#{request.url}"}
@@ -16,8 +16,10 @@
   / = render partial: 'cart_item', collection: @collection.cart_items
 
 - content_for :javascript do
-  $(window).load(function() {
+  $('#banner').remove();
+  $('#recent-dotted').remove();
   $('#recent').remove();
+  $(window).load(function() {
   $container = $('#products');
   $container.masonry({isFitWidth: true, columnWidth: 240});
   window.router = new Arto.Routers.ProductsRouter({products: #{@collection.cart_items.collect{|cart_item| ProductDecorator.decorate(cart_item.variant_product).json_to_browse}.to_json.html_safe}});

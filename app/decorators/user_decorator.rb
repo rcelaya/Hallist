@@ -73,8 +73,39 @@ class UserDecorator < Draper::Base
 
   def products_for_profile
     products = self.sample_products
-    puts 'produc' + products.to_yaml
     products.blank? ? products : products.to_json.html_safe
+  end
+
+  def followable_to_json
+    featured_product = ProductDecorator.decorate(brand.products.active.first)
+    featured_artwork = profile.avatar(:profile)
+    if featured_artwork == '/avatars/profile/missing.png'
+      featured_artwork = "/assets/missing.png"
+    end
+    {
+        profile_path: profile_path,
+        featured_artwork: featured_artwork,
+        image_height: featured_product.small_image_height,
+        about:  profile_about,
+        artworks_count: brand.products.active.count,
+        name: name
+    }
+  end
+
+  def follower_to_json
+    featured_product = ProductDecorator.decorate(brand.products.active.first)
+    featured_artwork = profile.avatar(:profile)
+    if featured_artwork == '/avatars/profile/missing.png'
+      featured_artwork = "/assets/missing.png"
+    end
+    {
+        profile_path: profile_path,
+        featured_artwork: featured_artwork,
+        image_height: featured_product.small_image_height,
+        about:  profile_about,
+        artworks_count: brand.products.active.count,
+        name: name
+    }
   end
 
   def artist_to_json

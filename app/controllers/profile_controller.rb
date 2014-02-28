@@ -25,6 +25,14 @@ class ProfileController < ApplicationController
     current_user.profile
     end
 
+    if params[:artwork_type] == 'followers'
+      @artists = UserDecorator.decorate(@user_profile.user).followers.map(&:follower_to_json)
+    end
+
+    if params[:artwork_type] == 'followings'
+      @artists = UserDecorator.decorate(@user_profile.user).followings.map(&:followable_to_json)
+    end
+
     if @user_profile
       #puts 'entro al user_profile'
       @user = UserDecorator.decorate(@user_profile.user)

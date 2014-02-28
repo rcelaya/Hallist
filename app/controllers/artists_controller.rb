@@ -1,5 +1,7 @@
 class ArtistsController < ApplicationController
-  
+  layout 'no-responsive'
+
+
   def index
     set_filters
     search = User.filters(params[:filters] || {}, params[:page])
