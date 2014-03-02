@@ -348,12 +348,17 @@ $(function () {
 
         image_height = image.height();
 
+        var column_preview = $(this).parent().parent().children('.medidas').children().children()[0].innerText,
+        medida = column_preview.match(/(\d+) x (\d+)/),
+        width = medida[1],
+        height = medida[2];
+
         if (small_image.data('artwork-measures') == 'inch' || _.isEmpty(small_image.data('artwork-measures'))) {
-            small_image.css('height', (small_image.data('artwork-height') * 3));
-            small_image.css('width', (small_image.data('artwork-width') * 3));
+            small_image.css('height', (height * 2.5));
+            small_image.css('width', (width * 2.5));
         } else {
-            small_image.css('height', (small_image.data('artwork-height')));
-            small_image.css('width', (small_image.data('artwork-width')));
+            small_image.css('height', height);
+            small_image.css('width', width);
         }
 
         small_image.draggable();
