@@ -1,4 +1,4 @@
-- if @products.empty?
+- if @products.present? && @products.empty?
   .header-info
     %center
       %h1 Search not found

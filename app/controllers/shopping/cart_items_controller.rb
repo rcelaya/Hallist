@@ -10,6 +10,18 @@ class Shopping::CartItemsController < Shopping::BaseController
     qty = (qty > 0)? qty : 1
     @item = session_cart.add_variant(params[:cart_item][:variant_id], most_likely_user, qty)
     redirect_to checkout_shopping_order_url('checkout')
+    #if current_user.nil?
+     # redirect_to checkout_shopping_order_url('checkout')
+    #else
+     # js_redirect_to(checkout_shopping_order_url('checkout'))
+    #end
+    #respond_to do |format|
+     # format.js {redirect_to checkout_shopping_order_url('checkout')}
+    #end
+  end
+
+  def js_redirect_to(path)
+    render js: %(window.location.href='#{path}') and return
   end
 
   # PUT /carts/1

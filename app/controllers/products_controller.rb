@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   def index
     set_filters
     #puts 'filtros' + params[:filters].to_yaml
+    #current_user = current_user
     search = Product.filters(params[:filters] || {}, params[:page])
     @products = ProductDecorator.decorate(search.results).map(&:json_to_browse)
     @featured_product = ProductDecorator.decorate(Product.featured) unless request.xhr?
@@ -12,6 +13,7 @@ class ProductsController < ApplicationController
         #redirect_to artwork_url(search.results.first.permalink) if @products.size == 1
       end
       format.json { render json: @products }
+      format.js
     end
   end
 
