@@ -18,8 +18,8 @@
     </a>
   </div>
   <div class="social-buttons-container">
-    <div class="like-button" data-product-id="<%= id %>" data-like-action="<%= like_action %>"><span><%= like_action %></span></div>
-    <div class="add-to-collection-button" data-product-id="<%= id %>"><span>Hall it</span></div>
+    <div class="like-button <%= like_action %>" data-product-id="<%= id %>" data-like-action="<%= like_action %>"><span><%= like_action %></span></div>
+    <div class="add-to-collection-button <%= collection_action %>" data-product-id="<%= id %>"><span><%= collection_action %></span></div>
 
     <!-- Share via Facebook only -->
     <div class="share-button" data-url="<%= window.location.href %>">

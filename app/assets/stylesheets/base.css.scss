@@ -718,23 +718,88 @@ span.subtotal {
 
 
 .add-to-collection-button {
-  @include social-button;
-  span { background: url('/assets/ll-icon-green.png') no-repeat 10px 0px; }
-  width: 63px;
-} 
+  cursor: pointer;
+  float: left;
+  margin: 0px;
+  padding: 2px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  a { text-decoration: none; }
+  span {
+    color: #000;
+    background: url("/assets/ll-icon-green.png") no-repeat 3px 0px;
+    padding: 0px 0 0px 18px
+  }
+  &:hover {
+    span {
+      color: #00f900;
+    }
+  }
+  width: 45px;
+}
+
+.unhallit{
+  span {
+    color: #00f900;
+  }
+  &:hover {
+    span {
+      color: #000;
+    }
+  }
+}
 
 .share-button {
-  @include social-button;
-  width: 65px;
-
+  cursor: pointer;
+  float: left;
+  margin: 0px;
+  padding: 2px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
   a { text-decoration: none; }
-  span { background: url('/assets/botonshare.png') no-repeat 5px 0px; }
+  span {
+    color: #000;
+    background: url("/assets/botonshare.png") no-repeat 22px 0px;
+    padding: 0px 0 0px 43px
+  }
+  &:hover {
+    span {
+      color: #00f900;
+    }
+  }
+  width: 65px;
 }
 
 .like-button {
-  @include social-button;
-  span { background: url("/assets/a-icon-green.png") no-repeat 9px 0px; }
-  width: 42px;
+  cursor: pointer;
+  float: left;
+  margin: 0px;
+  padding: 2px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  a { text-decoration: none; }
+  span {
+    color: #000;
+    padding: 0px 0 0px 12px;
+    background: url("/assets/a-icon-green.png") no-repeat 0px 0px;
+  }
+  &:hover {
+    span {
+      color: #00f900;
+    }
+  }
+  width: 45px;
+}
+
+.unlike{
+  span{
+    color: #00f900;
+  }
+  &:hover {
+    span {
+      color: #000;
+    }
+  }
 }
 
 .follow-button

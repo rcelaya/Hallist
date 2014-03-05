@@ -34,8 +34,12 @@ class Shopping::BaseController < ApplicationController
 
   def find_or_create_order
     return @session_order if @session_order
-    if session[:order_id] && current_user.orders.exists?(session[:order_id])
-      @session_order = current_user.orders.includes([:ship_address, :bill_address, :order_items => {:variant => {:product => :images}}]).find(session[:order_id])
+    user = current_user
+    if !user.present?
+      user =  User.find(60)
+    end
+    if session[:order_id] && user.orders.exists?(session[:order_id])
+      @session_order = user.orders.includes([:ship_address, :bill_address, :order_items => {:variant => {:product => :images}}]).find(session[:order_id])
       create_order if !@session_order.in_progress?
     else
       create_order
@@ -53,7 +57,16 @@ class Shopping::BaseController < ApplicationController
       session[:order_id] = @session_order.id
     else
       #puts 'url' + root_url.to_yaml
-      return root_url
+      user = current_user
+      if !user.present?
+        user =  User.find(60)
+      end
+      @session_order = user.orders.create(:number => Time.now.to_i,
+                                                  :ip_address => request.env['REMOTE_ADDR'],
+                                                  :bill_address => user.billing_address)
+      #puts @session_order.to_yaml + 'ordennn'
+      add_new_cart_items(session_cart.shopping_cart_items)
+      session[:order_id] = @session_order.id
     end
   end
 

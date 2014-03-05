@@ -34,17 +34,17 @@ class Shopping::OrdersController < Shopping::BaseController
       @order = session_cart.add_items_to_checkout(order) # need here because items can also be removed
       redirect_to shopping_orders_url
     else
-      redirect_to root_url
+      @order = session_cart.add_items_to_checkout(order) # need here because items can also be removed
+      redirect_to shopping_orders_url
+      #redirect_to root_url
     end
   end
 
   # POST /shopping/orders
   # POST /shopping/orders.xml
   def update
-    puts 'update' + @order.to_yaml
     @order = find_or_create_order
     @order.ip_address = request.remote_ip
-    puts 'order' + @order.to_yaml
     if @order.ship_address.blank?
       puts 'order ship address' + @order.to_yaml
       ship_address = @order.build_ship_address(params[:order][:ship_address_attributes])
@@ -59,28 +59,22 @@ class Shopping::OrdersController < Shopping::BaseController
       bill_address.save
     end
 
-    puts 'pasoooooo...'
     @credit_card ||= ActiveMerchant::Billing::CreditCard.new(cc_params)
     #gateway = ActiveMerchant::Billing::PaypalGateway.new(:login=>$PAYPAL_LOGIN, :password=>$PAYPAL_PASSWORD)
-    puts 'creditooooo...'
     puts @credit_card.to_yaml
     #res = gateway.authorize(amount, credit_card, :ip=>request.remote_ip, :billing_address=>billing_address)
     address = @order.bill_address.cc_params
-    puts 'antes del if...'
     if @order.complete?
-      puts 'completeeee----'
       #CartItem.mark_items_purchased(session_cart, @order)
       session_cart.mark_items_purchased(@order)
       flash[:error] = I18n.t('the_order_purchased')
       redirect_to myaccount_order_url(@order)
     elsif @credit_card.valid?
-      puts 'elseeeee iffff'
       if response = @order.create_invoice(@credit_card,
                                           @order.credited_total,
                                           {:email => @order.email, :billing_address=> address, :ip=> @order.ip_address },
                                           @order.amount_to_credit)
         if response.succeeded?
-          puts 'responsee succedddd'
           ##  MARK items as purchased
           #CartItem.mark_items_purchased(session_cart, @order)
           @order.remove_user_store_credits

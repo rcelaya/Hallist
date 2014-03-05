@@ -13,3 +13,19 @@
             .span4
               SUBTOTAL
   = render :partial => 'form'
+
+
+- content_for :javascript do
+  $(document).ready(function () {
+  if(!window.current_user){
+  $('#artwork-details-modal').modal('hide');
+  Arto.popovers.closeCart();
+  $('#login-modal').modal({
+  keyboard: false,
+  backdrop: 'static'
+  });
+  $('.login-close-modal').click(function(){
+  window.location.href = '/';
+  });
+  }
+  });
