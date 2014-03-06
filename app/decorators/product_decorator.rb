@@ -82,6 +82,7 @@ class ProductDecorator < Draper::Base
       original_size: primary_property,
       image_height: small_image_height,
       like_action: like_action,
+      product_type: product.product_type.name,
       collection_action: collection_action,
       variants: {
         original: {
@@ -103,7 +104,8 @@ class ProductDecorator < Draper::Base
       image: detail_image,
       small_image: small_image,
       price: price, 
-      permalink: product.permalink, 
+      permalink: product.permalink,
+      product_type: product.product_type.name,
       like_action: like_action,
       collection_action: collection_action,
       artist_avatar: product.artist.featured_avatar,

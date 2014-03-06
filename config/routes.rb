@@ -37,7 +37,7 @@ Hadean::Application.routes.draw do
   resources :bids, only: [:create]
   
   resources :products, :only => [:index, :show, :create] do
-    resources :collection_cart_items, only: :create
+    resources :collection_cart_items, only: [:create, :destroy]
     resource :likes, only: [:create, :destroy], controller: 'products/likes'
   end
 

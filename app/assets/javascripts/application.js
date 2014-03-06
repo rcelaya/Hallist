@@ -91,13 +91,34 @@ $(function () {
         Arto.popovers.closeCart();
 
         if (window.current_user) {
-            productId = $(this).data('product-id');
-            if (productId) {
+            if($(this).data('collection-action') == 'hallit'){
+              productId = $(this).data('product-id');
+              if (productId) {
                 $('form#add-to-collection-form').attr('action', '/products/' + productId + '/collection_cart_items');
                 $('#add-collection-product-id').val(productId);
+              }
+              $('#add-to-collection-modal').modal('show');
+            } else {
+              //url = '/collections/'+ $(this).data('product-id');
+              url = '/products/' + $(this).data('product-id') + '/collection_cart_items/' + $(this).data('product-id');
+              type = 'DELETE'
+              $.ajax({
+                type: type,
+                url: url,
+                success: function (data) {
+                    referencia = window.location.href;
+                    if(referencia.indexOf("collections") == -1 ){
+                        collectionButton = $('div.add-to-collection-button[data-product-id=' + data.product_id + ']');
+                        collectionButton.data('collection-action', data.collection_action);
+                        collectionButton.find('span').html(data.collection_action);
+                        collectionButton.removeClass('unhallit');
+                    } else {
+                        $('div.add-to-collection-button[data-product-id=' + data.product_id + ']').parent().parent().remove();
+                        window.location.href = '/collections/' + data.collection_id
+                    }
+                }
+              });
             }
-            $('#add-to-collection-modal').modal('show');
-
         } else {
             openLoginModal();
         }
@@ -125,13 +146,17 @@ $(function () {
                 }
             }
         }
-
+        console.log(formUrl);
         $.ajax({
             type: 'POST',
             url: formUrl + '.json',
             data: data,
             success: function (data) {
                 $('.modal').modal('hide');
+                collectionButton = $('div.add-to-collection-button[data-product-id=' + data.product_id + ']');
+                collectionButton.data('collection-action', data.collection_action);
+                collectionButton.find('span').html(data.collection_action);
+                collectionButton.addClass('unhallit');
             }
         });
     });
@@ -172,6 +197,7 @@ $(function () {
     });
 });
 
+
 $(function () {
     $('#banners_0').click(function (event) {
         event.preventDefault();
@@ -185,9 +211,7 @@ $(function () {
     $('.add-checkout').click(function (event) {
         event.preventDefault();
         if (window.current_user) {
-           alert(4224);
         } else {
-            alert('login');
             openLoginModal();
         }
     });

@@ -19,7 +19,7 @@
   </div>
   <div class="social-buttons-container">
     <div class="like-button <%= like_action %>" data-product-id="<%= id %>" data-like-action="<%= like_action %>"><span><%= like_action %></span></div>
-    <div class="add-to-collection-button <%= collection_action %>" data-product-id="<%= id %>"><span><%= collection_action %></span></div>
+    <div class="add-to-collection-button <%= collection_action %>" data-collection-action="<%= collection_action %>" data-product-id="<%= id %>"><span><%= collection_action %></span></div>
 
     <!-- Share via Facebook only -->
     <div class="share-button" data-url="<%= window.location.href %>">
@@ -49,8 +49,10 @@
 
   <div class="row" id="artwork-varaints">
     <div class="span3 original-details">
+      <span class="description-title">TECHNIQUES</span>
+      <%= product_type %>
       <span class="description-title">ABOUT THIS PIECE</span>
-      <%= description %>
+      <p><%= description %></p>
       <span class="description-title">
         <% if(!_.isEmpty(variants.original)) { %>
           Total Number of Original in The Edition: <%= variants.original.amount_inventory %>

@@ -33,8 +33,12 @@
 
 .row-fluid.user-products
 - if @products.blank? and @user.artist?
-  - if params[:artwork_type] == 'collections' and @collections
+  - if params[:artwork_type] == 'collections' and !@collections.present?
     %p.no-products= "No collections to show yet."
+  - elsif @collections
+    .span12.profile-collections.my-profile
+      - @collections.each do |collection|
+        = render partial: 'collections/collection', locals: {collection: collection}
   - elsif params[:artwork_type] == 'works'
     %p.no-products= "No works to show yet."
   - elsif params[:artwork_type] == 'likes'
@@ -43,7 +47,7 @@
     - @artists.each do |artist|
       = render partial: 'artists/artist', locals: {artist: artist}
   - else
-    %p.no-products= "No products to show yet."
+    #products
 - elsif params[:artwork_type] == 'collections'
   - if !@collections.blank?
     .span12.profile-collections.my-profile
@@ -76,8 +80,8 @@
   $('.profile-collections').masonry({isFitWidth: true});
   - if @likes.present?
     window.router = new Arto.Routers.ProductsRouter({products: #{@likes}});
-  - else
+  - elsif @products.present?
     window.router = new Arto.Routers.ProductsRouter({products: #{@products}});
-  Backbone.history.start({pushState: true});
-  window.scrollInfinite.active = false;
+    Backbone.history.start({pushState: true});
+    window.scrollInfinite.active = false;
   });
