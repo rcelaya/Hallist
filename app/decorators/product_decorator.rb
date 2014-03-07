@@ -15,7 +15,7 @@ class ProductDecorator < Draper::Base
   # Defining an Interface
   #   Control access to the wrapped subject's methods using one of the following:
   #
-  #   To allow only the listed methods (whitelist):
+  #   To allow only the listed methods (whitelist):sfssfsf
   #     allows :method1, :method2
   #
   #   To allow everything except the listed methods (blacklist):
