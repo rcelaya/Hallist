@@ -449,6 +449,13 @@ h2.large.collections {
         display: inline-block;
         width: 330px;
         position: absolute;
+        .error-about-character{
+          color: #6E6B6B;
+          font-family: 'Gotham';
+          font-size: 13px;
+          bottom: 25px;
+          position: relative;
+        }
       }
     }
 

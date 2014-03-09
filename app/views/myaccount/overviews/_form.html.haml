@@ -45,7 +45,8 @@
     = f.fields_for :profile do |profile_form|
       = profile_form.text_field :website, placeholder: 'WEBSITE'
       %br
-      = profile_form.text_area :about, placeholder: 'ABOUT YOU', rows: '7'
+      = profile_form.text_area :about, placeholder: 'ABOUT YOU', rows: '7', cols: '28'
+      = label_tag '', 'YOU HAVE 325 CHARACTER', id:'error_caracteres', class: 'error-about-character'
       %br
 
 
@@ -86,3 +87,35 @@
   });
   fileInput.click();
   });
+
+  $('#user_profile_attributes_about').keydown(function(e){
+  valida_longitud()
+  });
+
+  $('#user_profile_attributes_about').keyup(function(e){
+  valida_longitud()
+  });
+
+  contenido_about = "";
+  num_caracteres_permitidos = 325;
+
+  function valida_longitud(){
+  num_caracteres = $('#user_profile_attributes_about')[0].value.length;
+
+  if (num_caracteres > num_caracteres_permitidos){
+  $('#user_profile_attributes_about')[0].value = contenido_about;
+  }else{
+  contenido_about = $('#user_profile_attributes_about')[0].value;
+  }
+
+  if (num_caracteres >= num_caracteres_permitidos){
+  $('#error_caracteres')[0].style.color="#ff0000";
+  }else{
+  $('#error_caracteres')[0].style.color="#6E6B6B";
+  }
+  cuenta_caracteres()
+  }
+
+  function cuenta_caracteres(){
+  $('#error_caracteres')[0].textContent = 'YOU HAVE ' + (num_caracteres_permitidos - $('#user_profile_attributes_about')[0].value.length) + ' CHARACTER';
+  }
