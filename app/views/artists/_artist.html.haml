@@ -7,3 +7,9 @@
           = artist[:name]
         %br
           = artist[:about]
+
+- content_for :javascript do
+  $(window).load(function() {
+  $('#artists').masonry({isFitWidth: true});
+  window.router = new Arto.Routers.ArtistsRouter({artists: #{@artists.to_json.html_safe}});
+  });

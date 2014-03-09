@@ -1,7 +1,7 @@
 .row-fluid#user-profile
   .span10
     .profile-header
-      %h1= @user.name.upcase
+      %h1= link_to(@user.name.upcase, '/' + @user.profile.username, class: 'name-profile')
       = @user.artist? ? image_tag('artist_icon.png') : image_tag('hallist_icon.png')
       = link_to('Edit Profile >', edit_myaccount_overview_path, class: 'edit-link') if @user.user.id == current_user_id
       %p= @user_profile.city
@@ -35,17 +35,20 @@
 - if @products.blank? and @user.artist?
   - if params[:artwork_type] == 'collections' and !@collections.present?
     %p.no-products= "No collections to show yet."
-  - elsif @collections
-    .span12.profile-collections.my-profile
-      - @collections.each do |collection|
-        = render partial: 'collections/collection', locals: {collection: collection}
   - elsif params[:artwork_type] == 'works'
     %p.no-products= "No works to show yet."
   - elsif params[:artwork_type] == 'likes'
-    %p.no-products= "No likes to show yet."
+    - if !@likes.blank?
+      #products
+    - else
+      %p.no-products= "No likes to show yet."
   - elsif params[:artwork_type] == 'followers' || params[:artwork_type] == 'followings'
     - @artists.each do |artist|
       = render partial: 'artists/artist', locals: {artist: artist}
+  - elsif @collections.present?
+    .span12.profile-collections.my-profile
+      - @collections.each do |collection|
+        = render partial: 'collections/collection', locals: {collection: collection}
   - else
     #products
 - elsif params[:artwork_type] == 'collections'
@@ -64,13 +67,18 @@
   #products
 - elsif params[:artwork_type] == 'followers' || params[:artwork_type] == 'followings'
   - @artists.each do |artist|
+    = artist.to_yaml
     = render partial: 'artists/artist', locals: {artist: artist}
-- elsif !@collections.blank?
+- elsif @collections.present?
   .span12.profile-collections.my-profile
     - @collections.each do |collection|
       = render partial: 'collections/collection', locals: {collection: collection}
 - else
-  #products
+  - if @collections.present?
+    #products
+  - else
+    %p.no-products= "No collections to show yet."
+
 
 
 - content_for :javascript do
@@ -80,6 +88,8 @@
   $('.profile-collections').masonry({isFitWidth: true});
   - if @likes.present?
     window.router = new Arto.Routers.ProductsRouter({products: #{@likes}});
+    Backbone.history.start({pushState: true});
+    window.scrollInfinite.active = false;
   - elsif @products.present?
     window.router = new Arto.Routers.ProductsRouter({products: #{@products}});
     Backbone.history.start({pushState: true});

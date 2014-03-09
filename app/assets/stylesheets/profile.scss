@@ -55,6 +55,16 @@ h3.collection-name {
       font-family: 'Gotham-Medium';
       font-size: 24px;
       display: inline;
+      .name-profile{
+        color: #373944;
+        margin-bottom: 30px;
+        font-weight: normal;
+        &:hover {
+          text-decoration: none;
+          color:#59FF00;
+          cursor: pointer;
+        }
+      }
     }
     img {
       padding: 0 0 10px 10px;
