@@ -4,6 +4,8 @@
       %h1= link_to(@user.name.upcase, '/' + @user.profile.username, class: 'name-profile')
       = @user.artist? ? image_tag('artist_icon.png') : image_tag('hallist_icon.png')
       = link_to('Edit Profile >', edit_myaccount_overview_path, class: 'edit-link') if @user.user.id == current_user_id
+      %div{:class => 'share-button-profile', :data => {:url => request.url }}
+        = link_to( image_tag('facebookGREEN.png'), '', :onclick => 'postToFeed(); return false;')
       %p= @user_profile.city
 
     .bio
@@ -95,3 +97,11 @@
     Backbone.history.start({pushState: true});
     window.scrollInfinite.active = false;
   });
+
+  // Settings for social share actions
+  var Share = {};
+  Share.link = #{request.url};
+  Share.name = "#{@user.name.upcase}";
+  Share.description =  "#{@user_profile.about.html_safe}";
+  Share.picture = "#{@user.featured_avatar(:profile)}";
+  window.Share = Share;

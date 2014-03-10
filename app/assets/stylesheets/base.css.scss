@@ -770,6 +770,22 @@ span.subtotal {
   width: 65px;
 }
 
+.share-button-profile
+{
+  cursor: pointer;
+  float: right;
+  right: 48%;
+  position: relative;
+  top: -2px;
+  a {
+    cursor: pointer;
+    padding:6px 20px;
+  }
+  img{
+    height: 17px;
+  }
+}
+
 .like-button {
   cursor: pointer;
   float: left;
