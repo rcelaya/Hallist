@@ -96,12 +96,12 @@
     window.router = new Arto.Routers.ProductsRouter({products: #{@products}});
     Backbone.history.start({pushState: true});
     window.scrollInfinite.active = false;
-  });
 
   // Settings for social share actions
   var Share = {};
-  Share.link = #{request.url};
+  Share.link = "#{request.url}";
   Share.name = "#{@user.name.upcase}";
   Share.description =  "#{@user_profile.about.html_safe}";
   Share.picture = "#{@user.featured_avatar(:profile)}";
   window.Share = Share;
+  });
