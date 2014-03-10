@@ -100,7 +100,7 @@
   // Settings for social share actions
   var Share = {};
   Share.link = "#{request.url}";
-  Share.name = "#{@user.name.upcase}";
+  Share.name = "#{@user.profile.username.upcase}";
   Share.description =  "#{@user_profile.about.html_safe}";
   Share.picture = "#{@user.featured_avatar(:profile)}";
   window.Share = Share;
