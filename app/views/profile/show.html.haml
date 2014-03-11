@@ -3,10 +3,10 @@
     .profile-header
       %h1= link_to(@user.name.upcase, '/' + @user.profile.username, class: 'name-profile')
       = @user.artist? ? image_tag('artist_icon.png') : image_tag('hallist_icon.png')
+      %span{:class => 'share-button-profile', :data => {:url => request.url }}
+        = link_to( image_tag('facebookGREEN.png'), '', :onclick => 'postToFeed(); return false;')
       = link_to('Edit Profile >', edit_myaccount_overview_path, class: 'edit-link') if @user.user.id == current_user_id
       %p= @user_profile.city
-      %div{:class => 'share-button-profile', :data => {:url => request.url }}
-        = link_to( image_tag('facebookGREEN.png'), '', :onclick => 'postToFeed(); return false;')
 
     .bio
       %p= @user_profile.about.html_safe if @user_profile.about.present?
