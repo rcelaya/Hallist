@@ -21,6 +21,11 @@
               = text_field_tag 'filters[search]', '', placeholder: 'Search for a hall'
             = link_to 'All', hallists_path
 
+        %li
+          .search.search-hallist
+            = form_tag newsletter_path do
+              = text_field_tag 'email', nil, :id => 'filters_search', :placeholder => 'Your email address'
+
     %ul#links.visible-phone
       %li.dropdown
         %a.link-menu-iphone{"href" => "#"}
@@ -136,6 +141,10 @@
         //%li
         //.input-append
         //= text_field_tag 'newsletter', '', placeholder: 'Newsletter'
+        %li
+          .input-append
+            = form_tag newsletter_path do
+              = text_field_tag 'email', nil, :id => 'filters_search', :placeholder => 'Your email address'
         %li
           .input-append
             = form_tag search_path do

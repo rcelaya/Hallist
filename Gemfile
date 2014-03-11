@@ -74,6 +74,7 @@ gem 'redcarpet'
 
 gem 'json'
 gem 'yajl-ruby'
+gem 'gibbon'
 
 group :development do
   gem 'sqlite3'

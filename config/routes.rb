@@ -30,9 +30,10 @@ Hadean::Application.routes.draw do
   match 'artists/search' => 'artists#index', as: 'artists_search'
   match 'artists/search/:search_term' => 'artists#index', as: 'artists_search_term'
 
+  match 'contacts/newsletter' => 'contacts#newsletter', as: 'newsletter'
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
-  
+
   resources :comments
   resources :bids, only: [:create]
   
