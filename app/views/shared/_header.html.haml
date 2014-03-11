@@ -21,10 +21,10 @@
               = text_field_tag 'filters[search]', '', placeholder: 'Search for a hall'
             = link_to 'All', hallists_path
 
-        %li
-          .search.search-hallist
-            = form_tag newsletter_path do
-              = text_field_tag 'email', nil, :id => 'filters_search', :placeholder => 'Your email address'
+        //%li
+        //.search.search-hallist
+        //= form_tag newsletter_path do
+        //= text_field_tag 'email', nil, :id => 'filters_search', :placeholder => 'Your email address'
 
     %ul#links.visible-phone
       %li.dropdown
@@ -138,14 +138,11 @@
               %li= link_to '$2001.00 USD >', '/price/2001'
 
       %ul#links.hidden-phone
-        //%li
-        //.input-append
-        //= text_field_tag 'newsletter', '', placeholder: 'Newsletter'
         %li
           .input-append
             = form_tag newsletter_path do
               = text_field_tag 'email', nil, :id => 'filters_search', :placeholder => 'Your email address'
-        %li
-          .input-append
-            = form_tag search_path do
-              = text_field_tag 'filters[search]', '', placeholder: 'Search website'
+        //%li
+        //.input-append
+        //= form_tag search_path do
+        //= text_field_tag 'filters[search]', '', placeholder: 'Search website'
