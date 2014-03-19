@@ -34,6 +34,8 @@ Hadean::Application.routes.draw do
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
 
+  match 'collections/delete_collection/:id' => 'collections#delete_collection', as: 'delete_collection'
+
   resources :comments
   resources :bids, only: [:create]
   

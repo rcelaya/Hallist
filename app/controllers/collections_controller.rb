@@ -37,6 +37,15 @@ class CollectionsController < ApplicationController
     flash[:notice] = 'Successfully destroyed collection.'
     render json: {product_name: product.name, product_id: product.id, collection_action: 'hallit'}
   end
+
+  def delete_collection
+    collection = Collection.find(params[:id])
+    if collection.cart_items.present?
+      collection.cart_items.each{|item|item.destroy}
+    end
+    collection.destroy
+    redirect_to '/' + current_user.profile.username
+  end
   
   private
   
