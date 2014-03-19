@@ -138,11 +138,11 @@
               %li= link_to '$2001.00 USD >', '/price/2001'
 
       %ul#links.hidden-phone
-        %li
-          .input-append
-            = form_tag newsletter_path do
-              = text_field_tag 'email', nil, :id => 'filters_search', :placeholder => 'Your email address'
         //%li
         //.input-append
-        //= form_tag search_path do
-        //= text_field_tag 'filters[search]', '', placeholder: 'Search website'
+        //= form_tag newsletter_path do
+        //= text_field_tag 'email', nil, :id => 'filters_search', :placeholder => 'Your email address'
+        %li
+          .input-append
+          = form_tag search_path do
+            = text_field_tag 'filters[search]', '', placeholder: 'Search website'

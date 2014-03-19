@@ -14,7 +14,7 @@ class ContactsController < ApplicationController
     response
     #gb = Gibbon::API.new("35b67fc98e8508fca88e64c945f273cd")
     #gb.lists.subscribe({:id => 'e32567f442', :email => {:email => params[:email]}, :merge_vars => {:FNAME => 'First Name', :LNAME => 'Last Name'}, :double_optin => false})
-   #gb.lists.subscribe(:id => 'e32567f442', :email_address => params[:email])
+    #gb.lists.subscribe(:id => 'e32567f442', :email_address => params[:email])
 
     #puts Gibbon::API.lists.list.to_yaml
 

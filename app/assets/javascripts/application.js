@@ -630,6 +630,12 @@ $(document).ready(function () {
 
 });
 
+$(document).ready(function () {
+  $('.delete-item-checkout').click(function(){
+      window.location.href = '/shopping/checkout'
+  });
+});
+
 /*
  * Project: Twitter Bootstrap Hover Dropdown
  * Author: Cameron Spear

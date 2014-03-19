@@ -1,17 +1,19 @@
 .gray-main-container-checkout
   .row-fluid
     #checkout_section.span10
-      .span6
+      .span5
         %legend 1. YOUR ORDER
-      .span6
+      .span7
         %legend
           %center
-            .span4
+            .span3
               QUANTITY
-            .span4
+            .span3
               PRICE
-            .span4
+            .span3
               SUBTOTAL
+            .span3
+              DELETE
   = render :partial => 'form'
 
 

@@ -2,7 +2,7 @@
   #checkout_section.span10
     - @order.order_items.each do |item|
       %fieldset.basic-info
-        .row-fluid.span6
+        .row-fluid.span5
           .span4
             = image_tag item.variant.product.decorator().featured_image(:small)
           .span6
@@ -11,29 +11,35 @@
             #description-product
               = User.find_by_brand_id(item.variant.product.brand_id).first_name
 
-        .span6
+        .span7
           %legend
             %center
-              .span4
+              .span3
                 1
-              .span4
+              .span3
                 USD
                 = number_to_currency item.price
-              .span4
+              .span3
                 USD
                 = number_to_currency item.price
+              .span3
+                - user = current_user.present? ? current_user.id : 60
+                - cart_item = CartItem.find_by_cart_id_and_user_id_and_active_and_variant_id(session_cart,user,true, item.variant.id)
+                - if cart_item.present?
+                  = link_to '/shopping/cart_items/'+ cart_item.id.to_s+'?variant_id='+item.variant_id.to_s, class: 'delete-item-checkout', :method => :delete, remote: true do
+                    = image_tag('tache.png')
     %br
 
       %fieldset.basic-info
-        .span6
-        #total.span6
+        .span5
+        #total.span7
           %legend
             %center
-              .charge-title.span4
+              .charge-title.span3
                 Total:
-              .span4
+              .span3
                 = select_tag("select_divisa", options_for_select(['USD', 'MXN']), { :class => 'span6 divisas' })
-              .span4#total_item
+              .span3#total_item
                 = number_to_currency @order.total || 0
 
 

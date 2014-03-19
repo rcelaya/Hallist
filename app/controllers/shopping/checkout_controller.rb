@@ -13,28 +13,53 @@ class Shopping::CheckoutController < Shopping::BaseController
     if !user.present?
       user = User.find(60)
     end
-    @order = find_or_create_order
-    if @order.bill_address.blank? || @order.bill_address.first_name.blank?
-      if user.default_billing_address
-        @order.bill_address = user.default_billing_address
-      else
-        @order.build_bill_address
-      end
-    end
-    
-    if @order.build_ship_address.blank? || @order.build_ship_address.first_name.blank?
-      if user.default_shipping_address
-        @order.ship_address = user.default_shipping_address
-      else
-        @order.build_ship_address
-      end
-    end
-    @order.default_shipping_rate
-    @order.find_total
-    @credit_card ||= ActiveMerchant::Billing::CreditCard.new
 
-    puts 'checkout controller' + @order.to_yaml
-    puts 'checkout controller + credit card' + @credit_card.to_yaml
+    order = find_or_create_order
+
+    if order.present?
+      @order = session_cart.add_items_to_checkout(order) # need here because items can also be removed
+
+      if order.bill_address.blank? || order.bill_address.first_name.blank?
+        if user.default_billing_address
+          order.bill_address = user.default_billing_address
+        else
+          order.build_bill_address
+        end
+      end
+
+      if order.build_ship_address.blank? || order.build_ship_address.first_name.blank?
+        if user.default_shipping_address
+          order.ship_address = user.default_shipping_address
+        else
+          order.build_ship_address
+        end
+      end
+      order.default_shipping_rate
+      order.find_total
+      @credit_card ||= ActiveMerchant::Billing::CreditCard.new
+
+    else
+      @order = session_cart.add_items_to_checkout(order) # need here because items can also be removed
+
+      if order.bill_address.blank? || order.bill_address.first_name.blank?
+        if user.default_billing_address
+          order.bill_address = user.default_billing_address
+        else
+          order.build_bill_address
+        end
+      end
+
+      if order.build_ship_address.blank? || order.build_ship_address.first_name.blank?
+        if user.default_shipping_address
+          order.ship_address = user.default_shipping_address
+        else
+          order.build_ship_address
+        end
+      end
+      order.default_shipping_rate
+      order.find_total
+      @credit_card ||= ActiveMerchant::Billing::CreditCard.new
+    end
   end
   
   def user_exists?
