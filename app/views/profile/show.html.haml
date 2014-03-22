@@ -69,7 +69,6 @@
   #products
 - elsif params[:artwork_type] == 'followers' || params[:artwork_type] == 'followings'
   - @artists.each do |artist|
-    = artist.to_yaml
     = render partial: 'artists/artist', locals: {artist: artist}
 - elsif @collections.present?
   .span12.profile-collections.my-profile
