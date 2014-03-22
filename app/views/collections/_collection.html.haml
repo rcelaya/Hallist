@@ -1,4 +1,4 @@
-- if current_user && current_user.id
+- if current_user.present? && current_user.id.present?
   - if current_user.id == collection.user_id
     %div
       = link_to image_tag('tache.png'), delete_collection_path(collection), :class => 'delete-collection'
