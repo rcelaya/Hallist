@@ -1,5 +1,6 @@
-%div
-  = link_to image_tag('tache.png'), delete_collection_path(collection), :class => 'delete-collection'
+- if current_user.id == collection.user_id
+  %div
+    = link_to image_tag('tache.png'), delete_collection_path(collection), :class => 'delete-collection'
 .product
   = link_to collection_path(collection) do
     = image_tag collection.featured_image
