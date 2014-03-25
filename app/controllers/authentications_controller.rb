@@ -24,7 +24,7 @@ class AuthenticationsController < ApplicationController
         #puts 'entro new to aplication'
         # User is new to this application
         user = User.find_or_initialize_by_email(omniauth['extra']['raw_info']['email'])
-        #puts 'userrr' + user.to_yaml
+        puts 'userrr' + user.to_yaml
         user.apply_authorization
 
         if user.save!
