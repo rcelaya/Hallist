@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :secure_session
   before_filter :set_search
-  before_filter :check_domain
+  #before_filter :check_domain
 
   def check_domain
     if Rails.env.production? || Rails.env.testing? and request.host.downcase != 'www.hallist.com'
