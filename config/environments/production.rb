@@ -83,10 +83,10 @@
   # config.action_controller.asset_host = "http://assets.example.com"
   
   ActionMailer::Base.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'hallist.com' }
+  config.action_mailer.default_url_options = { :host => 'arto-dev.herokuapp.com' }
 
   #Configuration assets for email deliveryy
-  config.action_controller.asset_host = 'https://hallist.com'
+  config.action_controller.asset_host = 'https://arto-dev.herokuapp.com'
   config.action_mailer.asset_host = config.action_controller.asset_host
   #config.action_mailer.smtp_settings = {
       #address: Settings.email.server,
