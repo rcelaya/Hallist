@@ -66,7 +66,7 @@ class UserDecorator < Draper::Base
   end
 
   def sample_products(size = 20)
-    @products = user.artist? ? brand.products.active.limit(size) : likes.map(&:likeable)
+    @products = user.present? && user.artist? ? brand.products.active.limit(size) : likes.map(&:likeable)
     @products = ProductDecorator.decorate(@products).map(&:json_to_browse) unless @products.blank?
     @products
   end
