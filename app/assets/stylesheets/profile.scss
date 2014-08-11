@@ -31,6 +31,9 @@ h3.collection-name {
   .row {
     margin-left: 0px;
     display: inline-block;
+    &.social-menu {
+      float: left;
+    }
     &.follow-numbers {
       float: right;
     }
@@ -77,7 +80,7 @@ h3.collection-name {
   }
 
   .bio {
-    height: 60px;
+    height: 100%;
     width: 50%;
     margin-bottom: 30px;
     p { font-size: 11px; text-align: justify; }
